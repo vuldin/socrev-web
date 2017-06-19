@@ -1,0 +1,24 @@
+{
+  "name": "socialistrevolution.org-www",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "babel-plugin-styled-components": "^1.1.4",
+    "babel-preset-stage-0": "^6.24.1",
+    "isomorphic-fetch": "^2.2.1",
+    "next": "latest",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-fontawesome": "^1.6.1",
+    "styled-components": "^2.0.0-17"
+  },
+  "author": "Joshua Purcell <vuldin@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-plugin-inline-react-svg": "^0.4.0"
+  }
+}
