@@ -21,6 +21,15 @@ export default class MyDocument extends Document {
             * {
               box-sizing: border-box;
             }
+            figure {
+              margin: 0;
+            }
+            img {
+              border: 0;
+              height: auto;
+              max-width: 100vw;
+              vertical-align: middle;
+            }
           `}</style>
           {styleTags}
         </Head>

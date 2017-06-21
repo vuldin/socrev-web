@@ -4,6 +4,7 @@ import FontAwesome from 'react-fontawesome'
 import logo from '../svgs/imt_wil_logo.svg'
 
 const headerColor = '#5a5a5a'
+const contentPaddingX = '90px'
 
 export default () =>
   <Header>
@@ -50,7 +51,7 @@ const Header = styled.header`
   font-size: 20px;
   color: ${headerColor};
   display: flex;
-  padding: 0px 6em;
+  padding: 0px ${contentPaddingX};
 `
 const Left = styled.div`
   flex: 1;
