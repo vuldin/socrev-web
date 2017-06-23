@@ -1,9 +1,13 @@
 import React from 'react'
 import Layout from '../components/layout'
+import styled from 'styled-components'
+
+const contentPaddingX = 90
+const smallContentPaddingX = 45
 
 export default () =>
   <Layout>
-    <div style={{ padding: '0px 4em' }}>
+    <Padding>
       <em>{`
 The Program of the US section of the International Marxist Tendency as approved by the 2016 National Congress.
 If you agree with our proposals to transform the US and the world through socialist revolution, contact us about joining!
@@ -149,5 +153,12 @@ Cut the military budget and invest instead in social needs.
 No to militarism and intervention in the Middle East and around the world.
 Unite with Canadian and Latin American workers in a socialist federation of the Americas as part of a world socialist federation.
     `}</p>
-    </div>
+    </Padding>
   </Layout>
+
+const Padding = styled.div`
+  padding: 0 ${contentPaddingX}px;
+  @media (max-width: 720px) {
+  padding: 0 ${smallContentPaddingX}px;
+  }
+`

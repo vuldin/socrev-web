@@ -1,6 +1,8 @@
 import Document, { Head, Main, NextScript } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
 
+const contentMargin = 20
+
 export default class MyDocument extends Document {
   render () {
     const sheet = new ServerStyleSheet()
@@ -29,6 +31,13 @@ export default class MyDocument extends Document {
               height: auto;
               max-width: 100vw;
               vertical-align: middle;
+            }
+            a {
+              text-decoration: none;
+              color: inherit;
+            }
+            p {
+              margin: ${contentMargin}px 0 0 0;
             }
           `}</style>
           {styleTags}

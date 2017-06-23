@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { Flex, Box } from 'grid-styled'
 
 const contentPaddingX = '90px'
+const contentMargin = '20px'
 
 export default class extends React.Component {
   render () {
@@ -40,13 +41,11 @@ export default class extends React.Component {
   }
 }
 const Feature = styled(Flex)`
-  /*
-  background: url(//marx.imageresizer.io/ih5l1.jpg) no-repeat center center;
-  */
-  order: 1;
+  min-height: 200px;
+  height: 70vh;
   width: 100vw;
-  height: 50vh;
-  background: url(//marx.imageresizer.io/ih5l1.jpg);
+  margin-bottom: ${contentMargin};
+  background: url(//marx.imageresizer.io/7rAih5lc.jpg);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
