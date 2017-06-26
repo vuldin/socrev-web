@@ -1,39 +1,24 @@
 import React from 'react'
-import Parser from 'html-react-parser'
 import styled from 'styled-components'
 import { Box } from 'grid-styled'
 
 const contentMargin = 20
+const cdnUrl = 'https://marx.imageresizer.io'
 
 export default class extends React.Component {
   render () {
-    let title = this.props.post.title.rendered
-    let author = this.props.post.author
-    let excerpt = this.props.post.excerpt.rendered
+    const { title, author, excerpt } = this.props.post
+    let featuredImageId = 'Dlhih5l4'
+    if (this.props.post.featuredImage !== undefined) {
+      featuredImageId = this.props.post.featuredImage.id
+    }
     return (
       <Box width={1 / 3} style={{ height: '500px' }}>
         <Excerpt ml={this.props.ml} mr={this.props.mr}>
-          <Picture />
+          <Picture id={featuredImageId} />
           <Title>{title}</Title>
           <div>{author}</div>
-          <div>
-            {Parser(excerpt, {
-              replace: function (domNode) {
-                if (domNode.type === 'tag') {
-                  // keep src alt href is exists
-                  let keeps = ['src', 'alt', 'href']
-                  let keys = Object.keys(domNode.attribs)
-                  let result = {}
-                  keeps.forEach(keep => {
-                    if (keys.indexOf(keep) > -1)
-                      result[keep] = domNode.attribs[keep]
-                  })
-                  domNode.attribs = result
-                }
-                return domNode
-              }
-            })}
-          </div>
+          <div>{excerpt}</div>
         </Excerpt>
       </Box>
     )
@@ -44,7 +29,12 @@ const Title = styled.h2`
 `
 const Picture = styled.div`
   height: 50%;
-  background: url(//marx.imageresizer.io/5ioih5l8.jpg);
+  /*
+  background: url(${cdnUrl}/5ioih5l8.jpg);
+  */
+  background: ${props => {
+    return `url(${cdnUrl}/${props.id}.jpg)`
+  }};
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;

@@ -52,7 +52,7 @@ export default () =>
                   }}
                 </MediaQuery>
                 <Separator />
-                <Link href='/program'><a>Our Program</a></Link>
+                <Link href='/program'><a>Program</a></Link>
               </Actions>
             </Left>
             <LogoWrapper>

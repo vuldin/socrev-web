@@ -1,40 +1,21 @@
 import React from 'react'
-import Parser from 'html-react-parser'
 import styled from 'styled-components'
 import { Flex, Box } from 'grid-styled'
 
 const contentPaddingX = '90px'
 const contentMargin = '20px'
+const cdnUrl = 'https://marx.imageresizer.io'
 
 export default class extends React.Component {
   render () {
-    let title = this.props.post.title.rendered
-    let author = this.props.post.author
-    let excerpt = this.props.post.excerpt.rendered
-    console.log(title, author, excerpt)
+    let { title, author, excerpt } = this.props.post
+    let featuredImageId = this.props.post.featuredImage.id
     return (
-      <Feature>
+      <Feature id={featuredImageId}>
         <Box mx={contentPaddingX} my={1}>
-          <div>{title}</div>
-          <div>{author}</div>
-          <div>
-            {Parser(excerpt, {
-              replace: function (domNode) {
-                if (domNode.type === 'tag') {
-                  // keep src alt href is exists
-                  let keeps = ['src', 'alt', 'href']
-                  let keys = Object.keys(domNode.attribs)
-                  let result = {}
-                  keeps.forEach(keep => {
-                    if (keys.indexOf(keep) > -1)
-                      result[keep] = domNode.attribs[keep]
-                  })
-                  domNode.attribs = result
-                }
-                return domNode
-              }
-            })}
-          </div>
+          <Title>{title}</Title>
+          <Author>{author}</Author>
+          <Excerpt>{excerpt}</Excerpt>
         </Box>
       </Feature>
     )
@@ -45,7 +26,12 @@ const Feature = styled(Flex)`
   height: 70vh;
   width: 100vw;
   margin-bottom: ${contentMargin};
-  background: url(//marx.imageresizer.io/7rAih5lc.jpg);
+  /*
+  background: url(${cdnUrl}/7rAih5lc.jpg);
+  */
+  background: ${props => {
+    return `url(${cdnUrl}/${props.id}.jpg)`
+  }};
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -57,3 +43,11 @@ const Feature = styled(Flex)`
     0px 0px 10px black,
     0px 0px 10px black;
 `
+const Title = styled.div`
+  font-weight: bold;
+  font-size: 1.7em;
+`
+const Author = styled.div`
+  font-size: .8em;
+`
+const Excerpt = styled.div``
