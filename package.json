@@ -12,6 +12,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "glamor": "^2.20.25",
     "grid-styled": "^2.0.0-4",
+    "html-react-parser": "^0.3.5",
     "isomorphic-fetch": "^2.2.1",
     "moment": "^2.18.1",
     "next": "^3.0.1-beta.1",

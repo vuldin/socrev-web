@@ -8,6 +8,7 @@ import Excerpt from '../components/excerpt'
 const contentPaddingX = '90px'
 const contentMargin = 20
 const apiUrl = 'https://socialistrevolution.xyz'
+//const apiUrl = 'http://localhost:3001'
 
 export default class extends React.Component {
   static async getInitialProps () {

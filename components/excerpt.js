@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Box } from 'grid-styled'
+import Parser from 'html-react-parser'
 
 const contentMargin = 20
 const cdnUrl = 'https://marx.imageresizer.io'
@@ -16,7 +17,9 @@ export default class extends React.Component {
       <Box width={1 / 3} style={{ height: '500px' }}>
         <Excerpt ml={this.props.ml} mr={this.props.mr}>
           <Picture id={featuredImageId} />
-          <Title>{title}</Title>
+          <Title>
+            {title.includes('<') && title.includes('>') ? Parser(title) : title}
+          </Title>
           <div>{author}</div>
           <div>{excerpt}</div>
         </Excerpt>

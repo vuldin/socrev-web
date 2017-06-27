@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Flex, Box } from 'grid-styled'
+import Parser from 'html-react-parser'
 
 const contentPaddingX = '90px'
 const contentMargin = '20px'
@@ -10,12 +11,19 @@ export default class extends React.Component {
   render () {
     let { title, author, excerpt } = this.props.post
     let featuredImageId = this.props.post.featuredImage.id
+    //let miniPreview = this.props.post.featuredImage.mini_preview
     return (
-      <Feature id={featuredImageId}>
+      <Feature image={featuredImageId}>
         <Box mx={contentPaddingX} my={1}>
-          <Title>{title}</Title>
+          <Title>
+            {title.includes('<') && title.includes('>') ? Parser(title) : title}
+          </Title>
           <Author>{author}</Author>
-          <Excerpt>{excerpt}</Excerpt>
+          <Excerpt>
+            {excerpt.includes('<') && excerpt.includes('>')
+              ? Parser(excerpt)
+              : excerpt}
+          </Excerpt>
         </Box>
       </Feature>
     )
@@ -26,13 +34,16 @@ const Feature = styled(Flex)`
   height: 70vh;
   width: 100vw;
   margin-bottom: ${contentMargin};
-  /*
-  background: url(${cdnUrl}/7rAih5lc.jpg);
-  */
   background: ${props => {
-    return `url(${cdnUrl}/${props.id}.jpg)`
+    let result = `url(${cdnUrl}/${props.image}.jpg)`
+    if (props.image.length > 20)
+      result = `url(data:image/jpg;base64,${props.image})`
+    return result
   }};
-  background-position: center;
+  /*
+  filter: blur(40px);
+  */
+  background-position: center top;
   background-size: cover;
   background-repeat: no-repeat;
   color: #fff;
