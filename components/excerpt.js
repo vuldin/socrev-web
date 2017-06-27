@@ -21,7 +21,11 @@ export default class extends React.Component {
             {title.includes('<') && title.includes('>') ? Parser(title) : title}
           </Title>
           <div>{author}</div>
-          <div>{excerpt}</div>
+          <div>
+            {excerpt.includes('<') && excerpt.includes('>')
+              ? Parser(excerpt)
+              : excerpt}
+          </div>
         </Excerpt>
       </Box>
     )
