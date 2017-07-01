@@ -5,25 +5,18 @@ import Parser from 'html-react-parser'
 
 const contentPaddingX = '90px'
 const contentMargin = '20px'
-const cdnUrl = 'https://marx.imageresizer.io'
 
 export default class extends React.Component {
   render () {
-    let { title, author, excerpt } = this.props.post
-    let featuredImageId = this.props.post.featuredImage.id
-    //let miniPreview = this.props.post.featuredImage.mini_preview
+    let { title, excerpt, featuredMedia } = this.props.post
+    let srcUrl = featuredMedia.source_url
+    title = Parser(title.rendered)
+    excerpt = Parser(excerpt.rendered)
     return (
-      <Feature image={featuredImageId}>
+      <Feature image={srcUrl}>
         <Box mx={contentPaddingX} my={1}>
-          <Title>
-            {title.includes('<') && title.includes('>') ? Parser(title) : title}
-          </Title>
-          <Author>{author}</Author>
-          <Excerpt>
-            {excerpt.includes('<') && excerpt.includes('>')
-              ? Parser(excerpt)
-              : excerpt}
-          </Excerpt>
+          <Title>{title}</Title>
+          <Excerpt>{excerpt}</Excerpt>
         </Box>
       </Feature>
     )
@@ -35,10 +28,7 @@ const Feature = styled(Flex)`
   width: 100vw;
   margin-bottom: ${contentMargin};
   background: ${props => {
-    let result = `url(${cdnUrl}/${props.image}.jpg)`
-    if (props.image.length > 20)
-      result = `url(data:image/jpg;base64,${props.image})`
-    return result
+    return `url(${props.image})`
   }};
   /*
   filter: blur(40px);

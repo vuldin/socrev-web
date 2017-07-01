@@ -4,28 +4,19 @@ import { Box } from 'grid-styled'
 import Parser from 'html-react-parser'
 
 const contentMargin = 20
-const cdnUrl = 'https://marx.imageresizer.io'
 
 export default class extends React.Component {
   render () {
-    const { title, author, excerpt } = this.props.post
-    let featuredImageId = 'Dlhih5l4'
-    if (this.props.post.featuredImage !== undefined) {
-      featuredImageId = this.props.post.featuredImage.id
-    }
+    let { title, excerpt, featuredMedia } = this.props.post
+    let srcUrl = featuredMedia.source_url
+    title = Parser(title.rendered)
+    excerpt = Parser(excerpt.rendered)
     return (
       <Box width={1 / 3} style={{ height: '500px' }}>
         <Excerpt ml={this.props.ml} mr={this.props.mr}>
-          <Picture id={featuredImageId} />
-          <Title>
-            {title.includes('<') && title.includes('>') ? Parser(title) : title}
-          </Title>
-          <div>{author}</div>
-          <div>
-            {excerpt.includes('<') && excerpt.includes('>')
-              ? Parser(excerpt)
-              : excerpt}
-          </div>
+          <Picture id={srcUrl} />
+          <Title>{title}</Title>
+          <div>{excerpt}</div>
         </Excerpt>
       </Box>
     )
@@ -36,11 +27,8 @@ const Title = styled.h2`
 `
 const Picture = styled.div`
   height: 50%;
-  /*
-  background: url(${cdnUrl}/5ioih5l8.jpg);
-  */
   background: ${props => {
-    return `url(${cdnUrl}/${props.id}.jpg)`
+    return `url(${props.id})`
   }};
   background-position: center;
   background-size: cover;

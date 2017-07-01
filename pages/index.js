@@ -15,20 +15,20 @@ export default class extends React.Component {
     // eslint-disable-next-line no-undef
     const postsRes = await fetch(`${apiUrl}/posts`)
     const posts = await postsRes.json()
-    const featureIndexes = []
-    posts.forEach((p, i) => {
-      if (p.isFeatured) featureIndexes.push(i)
-    })
-    const featureIndex =
-      featureIndexes[Math.floor(Math.random() * featureIndexes.length)]
-    const feature = posts.splice(featureIndex, 1)[0]
+    const feature = posts.shift()
     return {
       posts: posts,
       feature: feature
     }
   }
+  static async getMedia (mid) {
+    const mediaRes = await fetch(`${apiUrl}/media/${mid}`)
+    const media = await mediaRes.json()
+    return media
+  }
   render () {
     const { feature, posts } = this.props
+    console.log(posts)
     return (
       <Layout>
         {feature !== undefined ? <Feature post={feature} /> : <div />}
