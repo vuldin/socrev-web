@@ -1,46 +1,56 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Box } from 'grid-styled'
-import Parser from 'html-react-parser'
+import { Link } from '../routes'
+import { Parser } from 'html-to-react'
 
+const htmlToReactParser = new Parser()
 const contentMargin = 20
+const contentPaddingX = 20
 
 export default class extends React.Component {
   render () {
-    let { title, excerpt, featuredMedia } = this.props.post
+    let { title, excerpt, featuredMedia, slug } = this.props.post
     let srcUrl = featuredMedia.source_url
-    title = Parser(title.rendered)
-    excerpt = Parser(excerpt.rendered)
+    title = htmlToReactParser.parse(title.rendered)
+    excerpt = htmlToReactParser.parse(excerpt.rendered)
     return (
-      <Box width={1 / 3} style={{ height: '500px' }}>
-        <Excerpt ml={this.props.ml} mr={this.props.mr}>
-          <Picture id={srcUrl} />
-          <Title>{title}</Title>
-          <div>{excerpt}</div>
-        </Excerpt>
-      </Box>
+      <Excerpt>
+        <Link prefetch route={`/${slug}`}>
+          <A>
+            <Picture id={srcUrl} />
+            <Padding contentPaddingX={contentPaddingX}>
+              <Title>{title}</Title>
+              {excerpt}
+            </Padding>
+          </A>
+        </Link>
+      </Excerpt>
     )
   }
 }
-const Title = styled.h2`
-  margin: ${contentMargin}px 0;
+const Excerpt = styled.div`
+  overflow: hidden;
+  &:hover {
+    opacity: .7;
+  }
 `
 const Picture = styled.div`
-  height: 50%;
+  height: 200px;
   background: ${props => {
     return `url(${props.id})`
   }};
-  background-position: center;
+  background-position: center top;
   background-size: cover;
   background-repeat: no-repeat;
 `
-const Excerpt = styled.div`
-  margin-left: ${props => {
-    return `${props.ml}px`
-  }};
-  margin-right: ${props => {
-    return `${props.mr}px`
-  }};
-  height: 100%;
-  overflow: hidden;
+const A = styled.a`
+  text-decoration: none;
+  cursor: pointer;
+  color: inherit;
+`
+const Title = styled.h2`
+  margin: 10px 0 0 0;
+`
+const Padding = styled.div`
+  padding: ${props => `0 ${contentPaddingX}px`};
 `

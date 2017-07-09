@@ -1,49 +1,58 @@
-import Link from 'next/link'
 import styled from 'styled-components'
 import FontAwesome from 'react-fontawesome'
-import MediaQuery from 'react-responsive'
-import logo from '../svgs/imt_wil_logo.svg'
+import Logo from './logo'
+import Actions from './actions'
 
 const headerColor = '#5a5a5a'
 const contentPaddingX = 90
 const smallContentPaddingX = 20
+const breakpoints = ['720', '900']
 
 export default () =>
-  /*
-export default class extends React.Components {
-  render() {
-    return 
-  }
-}
-  */
-  <MediaQuery query='(min-width: 720px)'>
-    {matches => {
-      let result = (
-        <Header px={smallContentPaddingX}>
-          <Left>
-            <Actions>
-              <FontAwesome name='bars' size='2x' />
-            </Actions>
-          </Left>
-          <LogoWrapper>
-            <Link href='/'>
-              <a><Logo height={'60px'} width={'60px'} /></a>
-            </Link>
-          </LogoWrapper>
-          <Right>
-            <Interactions>
-              <FontAwesome name='facebook' size='2x' />
-              <FontAwesome
-                name='twitter'
-                size='2x'
-                style={{ paddingLeft: '15px' }}
-              />
-            </Interactions>
-          </Right>
-        </Header>
-      )
-      if (matches)
-        result = (
+  <header>
+    <div className='left'>
+      <Actions />
+    </div>
+    <div className='logo-wrapper'>
+      <Logo />
+    </div>
+    <div className='right'>
+      <nav className='interactions'>
+        <FontAwesome name='facebook' size='2x' />
+        <FontAwesome name='twitter' size='2x' style={{ paddingLeft: '15px' }} />
+      </nav>
+    </div>
+    <style jsx>{`
+      header {
+        @import url(https://fonts.googleapis.com/css?family=Titillium+Web);
+        font-family: 'Titillium Web', sans-serif;
+        font-size: 20px;
+        white-space: nowrap;
+        color: #5a5a5a;
+        display: flex;
+        padding: 0px 20px;
+      }
+      .left {
+        flex: 1;
+      }
+      .right {
+        flex: 1;
+      }
+      .interactions {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding-top: 10px;
+        white-space: nowrap;
+      }
+      .logo-wrapper {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+      }
+    `}</style>
+  </header>
+/*
           <Header>
             <Left>
               <Actions>
@@ -53,7 +62,6 @@ export default class extends React.Components {
                     else return <FontAwesome name='bars' />
                   }}
                 </MediaQuery>
-                {/*
                 <Separator />
                 <MediaQuery query='(min-width: 900px)'>
                   {matches => {
@@ -61,9 +69,8 @@ export default class extends React.Components {
                     else return <FontAwesome name='search' />
                   }}
                 </MediaQuery>
-                */}
                 <Separator />
-                <Link href='/program'><A>Program</A></Link>
+                <Link href='/program'><a>Program</a></Link>
               </Actions>
             </Left>
             <LogoWrapper>
@@ -86,7 +93,6 @@ export default class extends React.Components {
                 <FontAwesome name='facebook' />
                 <FontAwesome name='google' style={{ paddingLeft: '10px' }} />
                 <FontAwesome name='twitter' style={{ paddingLeft: '10px' }} />
-                {/*
                 <Separator />
                 <MediaQuery query='(min-width: 900px)'>
                   {matches => {
@@ -94,7 +100,6 @@ export default class extends React.Components {
                     else return <FontAwesome name='sign-in' />
                   }}
                 </MediaQuery>
-                */}
               </Interactions>
             </Right>
           </Header>
@@ -102,53 +107,11 @@ export default class extends React.Components {
       return result
     }}
   </MediaQuery>
-
-const Header = styled.header`
-  @import url(https://fonts.googleapis.com/css?family=Titillium+Web);
-  font-family: 'Titillium Web', sans-serif;
-  font-size: 20px;
-  white-space: nowrap;
-  color: ${headerColor};
-  display: flex;
-  padding: 0px ${contentPaddingX}px;
-  padding: 0px ${props => props.px || contentPaddingX}px;
-`
-const Left = styled.div`
-  flex: 1;
-`
-const Right = styled.div`
-  flex: 1;
-`
-const Actions = styled.nav`
-  display: flex;
-  align-items: center;
-  padding-top: 10px;
-`
-const Interactions = styled.nav`
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding-top: 10px;
-  white-space: nowrap;
-`
-const A = styled.a`
-  text-decoration: none;
-  cursor: pointer;
-  color: inherit;
-`
+*/
 const Separator = styled.div`
   margin-left: 10px;
   margin-right: 10px;
   width: 1px;
   height: 30px;
   background-color: ${headerColor};
-`
-const LogoWrapper = styled.div`
-  flex: 1;
-  display: flex;
-  justify-content: center;
-`
-const Logo = styled(logo)`
-  width: ${props => props.width || '150px'};
-  height: ${props => props.height || '150px'};
 `

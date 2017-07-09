@@ -1,38 +1,52 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Flex, Box } from 'grid-styled'
-import Parser from 'html-react-parser'
+import Excerpt from './excerpt'
+import MediaQuery from 'react-responsive'
+//import { Flex, Box } from 'grid-styled'
+import { Parser } from 'html-to-react'
 
-const contentPaddingX = '90px'
-const contentMargin = '20px'
+const htmlToReactParser = new Parser()
+const contentMargin = 20
+const contentPaddingX = 20
 
 export default class extends React.Component {
   render () {
     let { title, excerpt, featuredMedia } = this.props.post
     let srcUrl = featuredMedia.source_url
-    title = Parser(title.rendered)
-    excerpt = Parser(excerpt.rendered)
+    title = htmlToReactParser.parse(title.rendered)
+    excerpt = htmlToReactParser.parse(excerpt.rendered)
     return (
-      <Feature image={srcUrl}>
-        <Box mx={contentPaddingX} my={1}>
-          <Title>{title}</Title>
-          <Excerpt>{excerpt}</Excerpt>
-        </Box>
-      </Feature>
+      <MediaQuery query='(min-width: 500px)'>
+        {matches => {
+          let result = <Excerpt post={this.props.post} />
+          if (matches)
+            result = (
+              <Feature contentPaddingX={contentPaddingX} image={srcUrl}>
+                <Words>
+                  <Title>{title}</Title>
+                  {excerpt}
+                </Words>
+              </Feature>
+            )
+          return result
+        }}
+      </MediaQuery>
     )
   }
 }
-const Feature = styled(Flex)`
+//const Feature = styled(Flex)`
+const Feature = styled.div`
+  display: grid;
+  justify-items: center;
+  align-items: end;
+  padding: ${props => `0 ${props.contentPaddingX}px`};
   min-height: 200px;
   height: 70vh;
   width: 100vw;
-  margin-bottom: ${contentMargin};
+  margin-bottom: ${contentMargin}px;
   background: ${props => {
     return `url(${props.image})`
   }};
-  /*
-  filter: blur(40px);
-  */
   background-position: center top;
   background-size: cover;
   background-repeat: no-repeat;
@@ -44,6 +58,9 @@ const Feature = styled(Flex)`
     0px 0px 10px black,
     0px 0px 10px black;
 `
+const Words = styled.div`
+  padding: 10px;
+`
 const Title = styled.div`
   font-weight: bold;
   font-size: 1.7em;
@@ -51,4 +68,3 @@ const Title = styled.div`
 const Author = styled.div`
   font-size: .8em;
 `
-const Excerpt = styled.div``
