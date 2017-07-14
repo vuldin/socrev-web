@@ -59,11 +59,12 @@ const Feature = styled.div`
     0px 0px 10px black;
 `
 const Words = styled.div`
-  padding: 10px;
+  padding: 70px;
 `
 const Title = styled.div`
   font-weight: bold;
-  font-size: 1.7em;
+  font-size: 2.6em;
+  font-family: font74157;
 `
 const Author = styled.div`
   font-size: .8em;

@@ -20,10 +20,13 @@ export default class MyDocument extends Document {
           <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
           <style>{`
             @import url(https://fonts.googleapis.com/css?family=Lora:400);
+            @import url(https://www.fontify.me/wf/ce600e451ccfc29f6b3b5a4d08b2f7aa);
+            @import url(https://www.fontify.me/wf/f48a579528427d3e4fa5aff81b09f0dd);
+
             body {
               margin: 0;
               font-size: 22px;
-              font-family: Lora, serif;
+              font-family: font145954;
               background: #fafafa;
             }
             * {

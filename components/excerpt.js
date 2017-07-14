@@ -17,7 +17,9 @@ export default class extends React.Component {
       <Excerpt>
         <Link prefetch route={`/${slug}`}>
           <A>
-            <Picture id={srcUrl} />
+            <BackColor>
+              <Picture id={srcUrl} />
+            </BackColor>
             <Padding contentPaddingX={contentPaddingX}>
               <Title>{title}</Title>
               {excerpt}
@@ -28,20 +30,35 @@ export default class extends React.Component {
     )
   }
 }
-const Excerpt = styled.div`
-  overflow: hidden;
-  &:hover {
-    opacity: .7;
-  }
+
+const BackColor = styled.div`
+    height: 240px;
+    background-color: #D80707;
+    background-position: center top;
+    background-size: cover;
+    background-repeat: no-repeat;
 `
 const Picture = styled.div`
-  height: 200px;
+  height: 100%;
   background: ${props => {
     return `url(${props.id})`
   }};
   background-position: center top;
   background-size: cover;
   background-repeat: no-repeat;
+`
+const Padding = styled.div`
+  padding: ${props => `0 ${contentPaddingX}px`};
+`
+const Excerpt = styled.div`
+  overflow: hidden;
+  &:hover ${Padding} {
+    color: #600000;
+  }
+  &:hover ${Picture} {
+    filter: brightness(1.1) grayscale(100%);
+    opacity: 0.8;
+  }
 `
 const A = styled.a`
   text-decoration: none;
@@ -50,7 +67,5 @@ const A = styled.a`
 `
 const Title = styled.h2`
   margin: 10px 0 0 0;
-`
-const Padding = styled.div`
-  padding: ${props => `0 ${contentPaddingX}px`};
+  font-family: font74157;
 `

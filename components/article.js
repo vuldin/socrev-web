@@ -24,13 +24,14 @@ export default class extends React.Component {
     */
     return (
       <div>
-        <figure style={{ background: `url(${source_url})` }} />
-        <Padding contentPaddingX={smallContentPaddingX}>
+        <Picture contentPaddingX={contentPaddingX} style={{ background: `url(${source_url})` }}>
           <Title>{title}</Title>
-          <em>
-            {excerpt}
-          </em>
+        </Picture>
+        <Padding contentPaddingX={smallContentPaddingX}>
           <Content>
+            <em>
+              {excerpt}
+            </em>
             {content}
           </Content>
         </Padding>
@@ -51,19 +52,33 @@ const Padding = styled.div`
     */
   }
 `
+const Picture = styled.div`
+  display: grid;
+  justify-items: right;
+  align-items: end;
+  padding: ${props => `0 ${props.contentPaddingX}px`};
+  min-height: 200px;
+  height: 70vh;
+  width: 100vw;
+  margin-bottom: ${contentMargin}px;
+  background-position: center top;
+  background-size: cover;
+  background: no-repeat;
+  color: #fff;
+  text-shadow:
+    0px 0px 10px black,
+    0px 0px 10px black,
+    0px 0px 10px black,
+    0px 0px 10px black,
+    0px 0px 10px black;
+`
 const Title = styled.div`
   font-weight: bold;
-  font-size: 1.7em;
+  font-size: 2.6em;
+  font-family: font74157;
+  padding: 70px;
 `
-const Picture = styled.div`
-  background: ${props => {
-    return `url(${props.url})`
-  }};
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-`
-
 const Content = styled.div`
-  overflow: hidden;
+  width: 70%;
+  margin: 0 auto;
 `
