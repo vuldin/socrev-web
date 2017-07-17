@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Excerpt from './excerpt'
+import { Link } from '../routes'
 import MediaQuery from 'react-responsive'
 //import { Flex, Box } from 'grid-styled'
 import { Parser } from 'html-to-react'
@@ -11,7 +12,7 @@ const contentPaddingX = 20
 
 export default class extends React.Component {
   render () {
-    let { title, excerpt, featured_media } = this.props.post
+    let { title, excerpt, featured_media, slug } = this.props.post
     let srcUrl = featured_media.source_url
     title = htmlToReactParser.parse(title.rendered)
     excerpt = htmlToReactParser.parse(excerpt.rendered)
@@ -21,12 +22,16 @@ export default class extends React.Component {
           let result = <Excerpt post={this.props.post} />
           if (matches)
             result = (
-              <Feature contentPaddingX={contentPaddingX} image={srcUrl}>
-                <Words>
-                  <Title>{title}</Title>
-                  {excerpt}
-                </Words>
-              </Feature>
+              <Link prefetch route={`/${slug}`}>
+                <A>
+                  <Feature contentPaddingX={contentPaddingX} image={srcUrl}>
+                    <Words>
+                      <Title>{title}</Title>
+                      {excerpt}
+                    </Words>
+                  </Feature>
+                </A>
+              </Link>
             )
           return result
         }}
@@ -67,4 +72,9 @@ const Title = styled.div`
 `
 const Author = styled.div`
   font-size: .8em;
+`
+const A = styled.a`
+  text-decoration: none;
+  cursor: pointer;
+  color: inherit;
 `
