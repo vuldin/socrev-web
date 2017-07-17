@@ -34,7 +34,6 @@ export default class MyDocument extends Document {
             }
             figure {
               margin: 0 !important;
-              padding-top: 56.25% !important;
               background-size: cover !important;
               background-position: center top !important;
               background-repeat: no-repeat !important;
@@ -44,6 +43,7 @@ export default class MyDocument extends Document {
               height: auto;
               max-width: 100vw;
               vertical-align: middle;
+              width: 100%;
             }
             /*
             a {

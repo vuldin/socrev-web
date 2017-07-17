@@ -2,7 +2,11 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import FontAwesome from 'react-fontawesome'
 import MediaQuery from 'react-responsive'
-import logo from '../svgs/imt_wil_logo.svg'
+//import logo from '../svgs/imt_wil_logo.svg'
+//import logo from '../svgs/SocialistRevolutionLogoEnclosed.svg'
+import logo from '../svgs/SocialistRevolutionLogoHorizontal.svg'
+
+const logoFile = 'SocialistRevolutionLogoHorizontal.svg'
 
 const headerColor = '#5a5a5a'
 const contentPaddingX = 90
@@ -27,7 +31,32 @@ export default class extends React.Components {
           </Left>
           <LogoWrapper>
             <Link href='/'>
-              <a><Logo height={'60px'} width={'60px'} /></a>
+              <a>
+                <div
+                  style={{
+                    display: 'inline-block',
+                    position: 'relative',
+                    width: '100%',
+                    //paddingBottom: '100%',
+                    verticalAlign: 'middle',
+                    overflow: 'hidden'
+                  }}
+                >
+                  <object
+                    type='image/svg+xml'
+                    data={`/static/${logoFile}`}
+                    width='100%'
+                    height='100%'
+                    style={{
+                      pointerEvents: 'none',
+                      display: 'inline-block',
+                      //position: 'absolute',
+                      top: 0,
+                      left: 0
+                    }}
+                  />
+                </div>
+              </a>
             </Link>
           </LogoWrapper>
           <Right>
@@ -69,19 +98,46 @@ export default class extends React.Components {
             <LogoWrapper>
               <Link href='/'>
                 <a>
-                  <MediaQuery query='(min-width: 900px)'>
-                    {matches => {
-                      let result = <Logo height='100px' width='100px' />
-                      if (matches) result = <Logo />
-                      return result
+                  <div
+                    style={{
+                      display: 'inline-block',
+                      position: 'relative',
+                      width: '100%',
+                      //paddingBottom: '100%',
+                      verticalAlign: 'middle',
+                      overflow: 'hidden'
                     }}
-                  </MediaQuery>
+                  >
+                    <object
+                      type='image/svg+xml'
+                      data={`/static/${logoFile}`}
+                      width='100%'
+                      height='100%'
+                      style={{
+                        pointerEvents: 'none',
+                        display: 'inline-block',
+                        //position: 'absolute',
+                        top: 0,
+                        left: 0
+                      }}
+                    />
+                  </div>
                 </a>
               </Link>
             </LogoWrapper>
             <Right>
               <Interactions>
-                <div>Donate</div>
+                <a
+                  target='_blank'
+                  href='https://wellred.org/collections/donate/products/donate-1'
+                  style={{
+                    textDecoration: 'none',
+                    cursor: 'pointer',
+                    color: 'inherit'
+                  }}
+                >
+                  Donate
+                </a>
                 <Separator />
                 <FontAwesome name='facebook' />
                 <FontAwesome name='google' style={{ paddingLeft: '10px' }} />
@@ -144,7 +200,7 @@ const Separator = styled.div`
   background-color: ${headerColor};
 `
 const LogoWrapper = styled.div`
-  flex: 1;
+  flex: 2;
   display: flex;
   justify-content: center;
 `

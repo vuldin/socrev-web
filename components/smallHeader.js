@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import styled from 'styled-components'
 import FontAwesome from 'react-fontawesome'
-import logo from '../svgs/imt_wil_logo.svg'
 
+const logoFile = 'srlogo.svg'
 const headerColor = '#5a5a5a'
 const contentPaddingX = 90
 const smallContentPaddingX = 20
@@ -16,7 +16,32 @@ export default () =>
     </Left>
     <LogoWrapper>
       <Link href='/'>
-        <a><Logo height={'60px'} width={'60px'} /></a>
+        <a>
+          <div
+            style={{
+              display: 'inline-block',
+              position: 'relative',
+              width: '100%',
+              height: '100%',
+              verticalAlign: 'middle',
+              overflow: 'hidden'
+            }}
+          >
+            <object
+              type='image/svg+xml'
+              data={`/static/${logoFile}`}
+              width='100%'
+              height='100%'
+              style={{
+                pointerEvents: 'none',
+                display: 'inline-block',
+                top: 0,
+                left: 0,
+                minHeight: '65px'
+              }}
+            />
+          </div>
+        </a>
       </Link>
     </LogoWrapper>
     <Right>
@@ -34,6 +59,7 @@ const Header = styled.header`
   white-space: nowrap;
   color: ${headerColor};
   display: flex;
+  height: 100%;
   padding: 0px ${contentPaddingX}px;
   padding: 0px ${props => props.px || contentPaddingX}px;
 `
@@ -71,8 +97,4 @@ const LogoWrapper = styled.div`
   flex: 1;
   display: flex;
   justify-content: center;
-`
-const Logo = styled(logo)`
-  width: ${props => props.width || '150px'};
-  height: ${props => props.height || '150px'};
 `
