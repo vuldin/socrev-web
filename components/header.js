@@ -46,7 +46,7 @@ export default class extends React.Components {
                     type='image/svg+xml'
                     data={`/static/${logoFile}`}
                     width='100%'
-                    height='100%'
+                    height='65px'
                     style={{
                       pointerEvents: 'none',
                       display: 'inline-block',
@@ -92,7 +92,7 @@ export default class extends React.Components {
                 </MediaQuery>
                 */}
                 <Separator />
-                <Link href='/program'><A>Program</A></Link>
+                <Link href='/program'><A>Our Program</A></Link>
               </Actions>
             </Left>
             <LogoWrapper>

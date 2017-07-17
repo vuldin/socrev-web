@@ -11,7 +11,7 @@ const handler = routes.getRequestHandler(app)
 
 const redirects = require('./redirects')
 
-const rootStaticFiles = ['/favicon.ico']
+const rootStaticFiles = ['/favicon.ico', '/apple-touch-icon.png']
 
 app.prepare().then(() => {
   const server = express()
@@ -19,6 +19,7 @@ app.prepare().then(() => {
   // static files
   const options = { root: join(__dirname, 'static') }
   rootStaticFiles.forEach(file => {
+    console.log(file)
     server.get(file, (req, res) => {
       res.sendFile(file.slice(1), options)
     })
