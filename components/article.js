@@ -48,7 +48,7 @@ const Padding = styled.div`
   @media (min-width: 720px) {
     margin: 0 90px;
   }
-  @media (min-width: 900px) {
+  @media (min-width: 1100px) {
     margin: 0 350px;
     /*
     column-count: 2;

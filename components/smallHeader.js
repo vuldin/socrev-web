@@ -2,7 +2,8 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import FontAwesome from 'react-fontawesome'
 
-const logoFile = 'srlogo.svg'
+//const logoFile = 'srlogo.svg'
+const logoFile = 'SocialistRevolutionLogoHorizontal.svg'
 const headerColor = '#5a5a5a'
 const contentPaddingX = 90
 const smallContentPaddingX = 20
@@ -31,13 +32,12 @@ export default () =>
               type='image/svg+xml'
               data={`/static/${logoFile}`}
               width='100%'
-              height='100%'
+              height='65px'
               style={{
                 pointerEvents: 'none',
                 display: 'inline-block',
                 top: 0,
-                left: 0,
-                minHeight: '65px'
+                left: 0
               }}
             />
           </div>
