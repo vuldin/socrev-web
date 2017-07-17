@@ -53,6 +53,11 @@ const Padding = styled.div`
 `
 const Excerpt = styled.div`
   overflow: hidden;
+`
+const A = styled.a`
+  text-decoration: none;
+  cursor: pointer;
+  color: inherit;
   &:hover ${Padding} {
     color: #600000;
   }
@@ -60,11 +65,6 @@ const Excerpt = styled.div`
     filter: brightness(1.1) grayscale(100%);
     opacity: 0.8;
   }
-`
-const A = styled.a`
-  text-decoration: none;
-  cursor: pointer;
-  color: inherit;
 `
 const Title = styled.h2`
   margin: 10px 0 0 0;
