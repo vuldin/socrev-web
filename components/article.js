@@ -58,7 +58,10 @@ const Padding = styled.div`
 `
 const Title = styled.div`
   font-weight: bold;
-  font-size: 1.7em;
+  font-size: 2.5em;
+  font-family: font74157;
+  margin-top: 70px;
+  letter-spacing: -0.8px;
 `
 const Picture = styled.div`
   background: ${props => {

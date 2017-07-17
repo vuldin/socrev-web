@@ -69,4 +69,5 @@ const A = styled.a`
 const Title = styled.h2`
   margin: 10px 0 0 0;
   font-family: font74157;
+  letter-spacing: -1.2px;
 `

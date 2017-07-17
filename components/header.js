@@ -8,7 +8,7 @@ import logo from '../svgs/SocialistRevolutionLogoHorizontal.svg'
 
 const logoFile = 'SocialistRevolutionLogoHorizontal.svg'
 
-const headerColor = '#5a5a5a'
+const headerColor = 'white';
 const contentPaddingX = 90
 const smallContentPaddingX = 20
 
@@ -168,6 +168,8 @@ const Header = styled.header`
   display: flex;
   padding: 0px ${contentPaddingX}px;
   padding: 0px ${props => props.px || contentPaddingX}px;
+  background-color: #BB0A0A;
+  height: 75px;
 `
 const Left = styled.div`
   flex: 1;

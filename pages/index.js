@@ -43,7 +43,7 @@ export default class extends React.Component {
       <div>
         <Banner>
           <div style={{ paddingTop: '20px', textAlign: 'center' }}>
-            {`Help build for the revolution! Support the IMT today.`}
+            {`Support the IMT today. Help build for the revolution!`}
           </div>
           <BannerItems>
             <BannerItem>
@@ -142,7 +142,10 @@ const Banner = styled.div`
   background-color: #f0f0f0;
   font-size: 1.4em;
   font-weight: bold;
+  font-family: font74157;
+  letter-spacing: -1.2px;
   padding: 0 20px;
+  color: #BB0A0A;
   @media (min-width: 720px) {
     padding: 0 90px;
   }
