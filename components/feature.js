@@ -11,8 +11,8 @@ const contentPaddingX = 20
 
 export default class extends React.Component {
   render () {
-    let { title, excerpt, featuredMedia } = this.props.post
-    let srcUrl = featuredMedia.source_url
+    let { title, excerpt, featured_media } = this.props.post
+    let srcUrl = featured_media.source_url
     title = htmlToReactParser.parse(title.rendered)
     excerpt = htmlToReactParser.parse(excerpt.rendered)
     return (

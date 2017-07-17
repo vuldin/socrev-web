@@ -3,6 +3,8 @@ import Header from './header'
 import SmallHeader from './smallHeader'
 import Footer from './footer'
 
+const site = 'https://socialistrevolution.org'
+
 export default class extends React.Component {
   componentDidMount () {
     window.addEventListener('scroll', this.fixedHeaderManager)
@@ -25,11 +27,65 @@ export default class extends React.Component {
     this.refs.fixedHeaderWrapper.style.height = `${height}px`
   }
   render () {
-    const { title = 'IMT | US', children } = this.props
+    const {
+      title = 'IMT | US',
+      meta = [
+        {
+          name: 'description',
+          content:
+            'Socialist Revolution is the publication of the International Marxist Tendency in the United States.'
+        },
+        {
+          property: 'og:description',
+          content:
+            'Socialist Revolution is the publication of the International Marxist Tendency in the United States.'
+        },
+        {
+          property: 'og:site_name',
+          content: 'Socialist Revolution'
+        },
+        {
+          property: 'twitter:site',
+          content: '@usimt'
+        },
+        {
+          property: 'robots',
+          content: 'index,follow'
+        },
+        {
+          property: 'og:title',
+          content: 'IMT | US'
+        },
+        {
+          property: 'og:type',
+          content: 'website'
+        },
+        {
+          property: 'og:url',
+          content: `${site}/`
+        },
+        {
+          property: 'twitter:title',
+          content: 'Socialist Revolution'
+        },
+        {
+          property: 'twitter:description',
+          content:
+            'Socialist Revolution is the publication of the International Marxist Tendency in the United States.'
+        }
+      ],
+      canonical = `${site}/`,
+      children
+    } = this.props
     return (
       <div>
         <Head>
           <title>{title}</title>
+          <link rel='canonical' href={canonical} />
+          {meta.map(m => {
+            let meta = React.createElement('meta', m, null)
+            return meta
+          })}
         </Head>
         <Header />
         <div className='fixedHeaderWrapper' ref='fixedHeaderWrapper'>

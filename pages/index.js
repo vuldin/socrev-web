@@ -9,7 +9,6 @@ import Excerpt from '../components/excerpt'
 
 const contentPaddingX = '90px'
 const contentMargin = 20
-//const apiUrl = 'https://socialistrevolution.xyz'
 const apiUrl = 'https://api.socialistrevolution.org'
 //const apiUrl = 'http://localhost:3001'
 
@@ -25,7 +24,7 @@ export default class extends React.Component {
     }
   }
   ref = 1
-  count = 5
+  count = 30
   createRefComponents = () => {
     let results = []
     for (let i = 2; i < this.count + 1; i++) {

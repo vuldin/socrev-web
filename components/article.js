@@ -9,8 +9,8 @@ const smallContentPaddingX = 20
 
 export default class extends React.Component {
   render () {
-    let { title, excerpt, content, featuredMedia } = this.props.post
-    let { source_url } = featuredMedia
+    let { title, excerpt, content, featured_media } = this.props.post
+    let { source_url } = featured_media
     title = htmlToReactParser.parse(title.rendered)
     excerpt = htmlToReactParser.parse(excerpt.rendered)
     content = htmlToReactParser.parse(content.rendered)
@@ -24,7 +24,12 @@ export default class extends React.Component {
     */
     return (
       <div>
-        <figure style={{ background: `url(${source_url})` }} />
+        <figure
+          style={{
+            background: `url(${source_url})`,
+            paddingTop: '56.25%'
+          }}
+        />
         <Padding contentPaddingX={smallContentPaddingX}>
           <Title>{title}</Title>
           <em>
@@ -44,7 +49,7 @@ const Padding = styled.div`
     margin: 0 90px;
   }
   @media (min-width: 900px) {
-    margin: 0 120px;
+    margin: 0 350px;
     /*
     column-count: 2;
     column-rule: 1px solid #e1e1e1;
