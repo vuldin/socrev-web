@@ -213,3 +213,4 @@ const LogoWrapper = styled.div`
 const Logo = styled(logo)`
   width: ${props => props.width || '150px'};
   height: ${props => props.height || '150px'};
+`

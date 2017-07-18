@@ -60,7 +60,7 @@ const Title = styled.div`
   font-weight: bold;
   font-size: 2.5em;
   font-family: font74157;
-  margin-top: 70px;
+  margin-top: 80px;
   letter-spacing: -0.8px;
 `
 const Picture = styled.div`
