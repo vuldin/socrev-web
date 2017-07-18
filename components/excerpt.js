@@ -14,13 +14,47 @@ export default class extends React.Component {
     title = htmlToReactParser.parse(title.rendered)
     //console.log(excerpt.rendered)
     excerpt = htmlToReactParser.parse(excerpt.rendered)
+    let media = (
+      <BackColor>
+        <Picture id={srcUrl} />
+      </BackColor>
+    )
+
+    if (featured_media.video) {
+      // https://img.youtube.com/vi/r2pJcLWsnOQ/0.jpg
+      let playUrl = '/static/newplay.png'
+      if (srcUrl.includes('youtube.com/') || srcUrl.includes('youtu.be/')) {
+        // youtube link
+        // https://img.youtube.com/vi/r2pJcLWsnOQ/0.jpg
+        let regex = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/
+        let match = srcUrl.match(regex)
+        //let youtubeId = 'r2pJcLWsnOQ'
+        let youtubeId = ''
+        if (match && match[7].length == 11) {
+          youtubeId = match[7]
+        }
+        srcUrl = `https://img.youtube.com/vi/${youtubeId}/0.jpg`
+      } else {
+        srcUrl = '/static/black.png'
+      }
+      media = (
+        <BackColor style={{ position: 'relative' }}>
+          <Picture
+            id={srcUrl}
+            style={{ position: 'absolute', width: '100%', height: '100%' }}
+          />
+          <Picture
+            id={playUrl}
+            style={{ position: 'absolute', width: '100%', height: '100%' }}
+          />
+        </BackColor>
+      )
+    }
     return (
       <Excerpt>
         <Link prefetch route={`/${slug}`}>
           <A>
-            <BackColor>
-              <Picture id={srcUrl} />
-            </BackColor>
+            {media}
             <Padding contentPaddingX={contentPaddingX}>
               <Title>{title}</Title>
               {excerpt}
@@ -35,9 +69,6 @@ export default class extends React.Component {
 const BackColor = styled.div`
     height: 240px;
     background-color: #D80707;
-    background-position: center top;
-    background-size: cover;
-    background-repeat: no-repeat;
 `
 const Picture = styled.div`
   height: 100%;
