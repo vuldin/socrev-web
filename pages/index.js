@@ -124,10 +124,17 @@ export default class extends React.Component {
 }
 
 const PostWrapper = styled.div`
+  /*
   margin: 20px 0 0 0;
-  display: grid;
+  display: block;
+  */
+  display: block;
+  padding: 20px 0 0 0;
   grid-template-columns: 1fr;
   grid-gap: 20px;
+  @media (min-width: 415px) {
+    display: grid;
+  }
   @media (min-width: 720px) {
     grid-template-columns: 1fr 1fr;
     margin: 20px 90px 0px 90px;

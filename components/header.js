@@ -6,10 +6,12 @@ import MediaQuery from 'react-responsive'
 //import logo from '../svgs/SocialistRevolutionLogoEnclosed.svg'
 import logo from '../svgs/SocialistRevolutionLogoHorizontal.svg'
 
-const logoFile = 'SocialistRevolutionLogoHorizontal.svg'
+const logoFile = 'newsrlogo.svg'
 
-const headerColor = '#5a5a5a'
+//const headerColor = '#5a5a5a'
+const headerColor = 'white'
 const contentPaddingX = 90
+const medContentPaddingX = 30
 const smallContentPaddingX = 20
 
 export default () =>
@@ -39,14 +41,16 @@ export default class extends React.Components {
                     width: '100%',
                     //paddingBottom: '100%',
                     verticalAlign: 'middle',
-                    overflow: 'hidden'
+                    overflow: 'hidden',
+                    backgroundColor: 'white',
+                    height: '50px'
                   }}
                 >
                   <object
                     type='image/svg+xml'
                     data={`/static/${logoFile}`}
                     width='100%'
-                    height='65px'
+                    height='100%'
                     style={{
                       pointerEvents: 'none',
                       display: 'inline-block',
@@ -103,9 +107,11 @@ export default class extends React.Components {
                       display: 'inline-block',
                       position: 'relative',
                       width: '100%',
+                      height: '50px',
                       //paddingBottom: '100%',
                       verticalAlign: 'middle',
-                      overflow: 'hidden'
+                      overflow: 'hidden',
+                      backgroundColor: 'white'
                     }}
                   >
                     <object
@@ -165,9 +171,9 @@ const Header = styled.header`
   font-size: 20px;
   white-space: nowrap;
   color: ${headerColor};
+  background-color: #ed1f24;
   display: flex;
-  padding: 0px ${contentPaddingX}px;
-  padding: 0px ${props => props.px || contentPaddingX}px;
+  padding: 0px ${props => props.px || medContentPaddingX}px;
 `
 const Left = styled.div`
   flex: 1;
@@ -200,7 +206,7 @@ const Separator = styled.div`
   background-color: ${headerColor};
 `
 const LogoWrapper = styled.div`
-  flex: 2;
+  flex: 3;
   display: flex;
   justify-content: center;
 `
