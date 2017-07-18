@@ -2,9 +2,9 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import FontAwesome from 'react-fontawesome'
 
-//const logoFile = 'srlogo.svg'
-const logoFile = 'SocialistRevolutionLogoHorizontal.svg'
-const headerColor = '#5a5a5a'
+const logoFile = 'newsrlogo-2.svg'
+const headerColor = 'white'
+const headerBackgroundColor = '#ed1f24'
 const contentPaddingX = 90
 const smallContentPaddingX = 20
 
@@ -13,40 +13,67 @@ export default () =>
     <Left>
       <Actions>
         <FontAwesome name='bars' size='2x' />
+        <Separator />
+        <Link href='/program'><DisappearingA>Our Program</DisappearingA></Link>
       </Actions>
     </Left>
     <LogoWrapper>
       <Link href='/'>
-        <a>
-          <div
-            style={{
-              display: 'inline-block',
-              position: 'relative',
-              width: '100%',
-              height: '100%',
-              verticalAlign: 'middle',
-              overflow: 'hidden'
-            }}
-          >
-            <object
-              type='image/svg+xml'
-              data={`/static/${logoFile}`}
-              width='100%'
-              height='65px'
+        <a style={{ width: '100%' }}>
+          <InnerLogoWrapper>
+            <div
               style={{
-                pointerEvents: 'none',
-                display: 'inline-block',
-                top: 0,
-                left: 0
+                backgroundColor: 'white',
+                position: 'relative',
+                height: '600%',
+                /*
+                marginTop: '-250px',
+                top: '-250%',
+                */
+                top: '-250%',
+                width: '150%',
+                left: '-25%'
               }}
-            />
-          </div>
+            >
+              <object
+                type='image/svg+xml'
+                data={`/static/${logoFile}`}
+                width='100%'
+                height='100%'
+                style={{
+                  pointerEvents: 'none',
+                  display: 'inline-block',
+                  top: 0,
+                  left: 0
+                }}
+              />
+            </div>
+          </InnerLogoWrapper>
         </a>
       </Link>
     </LogoWrapper>
     <Right>
       <Interactions>
+        <DisappearingA
+          target='_blank'
+          href='https://wellred.org/collections/donate/products/donate-1'
+          style={{
+            textDecoration: 'none',
+            cursor: 'pointer',
+            color: 'inherit'
+          }}
+        >
+          Donate
+        </DisappearingA>
+        <Separator />
         <FontAwesome name='facebook' size='2x' />
+        <DisappearingDiv>
+          <FontAwesome
+            name='google'
+            size='2x'
+            style={{ paddingLeft: '15px' }}
+          />
+        </DisappearingDiv>
         <FontAwesome name='twitter' size='2x' style={{ paddingLeft: '15px' }} />
       </Interactions>
     </Right>
@@ -58,10 +85,13 @@ const Header = styled.header`
   font-size: 20px;
   white-space: nowrap;
   color: ${headerColor};
+  background-color: ${headerBackgroundColor};
   display: flex;
-  height: 100%;
-  padding: 0px ${contentPaddingX}px;
+  height: 60px;
   padding: 0px ${props => props.px || contentPaddingX}px;
+  @media (min-width: 500px) {
+    height: 100px;
+  }
 `
 const Left = styled.div`
   flex: 1;
@@ -92,9 +122,36 @@ const Separator = styled.div`
   width: 1px;
   height: 30px;
   background-color: ${headerColor};
+  display: none;
+  @media (min-width: 950px) {
+    display: inherit;
+  }
+`
+const DisappearingA = styled.a`
+  cursor: pointer;
+  display: none;
+  @media (min-width: 950px) {
+    display: inherit;
+  }
+`
+const DisappearingDiv = styled.div`
+  display: none;
+  @media (min-width: 950px) {
+    display: inherit;
+  }
 `
 const LogoWrapper = styled.div`
-  flex: 1;
+  flex: 3;
+  background-color: white;
   display: flex;
   justify-content: center;
+  overflow: hidden;
+`
+const InnerLogoWrapper = styled.div`
+  height: 60px;
+  width: 100%;
+  overflow: hidden;
+  @media (min-width: 500px) {
+    height: 100px;
+  }
 `

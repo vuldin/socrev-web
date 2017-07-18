@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Header from './header'
+//import Header from './header'
 import SmallHeader from './smallHeader'
 import Footer from './footer'
 
@@ -15,14 +15,17 @@ export default class extends React.Component {
     window.removeEventListener('resize', this.fixedHeaderManager)
   }
   fixedHeaderManager = e => {
+    //let width = screen.width
+    let width = window.innerWidth
     let bpMod = 4
     let breakPoint = 65 * bpMod
     let height = 0
-    if (screen.width > 720) breakPoint = 105 * bpMod
-    if (screen.width > 900) breakPoint = 155 * bpMod
+    if (width > 720) breakPoint = 105 * bpMod
+    if (width > 900) breakPoint = 155 * bpMod
     if (window.scrollY > breakPoint) {
       //height = breakPoint / bpMod
-      height = 65
+      height = 60
+      if (width > 500) height = 100
     }
     this.refs.fixedHeaderWrapper.style.height = `${height}px`
   }
@@ -87,7 +90,10 @@ export default class extends React.Component {
             return meta
           })}
         </Head>
+        {/*
         <Header />
+        */}
+        <SmallHeader />
         <div className='fixedHeaderWrapper' ref='fixedHeaderWrapper'>
           <SmallHeader />
           <style jsx>{`

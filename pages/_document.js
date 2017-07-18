@@ -14,7 +14,7 @@ export default class MyDocument extends Document {
           <meta charSet='utf-8' />
           <meta
             name='viewport'
-            content='initial-scale=1.0, width=device-width'
+            content='initial-scale=1.0, width=device-width height=device-height'
           />
           <script src='https://use.fontawesome.com/62d036d8b5.js' />
           <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
@@ -60,6 +60,27 @@ export default class MyDocument extends Document {
           {styleTags}
         </Head>
         <body>
+          {/*
+          <script>{
+            window.fbAsyncInit = function() {
+              FB.init({
+                appId            : '1049510628513543',
+                autoLogAppEvents : true,
+                xfbml            : true,
+                version          : 'v2.9'
+              });
+              FB.AppEvents.logPageView();
+            };
+
+            (function(d, s, id){
+               var js, fjs = d.getElementsByTagName(s)[0];
+               if (d.getElementById(id)) {return;}
+               js = d.createElement(s); js.id = id;
+               js.src = "//connect.facebook.net/en_US/sdk.js";
+               fjs.parentNode.insertBefore(js, fjs);
+             }(document, 'script', 'facebook-jssdk'));
+          }</script>
+          */}
           {main}
           <NextScript />
         </body>
