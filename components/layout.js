@@ -1,5 +1,4 @@
 import Head from 'next/head'
-//import Header from './header'
 import SmallHeader from './smallHeader'
 import Footer from './footer'
 
@@ -78,6 +77,7 @@ export default class extends React.Component {
         }
       ],
       canonical = `${site}/`,
+      excerpt,
       children
     } = this.props
     return (
@@ -90,10 +90,7 @@ export default class extends React.Component {
             return meta
           })}
         </Head>
-        {/*
-        <Header />
-        */}
-        <SmallHeader />
+        <SmallHeader canonical={canonical} excerpt={excerpt} />
         <div className='fixedHeaderWrapper' ref='fixedHeaderWrapper'>
           <SmallHeader />
           <style jsx>{`

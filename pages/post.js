@@ -23,6 +23,7 @@ export default class extends React.Component {
       <Layout
         title={`IMT | ${title}`}
         canonical={`${site}/${post.slug}`}
+        excerpt={post.excerpt.rendered}
         meta={[
           {
             name: 'description',

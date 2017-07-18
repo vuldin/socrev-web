@@ -8,7 +8,21 @@ const headerBackgroundColor = '#ed1f24'
 const contentPaddingX = 90
 const smallContentPaddingX = 20
 
-export default () =>
+const twitterHandle = 'isimt'
+const description =
+  'Socialist Revolution is the publication of the International Marxist Tendency in the United States.'
+const site = 'https://socialistrevolution.org'
+const flink = `https://www.facebook.com/sharer/sharer.php?u=`
+const tlink = `https://twitter.com/intent/tweet`
+
+export default ({
+  fshare = `${flink}${site}`,
+  tshare = `${tlink}?original_referer=${encodeURI(site)}&text=${encodeURI(
+    description
+  )}&url=${encodeURI(site)}&via=${twitterHandle}`,
+  canonical,
+  excerpt
+}) =>
   <Header px={smallContentPaddingX}>
     <Left>
       <Actions>
@@ -66,7 +80,9 @@ export default () =>
           Donate
         </DisappearingA>
         <Separator />
-        <FontAwesome name='facebook' size='2x' />
+        <A href={canonical ? `${flink}${canonical}` : fshare} target='_blank'>
+          <FontAwesome name='facebook' size='2x' />
+        </A>
         <DisappearingDiv>
           <FontAwesome
             name='google'
@@ -74,7 +90,24 @@ export default () =>
             style={{ paddingLeft: '15px' }}
           />
         </DisappearingDiv>
-        <FontAwesome name='twitter' size='2x' style={{ paddingLeft: '15px' }} />
+        <A
+          href={
+            excerpt
+              ? `${tlink}?original_referer=${encodeURI(
+                  canonical
+                )}&text=${encodeURI(excerpt)}&url=${encodeURI(
+                  canonical
+                )}&via=${twitterHandle}`
+              : tshare
+          }
+          target='_blank'
+        >
+          <FontAwesome
+            name='twitter'
+            size='2x'
+            style={{ paddingLeft: '15px' }}
+          />
+        </A>
       </Interactions>
     </Right>
   </Header>
