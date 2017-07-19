@@ -24,7 +24,7 @@ export default class extends React.Component {
     if (window.scrollY > breakPoint) {
       //height = breakPoint / bpMod
       height = 60
-      if (width > 500) height = 100
+      if (width > 700) height = 100
     }
     this.refs.fixedHeaderWrapper.style.height = `${height}px`
   }

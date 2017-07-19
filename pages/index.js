@@ -71,6 +71,7 @@ export default class extends React.Component {
                   target='_blank'
                   href={`${glink}${site}`}
                   style={{
+                    paddingLeft: '20px',
                     textDecoration: 'none',
                     cursor: 'pointer',
                     color: 'inherit'
@@ -84,6 +85,7 @@ export default class extends React.Component {
                     site
                   )}&region=follow_link&screen_name=${twitterHandle}&tw_p=followbutton`}
                   style={{
+                    paddingLeft: '20px',
                     textDecoration: 'none',
                     cursor: 'pointer',
                     color: 'inherit'
@@ -251,6 +253,7 @@ const Quote = styled.div`
   }
 `
 const Icons = styled.div`
+  text-align: center;
 `
 const Button = styled.a`
   display: inline-block;

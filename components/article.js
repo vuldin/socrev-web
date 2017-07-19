@@ -80,6 +80,7 @@ const Title = styled.div`
   font-weight: bold;
   font-size: 1.2em;
   word-wrap: break-word;
+  padding-top: 20px;
   @media (min-width: 500px) {
     font-size: 1.7em;
   }

@@ -17,7 +17,7 @@ export default class extends React.Component {
     title = htmlToReactParser.parse(title.rendered)
     excerpt = htmlToReactParser.parse(excerpt.rendered)
     return (
-      <MediaQuery query='(min-width: 500px)'>
+      <MediaQuery query='(min-width: 700px)'>
         {matches => {
           let result = <Excerpt post={this.props.post} />
           if (matches)

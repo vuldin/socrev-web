@@ -2,7 +2,7 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import FontAwesome from 'react-fontawesome'
 
-const logoFile = 'newsrlogo-2.svg'
+const logoFile = 'newsrlogo-3.svg'
 const headerColor = 'white'
 const headerBackgroundColor = '#ed1f24'
 const contentPaddingX = 90
@@ -35,7 +35,12 @@ export default ({
   <Header px={smallContentPaddingX}>
     <Left>
       <Actions>
+        <A href={canonical ? `${flink}${canonical}` : fshare} target='_blank'>
+          <FontAwesome name='facebook' size='2x' />
+        </A>
+        {/*
         <FontAwesome name='bars' size='2x' />
+        */}
         <Separator />
         <Link href='/program'><DisappearingA>Our Program</DisappearingA></Link>
       </Actions>
@@ -76,9 +81,6 @@ export default ({
           Donate
         </DisappearingA>
         <Separator />
-        <A href={canonical ? `${flink}${canonical}` : fshare} target='_blank'>
-          <FontAwesome name='facebook' size='2x' />
-        </A>
         <DisappearingDiv>
           <A href={canonical ? `${glink}${canonical}` : gshare} target='_blank'>
             <FontAwesome
@@ -120,7 +122,7 @@ const Header = styled.header`
   display: flex;
   height: 60px;
   padding: 0px ${props => props.px || contentPaddingX}px;
-  @media (min-width: 500px) {
+  @media (min-width: 700px) {
     height: 100px;
   }
 `
@@ -196,7 +198,16 @@ const Magnifier = styled.div`
   width: 250%;
   left: -75%;
   height: 600%;
+  /*
+  top: -270%;
+  */
   top: -250%;
+  @media (min-width: 500px) {
+    top: -270%;
+  }
+  @media (min-width: 700px) {
+    top: -250%;
+  }
   @media (min-width: 1400px) {
     height: 600%;
     top: -250%;
