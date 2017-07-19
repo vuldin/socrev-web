@@ -11,6 +11,13 @@ const contentPaddingX = '90px'
 const contentMargin = 20
 //const apiUrl = 'https://api.socialistrevolution.org'
 const apiUrl = 'http://localhost:3001'
+const site = 'https://socialistrevolution.org'
+const flink = `https://www.facebook.com/sharer/sharer.php?u=`
+const glink = 'https://plus.google.com/share?url='
+const twitterHandle = 'usimt'
+const tFollowLink = `https://twitter.com/intent/follow`
+const description =
+  'Socialist Revolution is the publication of the International Marxist Tendency in the United States.'
 
 export default class extends React.Component {
   static async getInitialProps () {
@@ -49,22 +56,74 @@ export default class extends React.Component {
             <BannerItem>
               <div>Follow</div>
               <Icons>
-                <FontAwesome name='facebook' size='2x' />
-                <FontAwesome name='twitter' size='2x' />
-                <FontAwesome name='google' size='2x' />
+                <a
+                  target='_blank'
+                  href={`${flink}${site}`}
+                  style={{
+                    textDecoration: 'none',
+                    cursor: 'pointer',
+                    color: 'inherit'
+                  }}
+                >
+                  <FontAwesome name='facebook' size='2x' />
+                </a>
+                <a
+                  target='_blank'
+                  href={`${glink}${site}`}
+                  style={{
+                    textDecoration: 'none',
+                    cursor: 'pointer',
+                    color: 'inherit'
+                  }}
+                >
+                  <FontAwesome name='google' size='2x' />
+                </a>
+                <a
+                  target='_blank'
+                  href={`${tFollowLink}?original_referer=${encodeURI(
+                    site
+                  )}&region=follow_link&screen_name=${twitterHandle}&tw_p=followbutton`}
+                  style={{
+                    textDecoration: 'none',
+                    cursor: 'pointer',
+                    color: 'inherit'
+                  }}
+                >
+                  <FontAwesome name='twitter' size='2x' />
+                </a>
               </Icons>
             </BannerItem>
             <BannerItem>
-              <div>Subscribe</div>
-              <Icons>
-                <FontAwesome name='newspaper-o' size='2x' />
-              </Icons>
+              <a
+                target='_blank'
+                href='https://www.marxistbooks.com/products/subscription-to-socialist-revolution-magazine'
+                style={{
+                  textDecoration: 'none',
+                  cursor: 'pointer',
+                  color: 'inherit'
+                }}
+              >
+                <div>Subscribe</div>
+                <Icons>
+                  <FontAwesome name='newspaper-o' size='2x' />
+                </Icons>
+              </a>
             </BannerItem>
             <BannerItem>
-              <div>Donate</div>
-              <Icons>
-                <FontAwesome name='handshake-o' size='2x' />
-              </Icons>
+              <a
+                target='_blank'
+                href='https://wellred.org/collections/donate/products/donate-1'
+                style={{
+                  textDecoration: 'none',
+                  cursor: 'pointer',
+                  color: 'inherit'
+                }}
+              >
+                <div>Donate</div>
+                <Icons>
+                  <FontAwesome name='handshake-o' size='2x' />
+                </Icons>
+              </a>
             </BannerItem>
           </BannerItems>
         </Banner>

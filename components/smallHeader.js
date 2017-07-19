@@ -8,18 +8,27 @@ const headerBackgroundColor = '#ed1f24'
 const contentPaddingX = 90
 const smallContentPaddingX = 20
 
-const twitterHandle = 'isimt'
+const twitterHandle = 'usimt'
 const description =
   'Socialist Revolution is the publication of the International Marxist Tendency in the United States.'
 const site = 'https://socialistrevolution.org'
 const flink = `https://www.facebook.com/sharer/sharer.php?u=`
+// tweet
 const tlink = `https://twitter.com/intent/tweet`
+// follow
+// &ref_src=twsrc%5Etfw &region=follow_link &screen_name=aeonmag &tw_p=followbutton
+const tFollowLink = `https://twitter.com/intent/follow`
+const glink = 'https://plus.google.com/share?url='
 
 export default ({
   fshare = `${flink}${site}`,
-  tshare = `${tlink}?original_referer=${encodeURI(site)}&text=${encodeURI(
-    description
-  )}&url=${encodeURI(site)}&via=${twitterHandle}`,
+  gshare = `${glink}${site}`,
+  tshare = `${tFollowLink}?original_referer=${encodeURI(
+    site
+  )}&region=follow_link&screen_name=${twitterHandle}&tw_p=followbutton`,
+  /*
+  tshare = `${tlink}?original_referer=${encodeURI(site)}&text=${encodeURI(description)}&url=${encodeURI(site)}&via=${twitterHandle}`,
+  */
   canonical,
   excerpt
 }) =>
@@ -35,20 +44,7 @@ export default ({
       <Link href='/'>
         <a style={{ width: '100%' }}>
           <InnerLogoWrapper>
-            <div
-              style={{
-                backgroundColor: 'white',
-                position: 'relative',
-                height: '600%',
-                /*
-                marginTop: '-250px',
-                top: '-250%',
-                */
-                top: '-250%',
-                width: '150%',
-                left: '-25%'
-              }}
-            >
+            <Magnifier>
               <object
                 type='image/svg+xml'
                 data={`/static/${logoFile}`}
@@ -61,7 +57,7 @@ export default ({
                   left: 0
                 }}
               />
-            </div>
+            </Magnifier>
           </InnerLogoWrapper>
         </a>
       </Link>
@@ -84,11 +80,13 @@ export default ({
           <FontAwesome name='facebook' size='2x' />
         </A>
         <DisappearingDiv>
-          <FontAwesome
-            name='google'
-            size='2x'
-            style={{ paddingLeft: '15px' }}
-          />
+          <A href={canonical ? `${glink}${canonical}` : gshare} target='_blank'>
+            <FontAwesome
+              name='google'
+              size='2x'
+              style={{ paddingLeft: '15px' }}
+            />
+          </A>
         </DisappearingDiv>
         <A
           href={
@@ -186,5 +184,21 @@ const InnerLogoWrapper = styled.div`
   overflow: hidden;
   @media (min-width: 500px) {
     height: 100px;
+  }
+`
+const Magnifier = styled.div`
+  background-color: white;
+  position: relative;
+  /*
+  width: 150%;
+  left: -25%;
+  */
+  width: 250%;
+  left: -75%;
+  height: 600%;
+  top: -250%;
+  @media (min-width: 1400px) {
+    height: 600%;
+    top: -250%;
   }
 `

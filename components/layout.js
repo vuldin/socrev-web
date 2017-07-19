@@ -76,7 +76,7 @@ export default class extends React.Component {
             'Socialist Revolution is the publication of the International Marxist Tendency in the United States.'
         }
       ],
-      canonical = `${site}/`,
+      canonical = `${site}`,
       excerpt,
       children
     } = this.props
@@ -92,7 +92,7 @@ export default class extends React.Component {
         </Head>
         <SmallHeader canonical={canonical} excerpt={excerpt} />
         <div className='fixedHeaderWrapper' ref='fixedHeaderWrapper'>
-          <SmallHeader />
+          <SmallHeader canonical={canonical} excerpt={excerpt} />
           <style jsx>{`
             .fixedHeaderWrapper {
               z-index: 100;

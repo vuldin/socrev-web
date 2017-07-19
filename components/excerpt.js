@@ -84,6 +84,7 @@ const Padding = styled.div`
 `
 const Excerpt = styled.div`
   overflow: hidden;
+  padding-top: 30px;
 `
 const A = styled.a`
   text-decoration: none;
@@ -101,4 +102,8 @@ const Title = styled.h2`
   margin: 10px 0 0 0;
   font-family: font74157;
   letter-spacing: -1.2px;
+  font-size: 1.2em;
+  @media (min-width: 500px) {
+    font-size: 1.7em;
+  }
 `

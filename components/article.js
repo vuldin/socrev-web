@@ -33,7 +33,7 @@ export default class extends React.Component {
     )
     if (featured_media.video)
       media = (
-        <ResponsivePlayer url={source_url} width={'100vw'} height={'60vw'} />
+        <ResponsivePlayer url={source_url} width={'100vw'} height={'55vw'} />
       )
     return (
       <div>
