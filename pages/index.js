@@ -9,8 +9,8 @@ import Excerpt from '../components/excerpt'
 
 const contentPaddingX = '90px'
 const contentMargin = 20
-//const apiUrl = 'https://api.socialistrevolution.org'
-const apiUrl = 'http://localhost:3001'
+const apiUrl = 'https://api.socialistrevolution.org'
+//const apiUrl = 'http://localhost:3001'
 const site = 'https://socialistrevolution.org'
 const flink = `https://www.facebook.com/sharer/sharer.php?u=`
 const glink = 'https://plus.google.com/share?url='
