@@ -58,7 +58,7 @@ export default class extends React.Component {
               <Icons>
                 <a
                   target='_blank'
-                  href={`${flink}${site}`}
+                  href='https://www.facebook.com/imtusa'
                   style={{
                     textDecoration: 'none',
                     cursor: 'pointer',
@@ -223,7 +223,7 @@ const BannerItems = styled.div`
   grid-gap: 20px;
   grid-template-columns: 1fr;
   justify-items: center;
-  @media (min-width: 470px) {
+  @media (min-width: 575px) {
     grid-template-columns: 1fr 1fr 1fr;
   }
 `

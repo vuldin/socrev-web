@@ -1,23 +1,12 @@
+banner
+- make social media links be to follow instead of share (like twitter)
 header
-- COMPLETE remove menu link
-- COMPLETE move facebook link to left side, twitter right
-- COMPLETE shrink height on small landscape screens
-new-site
-- COMPLETE change title: welcome to socialist revolution!
-socialmedia banner
-- COMPLETE space out links
-- COMPLETE center links
-logo
-- COMPLETE add white space around socialist
-- COMPLETE increase size when possible
-feature
-- COMPLETE properly switch to excerpt on small landscape screens
-order
-- COMPLETE change to the following
-1. editorial
-2. welcome
-3. DSA
-4. labor
-5. greetings
+- make social media links be to follow instead of share (like twitter)
 article
-- COMPLETE add space between media and title, especially on small screens
+- add share links to the bottom in fixed footer
+- switch fixed footer to sharing component on left margin once on big screen size
+- increase size of article title for small screen
+misc
+- COMPLETE program spacing
+- re-add Jordana's changes
+- fix minor banner responsive problem

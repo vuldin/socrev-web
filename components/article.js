@@ -76,21 +76,22 @@ const Padding = styled.div`
     */
   }
 `
-const Title = styled.div`
-  font-weight: bold;
-  font-size: 1.2em;
-  word-wrap: break-word;
-  padding-top: 20px;
-  @media (min-width: 500px) {
-    font-size: 1.7em;
-  }
-  /*
-  @media (min-width: 1100px) {
-    width: 700px;
-    margin: 0 auto;
-  }
-  */
+const Title = styled.h2`
+  margin: 80px 0 0 0;
+  font-family: font74157;
+  letter-spacing: -0.8px;
+  font-size: 1.8em;
 `
+/*
+const Title = styled.div`
+  font-family: font74157;
+  letter-spacing: -0.8px;
+  font-weight: bold;
+  font-size: 1.8em;
+  word-wrap: break-word;
+  padding-top: 80px;
+`
+*/
 const Excerpt = styled.em`
   /*
   @media (min-width: 1100px) {
