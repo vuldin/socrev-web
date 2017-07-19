@@ -16,29 +16,21 @@ export default class extends React.Component {
     excerpt = htmlToReactParser.parse(excerpt.rendered)
     content = htmlToReactParser.parse(content.rendered)
     content = content.filter(d => d !== '\n')
-    /*
-    const columnContent = []
-    while (content.length) {
-      columnContent.push(content.splice(0, 4))
-    }
-    console.log(columnContent)
-    */
+    let isSticky = this.props.post.sticky
     let media = (
-      <figure
-        style={{
-          background: `url(${source_url})`,
-          paddingTop: '56.25%'
-        }}
-      />
+      <figure>
+        <img src={source_url} />
+      </figure>
     )
     if (featured_media.video)
       media = (
-        <ResponsivePlayer url={source_url} width={'100vw'} height={'55vw'} />
+        <ResponsivePlayer url={source_url} width={'60vw'} height={'40vw'} />
       )
     return (
       <div>
-        {media}
+        {isSticky && !featured_media.video ? media : <span />}
         <Padding contentPaddingX={smallContentPaddingX}>
+          {!isSticky || featured_media.video ? media : <span />}
           <Title>{title}</Title>
           <Excerpt>
             {excerpt}
@@ -52,13 +44,10 @@ export default class extends React.Component {
   }
 }
 const ResponsivePlayer = styled(ReactPlayer)`
-  /*
-  width: 100vw !important;
-  height: 60vw !important;
-  */
   margin: 0 auto;
-  @media (min-width: 720px) {
-    padding: 0 90px;
+  @media (min-width: 1100px) {
+    width: 700px !important;
+    height: 400px !important;
   }
 `
 const Padding = styled.div`

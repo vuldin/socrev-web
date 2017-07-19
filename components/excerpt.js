@@ -67,7 +67,7 @@ export default class extends React.Component {
 }
 
 const BackColor = styled.div`
-    height: 240px;
+    height: 275px;
     background-color: #D80707;
 `
 const Picture = styled.div`
@@ -75,7 +75,7 @@ const Picture = styled.div`
   background: ${props => {
     return `url(${props.id})`
   }};
-  background-position: center top;
+  background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
 `

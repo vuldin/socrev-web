@@ -19,10 +19,23 @@ const tlink = `https://twitter.com/intent/tweet`
 // &ref_src=twsrc%5Etfw &region=follow_link &screen_name=aeonmag &tw_p=followbutton
 const tFollowLink = `https://twitter.com/intent/follow`
 const glink = 'https://plus.google.com/share?url='
+/*
+        <DisappearingDiv>
+          <A href={canonical ? `${glink}${canonical}` : gshare} target='_blank'>
+            <FontAwesome
+              name='google'
+              size='2x'
+              style={{ paddingLeft: '15px' }}
+            />
+          </A>
+        </DisappearingDiv>
+        <A href={canonical ? `${flink}${canonical}` : fshare} target='_blank'>
+          <FontAwesome name='facebook' size='2x' />
+        </A>
+*/
 
 export default ({
-  fshare = `${flink}${site}`,
-  gshare = `${glink}${site}`,
+  fshare = `https://www.facebook.com/imtusa`,
   tshare = `${tFollowLink}?original_referer=${encodeURI(
     site
   )}&region=follow_link&screen_name=${twitterHandle}&tw_p=followbutton`,
@@ -35,7 +48,7 @@ export default ({
   <Header px={smallContentPaddingX}>
     <Left>
       <Actions>
-        <A href={canonical ? `${flink}${canonical}` : fshare} target='_blank'>
+        <A href={fshare} target='_blank'>
           <FontAwesome name='facebook' size='2x' />
         </A>
         {/*
@@ -81,15 +94,6 @@ export default ({
           Donate
         </DisappearingA>
         <Separator />
-        <DisappearingDiv>
-          <A href={canonical ? `${glink}${canonical}` : gshare} target='_blank'>
-            <FontAwesome
-              name='google'
-              size='2x'
-              style={{ paddingLeft: '15px' }}
-            />
-          </A>
-        </DisappearingDiv>
         <A
           href={
             excerpt
