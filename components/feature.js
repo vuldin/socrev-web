@@ -46,8 +46,11 @@ const Feature = styled.div`
   align-items: end;
   padding: ${props => `0 ${props.contentPaddingX}px`};
   min-height: 200px;
-  height: 70vh;
+  /*
+  height: 75vh;
+  */
   width: 100vw;
+  height: 50vw;
   margin-bottom: ${contentMargin}px;
   background: ${props => {
     return `url(${props.image})`

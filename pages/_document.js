@@ -45,13 +45,6 @@ export default class MyDocument extends Document {
               vertical-align: middle;
               width: 100%;
             }
-            /*
-            a {
-              text-decoration: none;
-              cursor: pointer;
-              color: inherit;
-            }
-            */
             p {
               margin: 10px 0 0 0;
               padding: 20px 0 0 0;

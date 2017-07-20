@@ -126,7 +126,7 @@ const Header = styled.header`
   display: flex;
   height: 60px;
   padding: 0px ${props => props.px || contentPaddingX}px;
-  @media (min-width: 700px) {
+  @media (min-width: 900px) {
     height: 100px;
   }
 `
@@ -209,7 +209,7 @@ const Magnifier = styled.div`
   @media (min-width: 500px) {
     top: -270%;
   }
-  @media (min-width: 700px) {
+  @media (min-width: 900px) {
     top: -250%;
   }
   @media (min-width: 1400px) {

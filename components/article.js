@@ -1,7 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
+import FontAwesome from 'react-fontawesome'
 import { Parser } from 'html-to-react'
 import ReactPlayer from 'react-player'
+import InteractionTool from './interactionTool'
+import Banner from './banner'
 
 const htmlToReactParser = new Parser()
 const contentMargin = 20
@@ -16,6 +19,8 @@ export default class extends React.Component {
     excerpt = htmlToReactParser.parse(excerpt.rendered)
     content = htmlToReactParser.parse(content.rendered)
     content = content.filter(d => d !== '\n')
+    content.splice(parseInt(content.length / 2), 0, <Banner />)
+    console.log(content)
     let isSticky = this.props.post.sticky
     let media = (
       <figure>
@@ -30,19 +35,59 @@ export default class extends React.Component {
       <div>
         {isSticky && !featured_media.video ? media : <span />}
         <Padding contentPaddingX={smallContentPaddingX}>
-          {!isSticky || featured_media.video ? media : <span />}
-          <Title>{title}</Title>
-          <Excerpt>
-            {excerpt}
-          </Excerpt>
+          <Side>
+            <InteractionTool />
+          </Side>
           <Content>
+            {!isSticky || featured_media.video ? media : <span />}
+            <Title>{title}</Title>
+            <Excerpt>
+              {excerpt}
+            </Excerpt>
             {content}
           </Content>
         </Padding>
+        <FixedFooter className='article-fixed-footer'>
+          <FontAwesome name='twitter-square' style={{ color: '#55acee' }} />
+          <FontAwesome
+            name='google-plus-official'
+            style={{ color: '#ea4335' }}
+          />
+          <FontAwesome name='facebook-square' style={{ color: '#3b5998' }} />
+        </FixedFooter>
+        <FixedSide className='article-fixed-side'>
+          <InteractionTool />
+        </FixedSide>
       </div>
     )
   }
 }
+const FixedSide = styled.div`
+  display: none;
+  position: fixed;
+  width: 150px;
+  left: 90px;
+  top: 200px;
+`
+const Side = styled.div`
+  flex: 0 0 150px;
+  display: none;
+  @media (min-width: 1100px) {
+    display: inherit;
+  }
+`
+const FixedFooter = styled.div`
+  box-shadow: 0 0 0.2rem rgba(0,0,0,0.35);
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  position: fixed;
+  height: 32px;
+  width: 100vw;
+  bottom: 0;
+  background-color: white;
+`
 const ResponsivePlayer = styled(ReactPlayer)`
   margin: 0 auto;
   @media (min-width: 1100px) {
@@ -51,22 +96,16 @@ const ResponsivePlayer = styled(ReactPlayer)`
   }
 `
 const Padding = styled.div`
-  margin: 0 ${props => props.contentPaddingX}px;
+  margin: ${props =>
+    `80px ${props.contentPaddingX}px 0 ${props.contentPaddingX}px`};
   overflow: hidden;
+  display: flex;
   @media (min-width: 720px) {
-    margin: 0 90px;
-  }
-  @media (min-width: 1100px) {
-    width: 700px;
-    margin: 0 auto;
-    /*
-    column-count: 2;
-    column-rule: 1px solid #e1e1e1;
-    */
+    margin: ${props => `80px 90px 0 90px`};
   }
 `
 const Title = styled.h2`
-  margin: 80px 0 0 0;
+  margin: 0;
   font-family: font74157;
   letter-spacing: -0.8px;
   font-size: 1.8em;
@@ -100,10 +139,8 @@ const Picture = styled.div`
 
 const Content = styled.div`
   overflow: hidden;
-  /*
   @media (min-width: 1100px) {
     width: 700px;
     margin: 0 auto;
   }
-  */
 `

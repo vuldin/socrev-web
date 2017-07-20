@@ -19,12 +19,33 @@ export default class extends React.Component {
     let bpMod = 4
     let breakPoint = 65 * bpMod
     let height = 0
+    const articleFooter = document.querySelector('.article-fixed-footer')
+    const articleShare = document.querySelector('.article-fixed-side')
+    let footerDisplayResult = 'none'
     if (width > 720) breakPoint = 105 * bpMod
     if (width > 900) breakPoint = 155 * bpMod
     if (window.scrollY > breakPoint) {
       //height = breakPoint / bpMod
       height = 60
-      if (width > 700) height = 100
+      if (width > 900) height = 100
+      if (width < 1100) {
+        if (
+          window.scrollY + window.innerHeight <
+          document.body.scrollHeight - 200
+        ) {
+          footerDisplayResult = 'flex'
+        }
+      }
+    }
+    if (
+      window.scrollY > breakPoint * 2 &&
+      articleShare !== null &&
+      width > 1100
+    ) {
+      articleShare.style.display = 'inherit'
+    } else articleShare.style.display = 'none'
+    if (articleFooter !== null) {
+      articleFooter.style.display = footerDisplayResult
     }
     this.refs.fixedHeaderWrapper.style.height = `${height}px`
   }
