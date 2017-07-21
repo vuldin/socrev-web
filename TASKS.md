@@ -1,14 +1,13 @@
-feature
-- COMPLETE increase height of feature
-index
-- COMPLETE ensure old stickies are included
-banner
-- COMPLETE make social media links be to follow instead of share (like twitter)
-header
-- COMPLETE decrease height on small devices in landscape mode
-- COMPLETE make social media links be to follow instead of share (like twitter)
-article
-- IN PROGRESS add share links to the bottom in fixed footer
-- IN PROGRESS switch fixed footer to sharing component on left margin once on big screen size
-- COMPLETE add follow banner to articles
-- COMPLETE make sticky feature images full width
+- COMPLETE add share links to the bottom in fixed footer
+- COMPLETE switch fixed footer to sharing component on left margin once on big screen size
+- COMPLETE make sure banner gets inserted between posts
+- COMPLETE add padding under img tags
+- COMPLETE add padding between article and footer
+- COMPLETE add top margin to footer
+- COMPLETE increase width of article sidebar
+- COMPLETE ensure 12 posts are pulled back
+- COMPLETE create Title component and increase size
+- add join to header and banner
+- change program over to Wordpress program
+- COMPLETE ensure all post requests work regardless of cache status
+- fix links in articles

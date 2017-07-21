@@ -44,6 +44,7 @@ export default class MyDocument extends Document {
               max-width: 100vw;
               vertical-align: middle;
               width: 100%;
+              padding-bottom: 30px;
             }
             p {
               margin: 10px 0 0 0;

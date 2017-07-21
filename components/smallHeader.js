@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { Link } from '../routes'
 import styled from 'styled-components'
 import FontAwesome from 'react-fontawesome'
 
@@ -9,39 +9,14 @@ const contentPaddingX = 90
 const smallContentPaddingX = 20
 
 const twitterHandle = 'usimt'
-const description =
-  'Socialist Revolution is the publication of the International Marxist Tendency in the United States.'
 const site = 'https://socialistrevolution.org'
-const flink = `https://www.facebook.com/sharer/sharer.php?u=`
-// tweet
-const tlink = `https://twitter.com/intent/tweet`
-// follow
-// &ref_src=twsrc%5Etfw &region=follow_link &screen_name=aeonmag &tw_p=followbutton
 const tFollowLink = `https://twitter.com/intent/follow`
-const glink = 'https://plus.google.com/share?url='
-/*
-        <DisappearingDiv>
-          <A href={canonical ? `${glink}${canonical}` : gshare} target='_blank'>
-            <FontAwesome
-              name='google'
-              size='2x'
-              style={{ paddingLeft: '15px' }}
-            />
-          </A>
-        </DisappearingDiv>
-        <A href={canonical ? `${flink}${canonical}` : fshare} target='_blank'>
-          <FontAwesome name='facebook' size='2x' />
-        </A>
-*/
 
 export default ({
   fshare = `https://www.facebook.com/imtusa`,
   tshare = `${tFollowLink}?original_referer=${encodeURI(
     site
   )}&region=follow_link&screen_name=${twitterHandle}&tw_p=followbutton`,
-  /*
-  tshare = `${tlink}?original_referer=${encodeURI(site)}&text=${encodeURI(description)}&url=${encodeURI(site)}&via=${twitterHandle}`,
-  */
   canonical,
   excerpt
 }) =>
@@ -55,11 +30,13 @@ export default ({
         <FontAwesome name='bars' size='2x' />
         */}
         <Separator />
-        <Link href='/program'><DisappearingA>Our Program</DisappearingA></Link>
+        <Link prefetch route='/our-program'>
+          <DisappearingA>Our Program</DisappearingA>
+        </Link>
       </Actions>
     </Left>
     <LogoWrapper>
-      <Link href='/'>
+      <Link route='/'>
         <a style={{ width: '100%' }}>
           <InnerLogoWrapper>
             <Magnifier>
@@ -94,18 +71,7 @@ export default ({
           Donate
         </DisappearingA>
         <Separator />
-        <A
-          href={
-            excerpt
-              ? `${tlink}?original_referer=${encodeURI(
-                  canonical
-                )}&text=${encodeURI(excerpt)}&url=${encodeURI(
-                  canonical
-                )}&via=${twitterHandle}`
-              : tshare
-          }
-          target='_blank'
-        >
+        <A href={tshare} target='_blank'>
           <FontAwesome
             name='twitter'
             size='2x'

@@ -37,13 +37,11 @@ export default class extends React.Component {
         }
       }
     }
-    if (
-      window.scrollY > breakPoint * 2 &&
-      articleShare !== null &&
-      width > 1100
-    ) {
-      articleShare.style.display = 'inherit'
-    } else articleShare.style.display = 'none'
+    if (articleShare !== null) {
+      if (window.scrollY > breakPoint * 2 && width > 1100) {
+        articleShare.style.display = 'inherit'
+      } else articleShare.style.display = 'none'
+    }
     if (articleFooter !== null) {
       articleFooter.style.display = footerDisplayResult
     }

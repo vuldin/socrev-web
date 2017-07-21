@@ -38,8 +38,8 @@ const Footer = styled.footer`
   white-space: nowrap;
   color: ${footerColor};
   display: flex;
-  padding: 0px ${contentPaddingX}px;
   padding: 0px ${props => props.px || contentPaddingX}px;
+  margin-top: 30px;
 `
 const Left = styled.div`
   flex: 1;

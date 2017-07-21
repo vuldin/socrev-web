@@ -1,7 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from '../routes'
+//import Link from 'next/link'
 import { Parser } from 'html-to-react'
+import Title from './title'
 
 const htmlToReactParser = new Parser()
 const contentMargin = 20
@@ -52,6 +54,9 @@ export default class extends React.Component {
     }
     return (
       <Excerpt>
+        {/*
+        <Link prefetch href={`/${slug}`}>
+        */}
         <Link prefetch route={`/${slug}`}>
           <A>
             {media}
@@ -80,7 +85,7 @@ const Picture = styled.div`
   background-repeat: no-repeat;
 `
 const Padding = styled.div`
-  padding: ${props => `0 ${contentPaddingX}px`};
+  padding: ${props => `20px ${contentPaddingX}px`};
 `
 const Excerpt = styled.div`
   overflow: hidden;
@@ -98,9 +103,11 @@ const A = styled.a`
     opacity: 0.8;
   }
 `
+/*
 const Title = styled.h2`
   margin: 20px 0 0 0;
   font-family: font74157;
   letter-spacing: -0.8px;
   font-size: 1.8em;
 `
+*/
