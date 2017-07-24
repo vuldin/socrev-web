@@ -1,18 +1,26 @@
 - COMPLETE add apple-touch-icon-precomposed.png
 - COMPLETE resolve unknown Link component props 'as' in header
 - COMPLETE remove flagman in program
+- COMPLETE handle author in API
+- COMPLETE add author to:
+  - COMPLETE feature
+  - COMPLETE excerpt
+  - COMPLETE article
+- COMPLETE add space between excerpt and title
+  - COMPLETE feature
+  - COMPLETE excerpt
+  - COMPLETE article
+- add 'join' link
+  - header
+  - COMPLETE banner
 - remove post-specific props being passed through to header
 - modify links in API to ensure they work
-- add 'join' link to header and banner
-- add space between excerpt and title
 - add marxistbooks banner
 - edit categories according to John's updates
-- COMPLETE handle author in API
 - handle categories in API
-- add author to:
+- add categories
   - feature
-  - COMPLETE excerpt
+  - excerpt
   - article
-- add categories to excerpt and article
 - automate API cache reloading
 - test restoring backup

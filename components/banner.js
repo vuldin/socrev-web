@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import FontAwesome from 'react-fontawesome'
+import { Link } from '../routes'
 
 const twitterHandle = 'usimt'
 const tFollowLink = `https://twitter.com/intent/follow`
@@ -76,20 +77,20 @@ export default () =>
         </a>
       </BannerItem>
       <BannerItem>
-        <a
-          target='_blank'
-          href='https://wellred.org/collections/donate/products/donate-1'
-          style={{
-            textDecoration: 'none',
-            cursor: 'pointer',
-            color: 'inherit'
-          }}
-        >
-          <div>Join</div>
-          <Icons>
-            <FontAwesome name='users' size='2x' />
-          </Icons>
-        </a>
+        <Link prefetch route='/join-the-imt'>
+          <a
+            style={{
+              textDecoration: 'none',
+              cursor: 'pointer',
+              color: 'inherit'
+            }}
+          >
+            <div>Join</div>
+            <Icons>
+              <FontAwesome name='users' size='2x' />
+            </Icons>
+          </a>
+        </Link>
       </BannerItem>
     </BannerItems>
   </Banner>

@@ -10,8 +10,8 @@ import Banner from '../components/banner'
 
 const contentPaddingX = '90px'
 const contentMargin = 20
-//const apiUrl = 'https://api.socialistrevolution.org'
-const apiUrl = 'http://localhost:3001'
+const apiUrl = 'https://api.socialistrevolution.org'
+//const apiUrl = 'http://localhost:3001'
 const description =
   'Socialist Revolution is the publication of the International Marxist Tendency in the United States.'
 
