@@ -14,6 +14,7 @@ export default () =>
       {`Support the IMT today. Help build for the revolution!`}
     </div>
     <BannerItems>
+      {/*
       <BannerItem>
         <div>Follow</div>
         <Icons>
@@ -44,6 +45,7 @@ export default () =>
           </a>
         </Icons>
       </BannerItem>
+      */}
       <BannerItem>
         <a
           target='_blank'
@@ -114,7 +116,7 @@ const BannerItems = styled.div`
   grid-template-columns: 1fr;
   justify-items: center;
   @media (min-width: 575px) {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
   }
 `
 const BannerItem = styled.div`

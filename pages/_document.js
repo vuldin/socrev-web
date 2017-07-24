@@ -47,8 +47,13 @@ export default class MyDocument extends Document {
               padding-bottom: 30px;
             }
             p {
-              margin: 10px 0 0 0;
+              margin: 20px 0 0 0;
+              /*
               padding: 20px 0 0 0;
+              */
+            }
+            h2 {
+              margin: 50px 0 0 0;
             }
           `}</style>
           {styleTags}

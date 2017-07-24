@@ -16,7 +16,7 @@
 - remove post-specific props being passed through to header
 - modify links in API to ensure they work
 - add marxistbooks banner
-- edit categories according to John's updates
+- JAKE edit categories according to John's updates
 - handle categories in API
 - add categories
   - feature
@@ -24,3 +24,6 @@
   - article
 - automate API cache reloading
 - test restoring backup
+- ensure index links work on mobile
+- COMPLETE fix title/header space (shows up in program)
+- add sitemap.xml https://www.npmjs.com/package/sitemap
