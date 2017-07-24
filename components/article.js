@@ -25,6 +25,10 @@ export default class extends React.Component {
     let { source_url } = featured_media
     title = htmlToReactParser.parse(title.rendered)
     excerpt = htmlToReactParser.parse(excerpt.rendered)
+    let author = 'IMT member'
+    if (this.props.post.acf !== false) {
+      author = this.props.post.acf.imt_author
+    }
     content = htmlToReactParser.parse(content.rendered)
     content = content.filter(d => d !== '\n')
     const ps = content.filter(c => c.type === 'p')
@@ -66,6 +70,7 @@ export default class extends React.Component {
             <Excerpt>
               {excerpt}
             </Excerpt>
+            <Author>{author}</Author>
             {content}
           </Content>
         </Padding>
@@ -118,6 +123,10 @@ export default class extends React.Component {
     )
   }
 }
+const Author = styled.div`
+  padding-top: 10px;
+  flex: 0 0 30px;
+`
 const FixedSide = styled.div`
   display: none;
   position: fixed;
@@ -161,6 +170,7 @@ const Padding = styled.div`
   }
 `
 const Excerpt = styled.em`
+  padding-top: 10px;
   /*
   @media (min-width: 1100px) {
     width: 700px;
@@ -178,6 +188,8 @@ const Picture = styled.div`
 `
 
 const Content = styled.div`
+  display: flex;
+  flex-flow: column;
   overflow: hidden;
   @media (min-width: 1100px) {
     width: 700px;

@@ -75,6 +75,22 @@ export default () =>
           </Icons>
         </a>
       </BannerItem>
+      <BannerItem>
+        <a
+          target='_blank'
+          href='https://wellred.org/collections/donate/products/donate-1'
+          style={{
+            textDecoration: 'none',
+            cursor: 'pointer',
+            color: 'inherit'
+          }}
+        >
+          <div>Join</div>
+          <Icons>
+            <FontAwesome name='users' size='2x' />
+          </Icons>
+        </a>
+      </BannerItem>
     </BannerItems>
   </Banner>
 
@@ -97,7 +113,7 @@ const BannerItems = styled.div`
   grid-template-columns: 1fr;
   justify-items: center;
   @media (min-width: 575px) {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 `
 const BannerItem = styled.div`

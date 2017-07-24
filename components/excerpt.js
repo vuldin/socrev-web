@@ -16,6 +16,10 @@ export default class extends React.Component {
     title = htmlToReactParser.parse(title.rendered)
     //console.log(excerpt.rendered)
     excerpt = htmlToReactParser.parse(excerpt.rendered)
+    let author = 'IMT member'
+    if (this.props.post.acf !== false) {
+      author = this.props.post.acf.imt_author
+    }
     let media = (
       <BackColor>
         <Picture id={srcUrl} />
@@ -59,11 +63,16 @@ export default class extends React.Component {
         */}
         <Link prefetch route={`/${slug}`}>
           <A>
-            {media}
-            <Padding contentPaddingX={contentPaddingX}>
-              <Title>{title}</Title>
-              {excerpt}
-            </Padding>
+            <Wrapper>
+              {media}
+              <Padding contentPaddingX={contentPaddingX}>
+                <Title>{title}</Title>
+                <Description>
+                  {excerpt}
+                </Description>
+                <Author>{author}</Author>
+              </Padding>
+            </Wrapper>
           </A>
         </Link>
       </Excerpt>
@@ -71,6 +80,19 @@ export default class extends React.Component {
   }
 }
 
+const Wrapper = styled.div`
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+`
+const Description = styled.div`
+  padding-top: 10px;
+  flex: 1;
+`
+const Author = styled.div`
+  padding-top: 10px;
+  flex: 0 0 30px;
+`
 const BackColor = styled.div`
     height: 275px;
     background-color: #D80707;
@@ -85,6 +107,10 @@ const Picture = styled.div`
   background-repeat: no-repeat;
 `
 const Padding = styled.div`
+  flex: auto;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
   padding: ${props => `20px ${contentPaddingX}px`};
 `
 const Excerpt = styled.div`

@@ -1,13 +1,18 @@
-- COMPLETE add share links to the bottom in fixed footer
-- COMPLETE switch fixed footer to sharing component on left margin once on big screen size
-- COMPLETE make sure banner gets inserted between posts
-- COMPLETE add padding under img tags
-- COMPLETE add padding between article and footer
-- COMPLETE add top margin to footer
-- COMPLETE increase width of article sidebar
-- COMPLETE ensure 12 posts are pulled back
-- COMPLETE create Title component and increase size
-- add join to header and banner
-- change program over to Wordpress program
-- COMPLETE ensure all post requests work regardless of cache status
-- fix links in articles
+- COMPLETE add apple-touch-icon-precomposed.png
+- COMPLETE resolve unknown Link component props 'as' in header
+- COMPLETE remove flagman in program
+- remove post-specific props being passed through to header
+- modify links in API to ensure they work
+- add 'join' link to header and banner
+- add space between excerpt and title
+- add marxistbooks banner
+- edit categories according to John's updates
+- COMPLETE handle author in API
+- handle categories in API
+- add author to:
+  - feature
+  - COMPLETE excerpt
+  - article
+- add categories to excerpt and article
+- automate API cache reloading
+- test restoring backup

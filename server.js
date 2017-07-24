@@ -11,7 +11,11 @@ const handler = routes.getRequestHandler(app)
 
 const redirects = require('./redirects')
 
-const rootStaticFiles = ['/favicon.ico', '/apple-touch-icon.png']
+const rootStaticFiles = [
+  '/favicon.ico',
+  '/apple-touch-icon.png',
+  '/apple-touch-icon-composed.png'
+]
 
 app.prepare().then(() => {
   const server = express()
