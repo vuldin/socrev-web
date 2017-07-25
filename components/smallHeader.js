@@ -30,13 +30,13 @@ export default ({
         <FontAwesome name='bars' size='2x' />
         */}
         <Separator />
-        <Link prefetch route='/our-program'>
+        <Link prefetch route='/our-program' passHref>
           <DisappearingA>Our Program</DisappearingA>
         </Link>
       </Actions>
     </Left>
     <LogoWrapper>
-      <Link route='/'>
+      <Link prefetch route='/'>
         <a style={{ width: '100%' }}>
           <InnerLogoWrapper>
             <Magnifier>
@@ -131,6 +131,8 @@ const Separator = styled.div`
   }
 `
 const DisappearingA = styled.a`
+  text-decoration: none;
+  color: inherit;
   cursor: pointer;
   display: none;
   @media (min-width: 950px) {

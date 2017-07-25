@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from '../routes'
-//import Link from 'next/link'
 import { Parser } from 'html-to-react'
 import Title from './title'
 
@@ -58,15 +57,19 @@ export default class extends React.Component {
     }
     return (
       <Excerpt>
-        {/*
-        <Link prefetch href={`/${slug}`}>
-        */}
-        <Link prefetch route={`/${slug}`}>
+        <Link prefetch route={`/${slug}`} passHref>
           <A>
             <Wrapper>
               {media}
               <Padding contentPaddingX={contentPaddingX}>
-                <Title>{title}</Title>
+                <Title minHeight='70px'>{title}</Title>
+                <Categories>
+                  {this.props.post.categories.map((c, i) => {
+                    let result = c.name
+                    if (i > 0) result = ` / ${c.name}`
+                    return result
+                  })}
+                </Categories>
                 <Description>
                   {excerpt}
                 </Description>
@@ -84,6 +87,12 @@ const Wrapper = styled.div`
   height: 100%;
   display: flex;
   flex-flow: column;
+`
+const Categories = styled.div`
+  font-size: .8em;
+  letter-spacing: -0.8px;
+  padding-top: 10px;
+  flex: 0;
 `
 const Description = styled.div`
   padding-top: 10px;

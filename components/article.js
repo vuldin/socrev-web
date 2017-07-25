@@ -162,7 +162,7 @@ const ResponsivePlayer = styled(ReactPlayer)`
 `
 const Padding = styled.div`
   margin: ${props =>
-    `80px ${props.contentPaddingX}px 0 ${props.contentPaddingX}px`};
+    `20px ${props.contentPaddingX}px 0 ${props.contentPaddingX}px`};
   overflow: hidden;
   display: flex;
   @media (min-width: 720px) {
