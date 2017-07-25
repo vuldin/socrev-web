@@ -23,15 +23,15 @@ export default ({
   <Header px={smallContentPaddingX}>
     <Left>
       <Actions>
-        <A href={fshare} target='_blank'>
-          <FontAwesome name='facebook' size='2x' />
-        </A>
         {/*
         <FontAwesome name='bars' size='2x' />
         */}
-        <Separator />
         <Link prefetch route='/our-program' passHref>
           <DisappearingA>Our Program</DisappearingA>
+        </Link>
+        <Separator />
+        <Link prefetch route='/join-the-imt' passHref>
+          <A>Join</A>
         </Link>
       </Actions>
     </Left>
@@ -75,7 +75,14 @@ export default ({
           <FontAwesome
             name='twitter'
             size='2x'
-            style={{ paddingLeft: '15px' }}
+            style={{ paddingLeft: '10px' }}
+          />
+        </A>
+        <A href={fshare} target='_blank'>
+          <FontAwesome
+            name='facebook'
+            size='2x'
+            style={{ paddingLeft: '5px' }}
           />
         </A>
       </Interactions>
@@ -126,7 +133,7 @@ const Separator = styled.div`
   height: 30px;
   background-color: ${headerColor};
   display: none;
-  @media (min-width: 950px) {
+  @media (min-width: 900px) {
     display: inherit;
   }
 `
@@ -135,13 +142,13 @@ const DisappearingA = styled.a`
   color: inherit;
   cursor: pointer;
   display: none;
-  @media (min-width: 950px) {
+  @media (min-width: 900px) {
     display: inherit;
   }
 `
 const DisappearingDiv = styled.div`
   display: none;
-  @media (min-width: 950px) {
+  @media (min-width: 900px) {
     display: inherit;
   }
 `

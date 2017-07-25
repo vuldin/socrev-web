@@ -5,7 +5,6 @@ import { Parser } from 'html-to-react'
 import ReactPlayer from 'react-player'
 import InteractionTool from './interactionTool'
 import Banner from './banner'
-import Title from './title'
 
 const htmlToReactParser = new Parser()
 const contentMargin = 20
@@ -55,22 +54,22 @@ export default class extends React.Component {
     )
     if (featured_media.video)
       media = (
-        <ResponsivePlayer url={source_url} width={'60vw'} height={'40vw'} />
+        <ResponsivePlayer url={source_url} width={'100vw'} height={'56vw'} />
       )
     return (
       <div>
-        {isSticky && !featured_media.video ? media : <span />}
+        {isSticky || featured_media.video ? media : <span />}
         <Padding contentPaddingX={smallContentPaddingX}>
           <Side>
             <InteractionTool post={post} />
           </Side>
           <Content>
-            {!isSticky || featured_media.video ? media : <span />}
-            <Title>{title}</Title>
+            <TitleArticle>{title}</TitleArticle>
             <Excerpt>
               {excerpt}
             </Excerpt>
             <Author>{author}</Author>
+            {!isSticky && !featured_media.video ? media : <span />}
             {content}
           </Content>
         </Padding>
@@ -125,6 +124,7 @@ export default class extends React.Component {
 }
 const Author = styled.div`
   padding-top: 10px;
+  padding-bottom: 20px;
   flex: 0 0 30px;
 `
 const FixedSide = styled.div`
@@ -155,18 +155,18 @@ const FixedFooter = styled.div`
 `
 const ResponsivePlayer = styled(ReactPlayer)`
   margin: 0 auto;
-  @media (min-width: 1100px) {
-    width: 700px !important;
-    height: 400px !important;
+  @media (min-width: 950px){
+    width: 950px !important;
+    height: 534px !important;
   }
 `
 const Padding = styled.div`
   margin: ${props =>
-    `20px ${props.contentPaddingX}px 0 ${props.contentPaddingX}px`};
+    `30px ${props.contentPaddingX}px 0 ${props.contentPaddingX}px`};
   overflow: hidden;
   display: flex;
   @media (min-width: 720px) {
-    margin: ${props => `80px 90px 0 90px`};
+    margin: ${props => `70px 90px 0 90px`};
   }
 `
 const Excerpt = styled.em`
@@ -194,5 +194,14 @@ const Content = styled.div`
   @media (min-width: 1100px) {
     width: 700px;
     margin: 0 auto;
+  }
+`
+
+const TitleArticle = styled.div`
+  font-family: font74157;
+  letter-spacing: -0.8px;
+  font-size: 1.6em;
+  @media (min-width: 720px) {
+    font-size: 2em;
   }
 `

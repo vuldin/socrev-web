@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import { Link } from '../routes'
 import { Parser } from 'html-to-react'
-import Title from './title'
 
 const htmlToReactParser = new Parser()
 const contentMargin = 20
@@ -138,11 +137,10 @@ const A = styled.a`
     opacity: 0.8;
   }
 `
-/*
 const Title = styled.h2`
-  margin: 20px 0 0 0;
+  min-height: ${props => props.minHeight};
+  margin: 0;
   font-family: font74157;
   letter-spacing: -0.8px;
-  font-size: 1.8em;
+  font-size: 1.4em;
 `
-*/
