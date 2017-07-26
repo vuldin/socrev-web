@@ -96,7 +96,7 @@ export default class extends React.Component {
         }
       ],
       canonical = `${site}`,
-      excerpt,
+      cats,
       children
     } = this.props
     return (
@@ -109,9 +109,9 @@ export default class extends React.Component {
             return meta
           })}
         </Head>
-        <SmallHeader canonical={canonical} excerpt={excerpt} />
+        <SmallHeader cats={cats} />
         <div className='fixedHeaderWrapper' ref='fixedHeaderWrapper'>
-          <SmallHeader canonical={canonical} excerpt={excerpt} />
+          <SmallHeader cats={cats} />
           <style jsx>{`
             .fixedHeaderWrapper {
               z-index: 100;

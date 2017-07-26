@@ -18,12 +18,24 @@ const description =
 export default class extends React.Component {
   static async getInitialProps () {
     // eslint-disable-next-line no-undef
+    /*
     const postsRes = await fetch(`${apiUrl}/posts`)
+    const catsRes = await fetch(`${apiUrl}/categories`)
+    */
+    const [postsRes, catsRes] = await Promise.all([
+      fetch(`${apiUrl}/posts`),
+      fetch(`${apiUrl}/categories`)
+    ])
+    /*
     const posts = await postsRes.json()
+    const cats = await catsRes.json()
+    */
+    const [posts, cats] = await Promise.all([postsRes.json(), catsRes.json()])
     const feature = posts.shift()
     return {
       posts: posts,
-      feature: feature
+      feature: feature,
+      cats: cats
     }
   }
   ref = 1
@@ -89,9 +101,9 @@ export default class extends React.Component {
   }
 
   render () {
-    const { feature, posts } = this.props
+    const { feature, posts, cats } = this.props
     return (
-      <Layout>
+      <Layout cats={cats}>
         {feature !== undefined ? <Feature post={feature} /> : <div />}
         {this.getNewContent(posts)}
         {this.createRefComponents()}

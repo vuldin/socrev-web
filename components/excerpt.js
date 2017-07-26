@@ -13,10 +13,12 @@ export default class extends React.Component {
     let srcUrl = featured_media.source_url
     title = htmlToReactParser.parse(title.rendered)
     //console.log(excerpt.rendered)
-    excerpt = htmlToReactParser.parse(excerpt.rendered)
     let author = 'IMT member'
-    if (this.props.post.acf !== false) {
-      author = this.props.post.acf.imt_author
+    excerpt = htmlToReactParser.parse(excerpt.rendered)
+    const acf = this.props.post.acf
+    if (acf !== false) {
+      if (acf.imt_author !== undefined) author = acf.imt_author
+      if (acf.imt_excerpt !== undefined) excerpt = acf.imt_excerpt
     }
     let media = (
       <BackColor>
@@ -62,6 +64,10 @@ export default class extends React.Component {
               {media}
               <Padding contentPaddingX={contentPaddingX}>
                 <Title minHeight='70px'>{title}</Title>
+                <Author>{author}</Author>
+                <Description>
+                  {excerpt}
+                </Description>
                 <Categories>
                   {this.props.post.categories.map((c, i) => {
                     let result = c.name
@@ -69,10 +75,6 @@ export default class extends React.Component {
                     return result
                   })}
                 </Categories>
-                <Description>
-                  {excerpt}
-                </Description>
-                <Author>{author}</Author>
               </Padding>
             </Wrapper>
           </A>
@@ -98,6 +100,8 @@ const Description = styled.div`
   flex: 1;
 `
 const Author = styled.div`
+  font-size: .8em;
+  letter-spacing: -0.8px;
   padding-top: 10px;
   flex: 0 0 30px;
 `

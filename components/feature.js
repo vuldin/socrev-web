@@ -15,10 +15,12 @@ export default class extends React.Component {
     let { title, excerpt, featured_media, slug } = this.props.post
     let srcUrl = featured_media.source_url
     title = htmlToReactParser.parse(title.rendered)
-    excerpt = htmlToReactParser.parse(excerpt.rendered)
     let author = 'IMT member'
-    if (this.props.post.acf !== false) {
-      author = this.props.post.acf.imt_author
+    excerpt = htmlToReactParser.parse(excerpt.rendered)
+    const acf = this.props.post.acf
+    if (acf !== false) {
+      if (acf.imt_author !== undefined) author = acf.imt_author
+      if (acf.imt_excerpt !== undefined) excerpt = acf.imt_excerpt
     }
     return (
       <MediaQuery query='(min-width: 700px)'>
@@ -32,7 +34,9 @@ export default class extends React.Component {
                     <Words>
                       <Title>{title}</Title>
                       {excerpt}
+                      {/*
                       <Author>{author}</Author>
+                      */}
                     </Words>
                   </Feature>
                 </A>
@@ -46,6 +50,8 @@ export default class extends React.Component {
 }
 //const Feature = styled(Flex)`
 const Author = styled.div`
+  font-size: .8em;
+  letter-spacing: -0.8px;
   padding-top: 10px;
   flex: 0 0 30px;
 `

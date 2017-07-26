@@ -23,11 +23,14 @@ export default class extends React.Component {
     let { title, excerpt, content, featured_media } = post
     let { source_url } = featured_media
     title = htmlToReactParser.parse(title.rendered)
-    excerpt = htmlToReactParser.parse(excerpt.rendered)
     let author = 'IMT member'
-    if (this.props.post.acf !== false) {
-      author = this.props.post.acf.imt_author
+    excerpt = htmlToReactParser.parse(excerpt.rendered)
+    const acf = this.props.post.acf
+    if (acf !== false) {
+      if (acf.imt_author !== undefined) author = acf.imt_author
+      if (acf.imt_excerpt !== undefined) excerpt = acf.imt_excerpt
     }
+    post.excerpt = excerpt
     content = htmlToReactParser.parse(content.rendered)
     content = content.filter(d => d !== '\n')
     const ps = content.filter(c => c.type === 'p')
@@ -65,10 +68,10 @@ export default class extends React.Component {
           </Side>
           <Content>
             <TitleArticle>{title}</TitleArticle>
+            <Author>{author}</Author>
             <Excerpt>
               {excerpt}
             </Excerpt>
-            <Author>{author}</Author>
             {!isSticky && !featured_media.video ? media : <span />}
             {content}
           </Content>
@@ -78,7 +81,9 @@ export default class extends React.Component {
             target='_blank'
             href={`${tShareLink}?original_referer=${encodeURI(
               `${site}/${post.slug}`
-            )}&text=${encodeURI(post.excerpt.rendered)}&url=${encodeURI(
+            )}&text=${excerpt.rendered !== undefined
+              ? encodeURI(excerpt.rendered)
+              : excerpt}&url=${encodeURI(
               `${site}/${post.slug}`
             )}&via=${twitterHandle}`}
             style={{
@@ -124,7 +129,6 @@ export default class extends React.Component {
 }
 const Author = styled.div`
   padding-top: 10px;
-  padding-bottom: 20px;
   flex: 0 0 30px;
 `
 const FixedSide = styled.div`
@@ -171,6 +175,7 @@ const Padding = styled.div`
 `
 const Excerpt = styled.em`
   padding-top: 10px;
+  padding-bottom: 20px;
   /*
   @media (min-width: 1100px) {
     width: 700px;

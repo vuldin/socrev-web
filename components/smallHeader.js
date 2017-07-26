@@ -11,84 +11,160 @@ const smallContentPaddingX = 20
 const twitterHandle = 'usimt'
 const site = 'https://socialistrevolution.org'
 const tFollowLink = `https://twitter.com/intent/follow`
+const fshare = `https://www.facebook.com/imtusa`
+const tshare = `${tFollowLink}?original_referer=${encodeURI(
+  site
+)}&region=follow_link&screen_name=${twitterHandle}&tw_p=followbutton`
 
-export default ({
-  fshare = `https://www.facebook.com/imtusa`,
-  tshare = `${tFollowLink}?original_referer=${encodeURI(
-    site
-  )}&region=follow_link&screen_name=${twitterHandle}&tw_p=followbutton`,
-  canonical,
-  excerpt
-}) =>
-  <Header px={smallContentPaddingX}>
-    <Left>
-      <Actions>
-        {/*
-        <FontAwesome name='bars' size='2x' />
-        */}
-        <Link prefetch route='/our-program' passHref>
-          <DisappearingA>Our Program</DisappearingA>
-        </Link>
-        <Separator />
-        <Link prefetch route='/join-the-imt' passHref>
-          <A>Join</A>
-        </Link>
-      </Actions>
-    </Left>
-    <LogoWrapper>
-      <Link prefetch route='/'>
-        <a style={{ width: '100%' }}>
-          <InnerLogoWrapper>
-            <Magnifier>
-              <object
-                type='image/svg+xml'
-                data={`/static/${logoFile}`}
-                width='100%'
-                height='100%'
-                style={{
-                  pointerEvents: 'none',
-                  display: 'inline-block',
-                  top: 0,
-                  left: 0
-                }}
+export default class extends React.Component {
+  state = {
+    displayMenu: false
+  }
+  render () {
+    const { cats } = this.props
+    return (
+      <Header px={smallContentPaddingX}>
+        <Left>
+          <Actions>
+            <A
+              href='#'
+              onClick={() => {
+                let menu = this.refs.menu
+                //menu.props.display = !menu.props.display
+                this.setState({ displayMenu: !this.state.displayMenu })
+              }}
+            >
+              <FontAwesome
+                name='bars'
+                size='2x'
+                style={{ paddingRight: '10px' }}
               />
-            </Magnifier>
-          </InnerLogoWrapper>
-        </a>
-      </Link>
-    </LogoWrapper>
-    <Right>
-      <Interactions>
-        <DisappearingA
-          target='_blank'
-          href='https://wellred.org/collections/donate/products/donate-1'
-          style={{
-            textDecoration: 'none',
-            cursor: 'pointer',
-            color: 'inherit'
-          }}
-        >
-          Donate
-        </DisappearingA>
-        <Separator />
-        <A href={tshare} target='_blank'>
-          <FontAwesome
-            name='twitter'
-            size='2x'
-            style={{ paddingLeft: '10px' }}
-          />
-        </A>
-        <A href={fshare} target='_blank'>
-          <FontAwesome
-            name='facebook'
-            size='2x'
-            style={{ paddingLeft: '5px' }}
-          />
-        </A>
-      </Interactions>
-    </Right>
-  </Header>
-
+            </A>
+            <Link prefetch route='/join-the-imt' passHref>
+              <DisappearingA>Join</DisappearingA>
+            </Link>
+            <Separator />
+            <Link prefetch route='/our-program' passHref>
+              <DisappearingA>Our Program</DisappearingA>
+            </Link>
+          </Actions>
+        </Left>
+        <LogoWrapper>
+          <Link prefetch route='/'>
+            <a style={{ width: '100%' }}>
+              <InnerLogoWrapper>
+                <Magnifier>
+                  <object
+                    type='image/svg+xml'
+                    data={`/static/${logoFile}`}
+                    width='100%'
+                    height='100%'
+                    style={{
+                      pointerEvents: 'none',
+                      display: 'inline-block',
+                      top: 0,
+                      left: 0
+                    }}
+                  />
+                </Magnifier>
+              </InnerLogoWrapper>
+            </a>
+          </Link>
+        </LogoWrapper>
+        <Right>
+          <Interactions>
+            <DisappearingA
+              target='_blank'
+              href='https://wellred.org/collections/donate/products/donate-1'
+              style={{
+                textDecoration: 'none',
+                cursor: 'pointer',
+                color: 'inherit'
+              }}
+            >
+              Donate
+            </DisappearingA>
+            <Separator />
+            <A href={tshare} target='_blank'>
+              <FontAwesome
+                name='twitter'
+                size='2x'
+                style={{ paddingLeft: '10px' }}
+              />
+            </A>
+            <A href={fshare} target='_blank'>
+              <FontAwesome
+                name='facebook'
+                size='2x'
+                style={{ paddingLeft: '5px' }}
+              />
+            </A>
+          </Interactions>
+        </Right>
+        <Menu ref='menu' show={this.state.displayMenu}>
+          <Left>
+            <Actions>
+              <A
+                href='#'
+                onClick={() => {
+                  let menu = this.refs.menu
+                  //menu.props.display = !menu.props.display
+                  this.setState({ displayMenu: !this.state.displayMenu })
+                }}
+              >
+                <FontAwesome
+                  name='bars'
+                  size='2x'
+                  style={{ paddingRight: '10px' }}
+                />
+              </A>
+              <Link prefetch route='/join-the-imt' passHref>
+                <A>Join</A>
+              </Link>
+              <MenuSeparator />
+              <Link prefetch route='/our-program' passHref>
+                <A>Our Program</A>
+              </Link>
+            </Actions>
+          </Left>
+          <CatWrapper>
+            {cats.map(c => <Span>{c.name}</Span>)}
+          </CatWrapper>
+        </Menu>
+      </Header>
+    )
+  }
+}
+const Span = styled.span`
+  margin-top: 10px;
+`
+const CatWrapper = styled.div`
+  display: flex;
+  flex-flow: column;
+`
+const Menu = styled.div`
+  ${props => {
+    let result = `
+      opacity: 1;
+      pointer-events: all;
+    `
+    if (!props.show)
+      result = `
+      opacity: 0;
+      pointer-events: none;
+    `
+    return result
+  }}
+  padding: 0 20px;
+  color: black;
+  position: fixed;
+  z-index: 101;
+  top: 0;
+  right: 0;
+  background: rgba(255,255,255,0.97);
+  box-shadow: 0 0 3rem rgba(0,0,0,0.25); left: 0;
+  transition: opacity 250ms ease-in-out;
+`
 const Header = styled.header`
   @import url(https://fonts.googleapis.com/css?family=Titillium+Web);
   font-family: 'Titillium Web', sans-serif;
@@ -125,6 +201,13 @@ const A = styled.a`
   text-decoration: none;
   cursor: pointer;
   color: inherit;
+`
+const MenuSeparator = styled.div`
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 1px;
+  height: 30px;
+  background-color: black;
 `
 const Separator = styled.div`
   margin-left: 10px;

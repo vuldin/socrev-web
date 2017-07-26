@@ -1,38 +1,23 @@
-- COMPLETE add apple-touch-icon-precomposed.png
-- COMPLETE resolve unknown Link component props 'as' in header
-- COMPLETE remove flagman in program
-- COMPLETE handle author in API
-- COMPLETE add author to:
+- COMPLETE handle categories in API
+- add categories
   - COMPLETE feature
   - COMPLETE excerpt
   - COMPLETE article
-- COMPLETE add space between excerpt and title
-  - COMPLETE feature
-  - COMPLETE excerpt
-  - COMPLETE article
-- add 'join' link
-  - COMPLETE header
-  - COMPLETE banner
+- COMPLETE? change position of banner in greetings article
+- COMPLETE ensure index links work on mobile
+- COMPLETE upload correct video for "Welcome to SocialistRevolution.org" article
+- COMPLETE switch order of category and author on excerpt/article
+- COMPLETE match author styling to category styling
+- COMPLETE create categories endpoint in API
+- switch from join to program in banner
+- create menu and add to banner
+- ? edit banner after internal article title and right before/after article image
 - remove post-specific props being passed through to header
 - modify links in API to ensure they work
 - add marxistbooks banner
-- JAKE edit categories according to John's updates
-- handle categories in API
-- add categories
-  - feature
-  - excerpt
-  - article
 - automate API cache reloading
 - test restoring backup
-- ensure index links work on mobile
-- COMPLETE fix title/header space (shows up in program)
 - add sitemap.xml https://www.npmjs.com/package/sitemap
-- COMPLETE edit space between title and article media
-  - COMPLETE add space between video and title (resolved w different vid handling)
-  - COMPLETE add media query for space between sticky feature and title (~500px)
-- COMPLETE modify video size for small screens
-- upload correct video for "Welcome to SocialistRevolution.org" article
-- edit banner after internal article title and right before/after article image
 - use wp image size info for articles
-- change position of banner in greetings article
 - JORDANA edit join article to not have excerpt
+- JAKE edit categories according to John's updates

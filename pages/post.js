@@ -11,27 +11,39 @@ const apiUrl = 'https://api.socialistrevolution.org'
 
 export default class extends React.Component {
   static async getInitialProps ({ query }) {
+    /*
     const postRes = await fetch(`${apiUrl}/posts/${query.slug}`)
     let post = await postRes.json()
-    return { post }
+    */
+    const [postRes, catsRes] = await Promise.all([
+      fetch(`${apiUrl}/posts/${query.slug}`),
+      fetch(`${apiUrl}/categories`)
+    ])
+    const [post, cats] = await Promise.all([postRes.json(), catsRes.json()])
+    return { post, cats }
   }
 
   render () {
-    const { post } = this.props
+    const { post, cats } = this.props
     const title = htmlToReactParser.parse(post.title.rendered)
+    let excerpt = post.excerpt.rendered
+    const acf = post.acf
+    if (acf !== false) {
+      if (acf.imt_excerpt !== undefined) excerpt = acf.imt_excerpt
+    }
     return (
       <Layout
         title={`IMT | ${title}`}
         canonical={`${site}/${post.slug}`}
-        excerpt={post.excerpt.rendered}
+        cats={cats}
         meta={[
           {
             name: 'description',
-            content: post.excerpt.rendered
+            content: excerpt
           },
           {
             property: 'og:description',
-            content: post.excerpt.rendered
+            content: excerpt
           },
           {
             property: 'og:site_name',
@@ -63,7 +75,7 @@ export default class extends React.Component {
           },
           {
             property: 'twitter:description',
-            content: post.excerpt.rendered
+            content: excerpt
           },
           {
             property: 'og:image',

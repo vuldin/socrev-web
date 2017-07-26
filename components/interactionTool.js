@@ -28,7 +28,9 @@ export default ({ post }) =>
         target='_blank'
         href={`${tShareLink}?original_referer=${encodeURI(
           `${site}/${post.slug}`
-        )}&text=${encodeURI(post.excerpt.rendered)}&url=${encodeURI(
+        )}&text=${post.excerpt.rendered !== undefined
+          ? encodeURI(post.excerpt.rendered)
+          : post.excerpt}&url=${encodeURI(
           `${site}/${post.slug}`
         )}&via=${twitterHandle}`}
         style={{
