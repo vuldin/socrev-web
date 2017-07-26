@@ -141,6 +141,7 @@ const Span = styled.span`
 const CatWrapper = styled.div`
   display: flex;
   flex-flow: column;
+  margin-bottom: 10px;
 `
 const Menu = styled.div`
   ${props => {
