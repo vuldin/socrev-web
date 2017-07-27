@@ -4,7 +4,6 @@ import Layout from '../components/layout'
 import 'isomorphic-fetch'
 import styled from 'styled-components'
 import FontAwesome from 'react-fontawesome'
-import Feature from '../components/feature'
 import Excerpt from '../components/excerpt'
 import Banner from '../components/banner'
 
@@ -16,22 +15,23 @@ const description =
   'Socialist Revolution is the publication of the International Marxist Tendency in the United States.'
 
 export default class extends React.Component {
-  static async getInitialProps () {
+  static async getInitialProps ({ query }) {
     // eslint-disable-next-line no-undef
+    //fetch(`${apiUrl}/posts?category=${params.category}`),
     const [postsRes, catsRes] = await Promise.all([
-      fetch(`${apiUrl}/posts?page=1`),
+      fetch(`${apiUrl}/posts?page=${query.id}`),
       fetch(`${apiUrl}/categories`)
     ])
     const [posts, cats] = await Promise.all([postsRes.json(), catsRes.json()])
-    const feature = posts.shift()
     return {
       posts: posts,
-      feature: feature,
       cats: cats
     }
   }
   ref = 1
   count = 30
+  arrayCount = 0 // how many post arrays have been drawn on the screen
+  shortArrays = []
   createRefComponents = () => {
     let results = []
     for (let i = 2; i < this.count + 1; i++) {
@@ -39,18 +39,30 @@ export default class extends React.Component {
     }
     return results
   }
+  /*
   getMorePosts = async page => {
     console.log(`${apiUrl}/posts?page=${page}`)
     const postsRes = await fetch(`${apiUrl}/posts?page=${page}`)
     const posts = await postsRes.json()
     return posts
   }
+  */
   getNewContent = posts => {
+    let postArrays = []
+    for (let i = 0; i < posts.length; i += 6) {
+      postArrays.push(posts.slice(i, i + 6))
+    }
     return (
       <div>
+        <PostWrapper>
+          {postArrays[0].map((post, i) => {
+            let result = <Excerpt key={i} post={post} />
+            return result
+          })}
+        </PostWrapper>
         <Banner />
         <PostWrapper>
-          {posts.map((post, i) => {
+          {postArrays[1].map((post, i) => {
             let result = <Excerpt key={i} post={post} />
             return result
           })}
@@ -69,7 +81,7 @@ export default class extends React.Component {
           </Quote>
         </A>
         <div style={{ paddingTop: '20px' }} />
-        {this.ref < this.count - 1
+        {this.shortArrays.length > this.arrayCount + 1
           ? <div style={{ display: 'flex', justifyContent: 'center' }}>
               <Button
                 className='more-component'
@@ -83,7 +95,9 @@ export default class extends React.Component {
 
   draw = async () => {
     let nextRef = this.ref + 1
-    let newPosts = await this.getMorePosts(nextRef)
+    //let newPosts = await this.getMorePosts(nextRef)
+    this.arrayCount = this.arrayCount + 1
+    let newPosts = this.shortArrays[this.arrayCount]
     let newJsx = this.getNewContent(newPosts)
     document
       .querySelectorAll('.more-component')
@@ -93,11 +107,15 @@ export default class extends React.Component {
   }
 
   render () {
-    const { feature, posts, cats } = this.props
+    const { posts, cats } = this.props
+    if (this.arrayCount === 0) {
+      for (let i = 0; i < posts.length; i += 12) {
+        this.shortArrays.push(posts.slice(i, i + 12))
+      }
+    }
     return (
       <Layout cats={cats}>
-        {feature !== undefined ? <Feature post={feature} /> : <div />}
-        {this.getNewContent(posts)}
+        {this.getNewContent(this.shortArrays[this.arrayCount])}
         {this.createRefComponents()}
       </Layout>
     )

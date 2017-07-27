@@ -118,18 +118,29 @@ export default class extends React.Component {
                   style={{ paddingRight: '10px' }}
                 />
               </A>
-              <Link prefetch route='/join-the-imt' passHref>
-                <A>Join</A>
-              </Link>
-              <MenuSeparator />
-              <Link prefetch route='/our-program' passHref>
-                <A>Our Program</A>
-              </Link>
             </Actions>
           </Left>
-          <CatWrapper>
-            {cats.map(c => <Span>{c.name}</Span>)}
-          </CatWrapper>
+          <MenuWrapper>
+            <Categories>
+              {cats.map(c => {
+                let result = (
+                  <Link prefetch route={`/search/${c.id}`} passHref>
+                    <A style={{ marginTop: '10px' }}>{c.name}</A>
+                  </Link>
+                )
+                if (c.name === 'Uncategorized') result = <span />
+                return result
+              })}
+            </Categories>
+            <OtherLinks>
+              <Link prefetch route='/join-the-imt' passHref>
+                <A style={{ marginTop: '10px' }}>Join</A>
+              </Link>
+              <Link prefetch route='/our-program' passHref>
+                <A style={{ marginTop: '10px' }}>Our Program</A>
+              </Link>
+            </OtherLinks>
+          </MenuWrapper>
         </Menu>
       </Header>
     )
@@ -138,10 +149,24 @@ export default class extends React.Component {
 const Span = styled.span`
   margin-top: 10px;
 `
-const CatWrapper = styled.div`
+const Categories = styled.div`
+  flex: 1;
   display: flex;
   flex-flow: column;
+`
+const OtherLinks = styled.div`
+  flex: 1;
+  display: flex;
+  flex-flow: column;
+  margin-top: 10px;
+`
+const MenuWrapper = styled.div`
+  display: flex;
+  flex-flow: row wrap;
   margin-bottom: 10px;
+  @media (min-width: 600px) {
+    font-size: 1.5em;
+  }
 `
 const Menu = styled.div`
   ${props => {
