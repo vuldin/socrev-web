@@ -101,7 +101,14 @@ export default class extends React.Component {
             </A>
           </Interactions>
         </Right>
-        <Menu ref='menu' show={this.state.displayMenu}>
+        <Menu
+          ref='menu'
+          show={this.state.displayMenu}
+          onClick={() => {
+            //console.log('menu click')
+            this.setState({ displayMenu: !this.state.displayMenu })
+          }}
+        >
           <Left>
             <Actions>
               <A
@@ -122,23 +129,29 @@ export default class extends React.Component {
           </Left>
           <MenuWrapper>
             <Categories>
-              {cats.map(c => {
+              {cats.map((c, i) => {
                 let result = (
-                  <Link prefetch route={`/search/${c.id}`} passHref>
-                    <A style={{ marginTop: '10px' }}>{c.name}</A>
-                  </Link>
+                  <div key={i}>
+                    <Link prefetch route={`/search/${c.id}`} passHref key={i}>
+                      <A style={{ marginTop: '10px' }}>{c.name}</A>
+                    </Link>
+                  </div>
                 )
-                if (c.name === 'Uncategorized') result = <span />
+                if (c.name === 'Uncategorized') result = <span key={i} />
                 return result
               })}
             </Categories>
             <OtherLinks>
-              <Link prefetch route='/join-the-imt' passHref>
-                <A style={{ marginTop: '10px' }}>Join</A>
-              </Link>
-              <Link prefetch route='/our-program' passHref>
-                <A style={{ marginTop: '10px' }}>Our Program</A>
-              </Link>
+              <div>
+                <Link prefetch route='/join-the-imt' passHref>
+                  <A style={{ marginTop: '10px' }}>Join</A>
+                </Link>
+              </div>
+              <div>
+                <Link prefetch route='/our-program' passHref>
+                  <A style={{ marginTop: '10px' }}>Our Program</A>
+                </Link>
+              </div>
             </OtherLinks>
           </MenuWrapper>
         </Menu>
