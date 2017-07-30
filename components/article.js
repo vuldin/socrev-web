@@ -5,6 +5,7 @@ import { Parser } from 'html-to-react'
 import ReactPlayer from 'react-player'
 import InteractionTool from './interactionTool'
 import Banner from './banner'
+import Categories from './categories'
 
 const htmlToReactParser = new Parser()
 const contentMargin = 20
@@ -27,7 +28,21 @@ export default class extends React.Component {
     excerpt = htmlToReactParser.parse(excerpt.rendered)
     const acf = this.props.post.acf
     if (acf !== false) {
-      if (acf.imt_author !== undefined) author = acf.imt_author
+      if (acf.imt_author !== undefined) {
+        if (
+          Object.prototype.toString.call(acf.imt_author) === '[object Array]'
+        ) {
+          // https://stackoverflow.com/questions/4775722/check-if-object-is-array#4775737
+          author = ''
+          acf.imt_author.forEach((a, i) => {
+            if (i === 0) author = a
+            else author += ` and ${a}`
+          })
+        } else {
+          // imt_author was originally just a string, so this is for handling some older articles
+          author = acf.imt_author
+        }
+      }
       if (acf.imt_excerpt !== undefined) excerpt = acf.imt_excerpt
     }
     post.excerpt = excerpt
@@ -69,6 +84,16 @@ export default class extends React.Component {
           <Content>
             <TitleArticle>{title}</TitleArticle>
             <Author>{author}</Author>
+            {/*
+            <Categories>
+              {post.categories.filter(c => c.parent !== 0).map((c, i) => {
+                let result = c.name
+                if (i > 0) result = ` / ${c.name}`
+                return result
+              })}
+            </Categories>
+            */}
+            <Categories cats={post.categories} />
             <Excerpt>
               {excerpt}
             </Excerpt>
@@ -131,6 +156,14 @@ const Author = styled.div`
   padding-top: 10px;
   flex: 0 0 30px;
 `
+/*
+const Categories = styled.div`
+  font-size: .8em;
+  letter-spacing: -0.8px;
+  padding-top: 10px;
+  flex: 0;
+`
+*/
 const FixedSide = styled.div`
   display: none;
   position: fixed;

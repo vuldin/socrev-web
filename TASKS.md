@@ -1,23 +1,13 @@
-- COMPLETE handle categories in API
-- add categories
-  - COMPLETE feature
-  - COMPLETE excerpt
-  - COMPLETE article
-- COMPLETE? change position of banner in greetings article
-- COMPLETE ensure index links work on mobile
-- COMPLETE upload correct video for "Welcome to SocialistRevolution.org" article
-- COMPLETE switch order of category and author on excerpt/article
-- COMPLETE match author styling to category styling
-- COMPLETE create categories endpoint in API
-- switch from join to program in banner
-- create menu and add to banner
+- COMPLETE limit categories to subcategories in excerpt/article
+- COMPLETE remove post-specific props being passed through to header
+- COMPLETE add clickable category links to article
+- COMPLETE replace creating refs with rendering in render function based on posts count
+- COMPLETE add mobx
+- COMPLETE get categories from store
 - ? edit banner after internal article title and right before/after article image
-- remove post-specific props being passed through to header
 - modify links in API to ensure they work
 - add marxistbooks banner
-- automate API cache reloading
 - test restoring backup
-- add sitemap.xml https://www.npmjs.com/package/sitemap
 - use wp image size info for articles
 - JORDANA edit join article to not have excerpt
 - JAKE edit categories according to John's updates

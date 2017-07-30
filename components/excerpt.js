@@ -17,7 +17,21 @@ export default class extends React.Component {
     excerpt = htmlToReactParser.parse(excerpt.rendered)
     const acf = this.props.post.acf
     if (acf !== false) {
-      if (acf.imt_author !== undefined) author = acf.imt_author
+      if (acf.imt_author !== undefined) {
+        if (
+          Object.prototype.toString.call(acf.imt_author) === '[object Array]'
+        ) {
+          // https://stackoverflow.com/questions/4775722/check-if-object-is-array#4775737
+          author = ''
+          acf.imt_author.forEach((a, i) => {
+            if (i === 0) author = a
+            else author += ` and ${a}`
+          })
+        } else {
+          // imt_author was originally just a string, so this is for handling some older articles
+          author = acf.imt_author
+        }
+      }
       if (acf.imt_excerpt !== undefined) excerpt = acf.imt_excerpt
     }
     let media = (
@@ -69,11 +83,13 @@ export default class extends React.Component {
                   {excerpt}
                 </Description>
                 <Categories>
-                  {this.props.post.categories.map((c, i) => {
-                    let result = c.name
-                    if (i > 0) result = ` / ${c.name}`
-                    return result
-                  })}
+                  {this.props.post.categories
+                    .filter(c => c.parent !== 0)
+                    .map((c, i) => {
+                      let result = c.name
+                      if (i > 0) result = ` / ${c.name}`
+                      return result
+                    })}
                 </Categories>
               </Padding>
             </Wrapper>

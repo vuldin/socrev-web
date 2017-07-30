@@ -6,105 +6,125 @@ import styled from 'styled-components'
 import FontAwesome from 'react-fontawesome'
 import Excerpt from '../components/excerpt'
 import Banner from '../components/banner'
-
-const contentPaddingX = '90px'
-const contentMargin = 20
-const apiUrl = 'https://api.socialistrevolution.org'
+import SearchCategories from '../components/searchCategories'
+import { Provider } from 'mobx-react'
+import { initStore } from '../store'
 
 export default class extends React.Component {
-  static async getInitialProps ({ query }) {
+  static async getInitialProps ({ query, req }) {
     // eslint-disable-next-line no-undef
-    const [postsRes, catsRes] = await Promise.all([
-      fetch(`${apiUrl}/posts?category=${query.id}&page=1`),
-      fetch(`${apiUrl}/categories`)
+
+    const isServer = !!req
+    const store = initStore(isServer)
+
+    const [postsRes, cats] = await Promise.all([
+      store.getSearchPosts(isServer, 1, query.id),
+      store.getCategories()
     ])
-    const [posts, cats] = await Promise.all([postsRes.json(), catsRes.json()])
+    const posts = postsRes.posts
+    const pagesLeft = postsRes.count.pagesLeft
+    const page = postsRes.count.page
+    //console.log(`getInitialProps pagesLeft ${pagesLeft}`)
+
     return {
+      lastUpdate: store.lastUpdate,
+      isServer,
       categoryId: query.id,
       posts: posts,
+      pagesLeft: pagesLeft,
+      page: page,
       cats: cats
     }
   }
-  ref = 1
-  count = 30
-  createRefComponents = () => {
-    let results = []
-    for (let i = 2; i < this.count + 1; i++) {
-      results.push(<div key={i} ref={i} />)
+  constructor (props) {
+    super(props)
+    this.page = props.page
+    this.pagesLeft = props.pagesLeft
+    this.categoryId = props.categoryId
+    this.state = {
+      posts: props.posts
     }
-    return results
+    this.store = initStore(props.isServer, props.lastUpdate)
   }
-  getMorePosts = async page => {
-    const postsRes = await fetch(
-      `${apiUrl}/posts?category=${this.props.categoryId}&page=${page}`
+
+  draw = async () => {
+    this.page = this.page + 1
+    const res = await this.store.getSearchPosts(
+      this.props.isServer,
+      this.page,
+      this.props.categoryId
     )
-    const posts = await postsRes.json()
-    return posts
+    const newPosts = res.posts
+    this.pagesLeft = res.count.pagesLeft
+    //console.log(`draw pagesLeft ${this.pagesLeft}`)
+    //console.log(typeof this.pagesLeft)
+    const posts = this.state.posts.concat(newPosts)
+    this.setState({ posts: posts })
   }
-  getNewContent = posts => {
+
+  render () {
+    const { cats } = this.props
+    if (this.categoryId !== this.props.categoryId) {
+      this.categoryId = this.props.categoryId
+      this.state.posts = this.props.posts
+      this.pagesLeft = this.props.pagesLeft
+      this.page = this.props.page
+    }
+    const { posts } = this.state
+    //console.log(`render pagesLeft ${this.pagesLeft}`)
     let postArrays = []
     for (let i = 0; i < posts.length; i += 6) {
       postArrays.push(posts.slice(i, i + 6))
     }
+    //console.log(`postArrays length ${postArrays.length}`)
+    const fillers = [
+      <Banner />,
+      <A
+        href='https://www.bolshevik.info/the-chain-is-no-stronger-than-its-weakest-link.htm'
+        target='_blank'
+      >
+        <Quote>
+          <blockquote>
+            {`Your iron chain was poor and rusty enough as it is, and now it has several links made not even of wood, but of clay and paper.`}
+          </blockquote>
+          <em
+            style={{ fontSize: '.8em' }}
+          >{`Published in Pravda No. 67, June 9 (May 27), 1917`}</em>
+        </Quote>
+      </A>
+    ]
+    let children = postArrays.map((pa, i) => {
+      const fillerIndex = i % fillers.length
+      return (
+        <div key={i}>
+          <PostWrapper>
+            {pa.map((post, j) => {
+              let result = <Excerpt key={j} post={post} />
+              return result
+            })}
+          </PostWrapper>
+          {fillers[fillerIndex]}
+        </div>
+      )
+    })
     return (
-      <div>
-        <PostWrapper>
-          {postArrays[0].map((post, i) => {
-            let result = <Excerpt key={i} post={post} />
-            return result
-          })}
-        </PostWrapper>
-        <Banner />
-        <PostWrapper>
-          {postArrays[1].map((post, i) => {
-            let result = <Excerpt key={i} post={post} />
-            return result
-          })}
-        </PostWrapper>
-        <A
-          href='https://www.bolshevik.info/the-chain-is-no-stronger-than-its-weakest-link.htm'
-          target='_blank'
-        >
-          <Quote>
-            <blockquote>
-              {`Your iron chain was poor and rusty enough as it is, and now it has several links made not even of wood, but of clay and paper.`}
-            </blockquote>
-            <em
-              style={{ fontSize: '.8em' }}
-            >{`Published in Pravda No. 67, June 9 (May 27), 1917`}</em>
-          </Quote>
-        </A>
-        <div style={{ paddingTop: '20px' }} />
-        {this.ref < this.count - 1
-          ? <div style={{ display: 'flex', justifyContent: 'center' }}>
-              <Button
-                className='more-component'
-                onClick={() => this.draw()}
-              >{`See more articles`}</Button>
-            </div>
-          : <div />}
-      </div>
-    )
-  }
-
-  draw = async () => {
-    let nextRef = this.ref + 1
-    let newPosts = await this.getMorePosts(nextRef)
-    let newJsx = this.getNewContent(newPosts)
-    document
-      .querySelectorAll('.more-component')
-      .forEach(c => (c.style.display = 'none'))
-    render(newJsx, this.refs[nextRef])
-    this.ref = nextRef
-  }
-
-  render () {
-    const { posts, cats } = this.props
-    return (
-      <Layout cats={cats}>
-        {this.getNewContent(posts)}
-        {this.createRefComponents()}
-      </Layout>
+      <Provider store={this.store}>
+        <Layout cats={cats}>
+          <SearchCategories cats={cats} parentId={this.categoryId} />
+          {children}
+          {this.pagesLeft
+            ? <div
+                key={`button${children.length + 1}`}
+                style={{ display: 'flex', justifyContent: 'center' }}
+              >
+                <Button
+                  className='more-component'
+                  onClick={() => this.draw()}
+                >{`See more articles`}</Button>
+              </div>
+            : <div key={`button${children.length + 1}`} />}
+        </Layout>
+      </Provider>
     )
   }
 }

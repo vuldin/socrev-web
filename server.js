@@ -1,6 +1,7 @@
 const express = require('express')
 const next = require('next')
 const { join } = require('path')
+const mobxReact = require('mobx-react')
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
@@ -8,6 +9,8 @@ const app = next({ dev })
 // next-routes
 const routes = require('./routes')
 const handler = routes.getRequestHandler(app)
+
+mobxReact.useStaticRendering(true)
 
 const redirects = require('./redirects')
 
@@ -23,7 +26,6 @@ app.prepare().then(() => {
   // static files
   const options = { root: join(__dirname, 'static') }
   rootStaticFiles.forEach(file => {
-    console.log(file)
     server.get(file, (req, res) => {
       res.sendFile(file.slice(1), options)
     })

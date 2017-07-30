@@ -7,43 +7,48 @@ import FontAwesome from 'react-fontawesome'
 import Feature from '../components/feature'
 import Excerpt from '../components/excerpt'
 import Banner from '../components/banner'
-
-const contentPaddingX = '90px'
-const contentMargin = 20
-const apiUrl = 'https://api.socialistrevolution.org'
-
-const description =
-  'Socialist Revolution is the publication of the International Marxist Tendency in the United States.'
+import { Provider } from 'mobx-react'
+import { initStore } from '../store'
 
 export default class extends React.Component {
-  static async getInitialProps () {
+  static async getInitialProps ({ req }) {
     // eslint-disable-next-line no-undef
-    const [postsRes, catsRes] = await Promise.all([
-      fetch(`${apiUrl}/posts?page=1`),
-      fetch(`${apiUrl}/categories`)
+
+    const isServer = !!req
+    const store = initStore(isServer)
+
+    const [postsRes, cats] = await Promise.all([
+      store.getIndexPosts(isServer, 1),
+      store.getCategories()
     ])
-    const [posts, cats] = await Promise.all([postsRes.json(), catsRes.json()])
+    const posts = postsRes.posts
+    const pagesLeft = postsRes.count.pagesLeft
+    const page = postsRes.count.page
+
     const feature = posts.shift()
+
     return {
+      lastUpdate: store.lastUpdate,
+      isServer,
       posts: posts,
+      pagesLeft: pagesLeft,
+      page: page,
       feature: feature,
       cats: cats
     }
   }
-  ref = 1
-  count = 30
-  createRefComponents = () => {
+  constructor (props) {
+    super(props)
+    this.page = props.page
+    this.pagesLeft = props.pagesLeft
+    this.store = initStore(props.isServer, props.lastUpdate)
+  }
+  createRefComponents = pagesLeft => {
     let results = []
-    for (let i = 2; i < this.count + 1; i++) {
+    for (let i = 2; i < pagesLeft + 2; i++) {
       results.push(<div key={i} ref={i} />)
     }
     return results
-  }
-  getMorePosts = async page => {
-    console.log(`${apiUrl}/posts?page=${page}`)
-    const postsRes = await fetch(`${apiUrl}/posts?page=${page}`)
-    const posts = await postsRes.json()
-    return posts
   }
   getNewContent = posts => {
     return (
@@ -69,37 +74,40 @@ export default class extends React.Component {
           </Quote>
         </A>
         <div style={{ paddingTop: '20px' }} />
-        {this.ref < this.count - 1
-          ? <div style={{ display: 'flex', justifyContent: 'center' }}>
-              <Button
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          {this.pagesLeft > 0
+            ? <Button
                 className='more-component'
                 onClick={() => this.draw()}
               >{`See more articles`}</Button>
-            </div>
-          : <div />}
+            : <div />}
+        </div>
       </div>
     )
   }
 
   draw = async () => {
-    let nextRef = this.ref + 1
-    let newPosts = await this.getMorePosts(nextRef)
+    this.page = this.page + 1
+    const res = await this.store.getIndexPosts(this.props.isServer, this.page)
+    const newPosts = res.posts
+    this.pagesLeft = res.count.pagesLeft
     let newJsx = this.getNewContent(newPosts)
     document
       .querySelectorAll('.more-component')
       .forEach(c => (c.style.display = 'none'))
-    render(newJsx, this.refs[nextRef])
-    this.ref = nextRef
+    render(newJsx, this.refs[this.page])
   }
 
   render () {
     const { feature, posts, cats } = this.props
     return (
-      <Layout cats={cats}>
-        {feature !== undefined ? <Feature post={feature} /> : <div />}
-        {this.getNewContent(posts)}
-        {this.createRefComponents()}
-      </Layout>
+      <Provider store={this.store}>
+        <Layout cats={cats}>
+          {feature !== undefined ? <Feature post={feature} /> : <div />}
+          {this.getNewContent(posts)}
+          {this.createRefComponents(this.pagesLeft)}
+        </Layout>
+      </Provider>
     )
   }
 }
