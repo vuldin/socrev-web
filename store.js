@@ -6,6 +6,7 @@ let store = null
 class Store {
   constructor () {
     this.apiUrl = 'https://api.socialistrevolution.org'
+    this.site = 'https://socialistrevolution.org'
     //this.apiUrl = 'http://localhost:3002'
   }
 

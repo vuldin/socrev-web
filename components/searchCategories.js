@@ -87,6 +87,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-flow: column;
   justify-content: center;
+  margin: 10px 90px 0 90px;
 `
 const Name = styled.div`
 `

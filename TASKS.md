@@ -4,6 +4,8 @@
 - COMPLETE replace creating refs with rendering in render function based on posts count
 - COMPLETE add mobx
 - COMPLETE get categories from store
+- COMPLETE add generic logo image for articles without images
+- improve style of category selection on search page
 - ? edit banner after internal article title and right before/after article image
 - modify links in API to ensure they work
 - add marxistbooks banner

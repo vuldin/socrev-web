@@ -11,6 +11,9 @@ export default class extends React.Component {
   render () {
     let { title, excerpt, featured_media, slug } = this.props.post
     let srcUrl = featured_media.source_url
+    if (!srcUrl) {
+      srcUrl = '/static/imt-wil-logo.jpg'
+    }
     title = htmlToReactParser.parse(title.rendered)
     //console.log(excerpt.rendered)
     let author = 'IMT member'

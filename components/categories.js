@@ -63,7 +63,7 @@ const Space = styled.div`
 const Wrapper = styled.div`
   font-size: .8em;
   letter-spacing: -0.8px;
-  padding-top: 10px;
+  padding: 10px 0;
   display: flex;
 `
 const Name = styled.div`

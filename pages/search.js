@@ -133,9 +133,9 @@ const PostWrapper = styled.div`
   /*
   margin: 20px 0 0 0;
   display: block;
+  padding: 20px 0 0 0;
   */
   display: block;
-  padding: 20px 0 0 0;
   grid-template-columns: 1fr;
   grid-gap: 20px;
   @media (min-width: 415px) {

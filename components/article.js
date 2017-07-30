@@ -86,19 +86,10 @@ export default class extends React.Component {
           <Content>
             <TitleArticle>{title}</TitleArticle>
             <Author>{author}</Author>
-            {/*
-            <Categories>
-              {post.categories.filter(c => c.parent !== 0).map((c, i) => {
-                let result = c.name
-                if (i > 0) result = ` / ${c.name}`
-                return result
-              })}
-            </Categories>
-            */}
-            <Categories cats={post.categories} />
             <Excerpt>
               {excerpt}
             </Excerpt>
+            <Categories cats={post.categories} />
             {!isSticky && !featured_media.video ? media : <span />}
             {content}
           </Content>
