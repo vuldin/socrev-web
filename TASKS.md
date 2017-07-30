@@ -11,3 +11,4 @@
 - use wp image size info for articles
 - JORDANA edit join article to not have excerpt
 - JAKE edit categories according to John's updates
+- TEST don't add figure when there isn't any media in the article

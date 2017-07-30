@@ -5,8 +5,8 @@ let store = null
 
 class Store {
   constructor () {
-    //this.apiUrl = 'https://api.socialistrevolution.org'
-    this.apiUrl = 'http://localhost:3002'
+    this.apiUrl = 'https://api.socialistrevolution.org'
+    //this.apiUrl = 'http://localhost:3002'
   }
 
   getCategories = async () => {

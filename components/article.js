@@ -65,11 +65,13 @@ export default class extends React.Component {
       content.splice(bannerIndex, 0, <Banner />)
     }
     let isSticky = post.sticky
-    let media = (
-      <figure>
-        <img src={source_url} />
-      </figure>
-    )
+    let media = <div />
+    if (source_url)
+      media = (
+        <figure>
+          <img src={source_url} />
+        </figure>
+      )
     if (featured_media.video)
       media = (
         <ResponsivePlayer url={source_url} width={'100vw'} height={'56vw'} />
