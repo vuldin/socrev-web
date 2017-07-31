@@ -17,8 +17,21 @@ export default class extends React.Component {
     const isServer = !!req
     const store = initStore(isServer)
 
+    let parentCatId = query.parent
+    let childCatId = query.child
+    if (parentCatId !== undefined) {
+      parentCatId = parseInt(parentCatId)
+    }
+    if (childCatId !== undefined) {
+      childCatId = parseInt(childCatId)
+    }
+
     const [postsRes, cats] = await Promise.all([
-      store.getSearchPosts(isServer, 1, query.id),
+      store.getSearchPosts(
+        isServer,
+        1,
+        childCatId !== undefined ? childCatId : parentCatId
+      ),
       store.getCategories()
     ])
     const posts = postsRes.posts
@@ -29,7 +42,9 @@ export default class extends React.Component {
     return {
       lastUpdate: store.lastUpdate,
       isServer,
-      categoryId: query.id,
+      parentCatId: parentCatId,
+      childCatId: childCatId,
+      //categoryId: query.id,
       posts: posts,
       pagesLeft: pagesLeft,
       page: page,
@@ -40,7 +55,9 @@ export default class extends React.Component {
     super(props)
     this.page = props.page
     this.pagesLeft = props.pagesLeft
-    this.categoryId = props.categoryId
+    //this.categoryId = props.categoryId
+    this.parentCatId = props.parentCatId
+    this.childCatId = props.childCatId
     this.state = {
       posts: props.posts
     }
@@ -52,7 +69,7 @@ export default class extends React.Component {
     const res = await this.store.getSearchPosts(
       this.props.isServer,
       this.page,
-      this.props.categoryId
+      this.props.childCatId ? this.props.childCatId : this.props.parentCatId
     )
     const newPosts = res.posts
     this.pagesLeft = res.count.pagesLeft
@@ -64,8 +81,14 @@ export default class extends React.Component {
 
   render () {
     const { cats } = this.props
-    if (this.categoryId !== this.props.categoryId) {
-      this.categoryId = this.props.categoryId
+    //if (this.categoryId !== this.props.categoryId) {
+    if (
+      this.childCatId !== this.props.childCatId ||
+      this.parentCatId !== this.props.parentCatId
+    ) {
+      //this.categoryId = this.props.categoryId
+      this.childCatId = this.props.childCatId
+      this.parentCatId = this.props.parentCatId
       this.state.posts = this.props.posts
       this.pagesLeft = this.props.pagesLeft
       this.page = this.props.page
@@ -110,7 +133,11 @@ export default class extends React.Component {
     return (
       <Provider store={this.store}>
         <Layout cats={cats}>
-          <SearchCategories cats={cats} parentId={this.categoryId} />
+          <SearchCategories
+            cats={cats}
+            parentId={this.parentCatId}
+            childId={this.childCatId}
+          />
           {children}
           {this.pagesLeft
             ? <div

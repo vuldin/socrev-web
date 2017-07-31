@@ -2,62 +2,76 @@ import styled from 'styled-components'
 import FontAwesome from 'react-fontawesome'
 import { Link } from '../routes'
 
-export default ({ cats, parentId }) => {
-  //console.log('parentId', parentId)
-  /*
-  let parents = cats.filter(c => c.parent === 0)
-  parents.forEach(p => (p.children = []))
-  cats.forEach(c => {
-    if (c.parent !== 0) {
-      let parent = parents.find(p => p.id === c.parent)
-      if (parent !== undefined) parent.children.push(c)
+export default ({ cats, parentId, childId }) => {
+  const ps = cats.filter(c => c.parent === 0)
+  let cs, parentCat, childCat
+  if (parentId !== undefined) {
+    parentId = parseInt(parentId)
+    parentCat = ps.find(p => p.id === parentId)
+    if (parentCat !== undefined) cs = parentCat.children
+    if (cs !== undefined && childId !== undefined) {
+      childId = parseInt(childId)
+      childCat = cs.find(c => c.id === childId)
     }
-  })
-  */
-  const children = pId => {
-    let p = cats.find(c => c.id === parseInt(pId))
-    //console.log(pId, cats, p)
+  }
+
+  //const spacer = i => (i !== 0 ? <FontAwesome name='circle' /> : <div />)
+  const spacer = i => {
     let result = <div />
-    if (p && p.children && p.children.length > 0)
-      result = (
-        <InnerWrapper>
-          <Children>
-            {p.children.map((c, i) =>
-              <Link key={i} prefetch route={`/search/${c.id}`} passHref>
-                <A style={{ paddingRight: '20px' }}>
-                  {c.name}
-                </A>
-              </Link>
-            )}
-          </Children>
-        </InnerWrapper>
-      )
+    if (i !== 0 || window.innerWidth < 1000) <Spacer>•</Spacer>
     return result
   }
-  const parents = arr => {
+  const children = () =>
+    cs.map((c, i) => {
+      return (
+        <Child key={i}>
+          {/*spacer(i)*/}
+          <Link prefetch route={`/find/${parentCat.id}/${c.id}`} passHref>
+            <A selected={c.id === childId ? true : false}>
+              {c.name}
+            </A>
+          </Link>
+        </Child>
+      )
+    })
+  const parents = () => {
     let result = []
-    arr.forEach((p, i) => {
+    ps.forEach((p, i) => {
       if (p.name !== 'Uncategorized') {
         result.push(
           <Parent key={i}>
-            <Link prefetch route={`/search/${p.id}`} passHref>
-              <A>{p.name}</A>
+            {/*spacer(i)*/}
+            <Link prefetch route={`/find/${p.id}`} passHref>
+              <A selected={p.id === parentId ? true : false}>{p.name}</A>
             </Link>
-            {/*children(p)*/}
           </Parent>
         )
       }
     })
     return result
   }
+  /*
+  console.log(`parents\n${JSON.stringify(ps)}`)
+  console.log(`parentCat\n${JSON.stringify(parentCat)}`)
+  console.log(`children\n${JSON.stringify(cs)}`)
+  console.log(`childCat\n${JSON.stringify(childCat)}`)
+  */
   return (
     <Wrapper>
-      <div style={{ display: 'flex' }}>
-        {parents(cats)}
-      </div>
-      <div>
-        {children(parentId)}
-      </div>
+      <CategoryTitle>Main categories</CategoryTitle>
+      <ParentWrapper>
+        {parents()}
+      </ParentWrapper>
+      {cs !== undefined
+        ? <div style={{ paddingTop: '20px' }}>
+            <CategoryTitle>Sub-categories</CategoryTitle>
+            <InnerWrapper>
+              <Children>
+                {children()}
+              </Children>
+            </InnerWrapper>
+          </div>
+        : <div />}
     </Wrapper>
   )
 }
@@ -74,6 +88,7 @@ const A = styled.a`
   text-decoration: none;
   cursor: pointer;
   color: inherit;
+  opacity: ${props => (props.selected ? 1 : 0.5)};
 `
 const Space = styled.div`
   width: 20px;
@@ -91,12 +106,35 @@ const Wrapper = styled.div`
 `
 const Name = styled.div`
 `
+const ParentWrapper = styled.div`
+  display: flex;
+  flex-flow: column;
+  @media (min-width: 1000px) {
+    flex-flow: row wrap;
+  }
+`
+const Child = styled.div`
+  margin-right: 20px;
+  display: flex;
+`
 const Parent = styled.div`
   margin-right: 20px;
+  display: flex;
 `
 const InnerWrapper = styled.div`
   display: flex;
 `
 const Children = styled.div`
   display: flex;
+  flex-flow column;
+  @media (min-width: 1000px) {
+    flex-flow: row wrap;
+  }
+`
+const Spacer = styled.div`
+  margin-right: 20px;
+`
+const CategoryTitle = styled.div`
+  font-weight: bold;
+  font-size: 1.1em;
 `

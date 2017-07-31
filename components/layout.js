@@ -104,7 +104,8 @@ export default class extends React.Component {
         <Head>
           <title>{title}</title>
           <link rel='canonical' href={canonical} />
-          {meta.map(m => {
+          {meta.map((m, i) => {
+            m.key = i
             let meta = React.createElement('meta', m, null)
             return meta
           })}

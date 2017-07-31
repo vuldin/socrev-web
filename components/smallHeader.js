@@ -132,7 +132,7 @@ export default class extends React.Component {
               {cats.map((c, i) => {
                 let result = (
                   <div key={i}>
-                    <Link prefetch route={`/search/${c.id}`} passHref key={i}>
+                    <Link prefetch route={`/find/${c.id}`} passHref key={i}>
                       <A style={{ marginTop: '10px' }}>{c.name}</A>
                     </Link>
                   </div>
@@ -163,12 +163,12 @@ const Span = styled.span`
   margin-top: 10px;
 `
 const Categories = styled.div`
-  flex: 1;
   display: flex;
   flex-flow: column;
+  flex: 1 0 auto;
 `
 const OtherLinks = styled.div`
-  flex: 1;
+  flex: 1 0 auto;
   display: flex;
   flex-flow: column;
   margin-top: 10px;

@@ -3,6 +3,19 @@ import FontAwesome from 'react-fontawesome'
 import { Link } from '../routes'
 
 export default ({ cats }) => {
+  /*
+  const ps = cats.filter(c => c.parent === 0)
+  let cs, parentCat, childCat
+  if (parentId !== undefined) {
+    parentId = parseInt(parentId)
+    parentCat = ps.find(p => p.id === parentId)
+    if (parentCat !== undefined) cs = parentCat.children
+    if (cs !== undefined && childId !== undefined) {
+      childId = parseInt(childId)
+      childCat = cs.find(c => c.id === childId)
+    }
+  }
+  */
   let parents = cats.filter(c => c.parent === 0)
   parents.forEach(p => (p.children = []))
   cats.forEach(c => {
@@ -15,30 +28,36 @@ export default ({ cats }) => {
     let result = <div />
     if (p.children.length > 0)
       result = (
-        <InnerWrapper>
-          <Space />
-          <FontAwesome name='level-up' rotate={90} />
-          <Space />
-          <Children>
-            {p.children.map((c, i) =>
-              <Link key={i} prefetch route={`/search/${c.id}`} passHref>
-                <A>{c.name}</A>
-              </Link>
-            )}
-          </Children>
-        </InnerWrapper>
+        <Children>
+          {p.children.map((c, i) => {
+            let spacer = <div />
+            if (i !== 0) spacer = <Space>/</Space>
+            let result = (
+              <div key={i}>
+                {spacer}
+                <Link key={i} prefetch route={`/find/${p.id}/${c.id}`} passHref>
+                  <A>{c.name}</A>
+                </Link>
+              </div>
+            )
+            return result
+          })}
+        </Children>
       )
     return result
   }
   return (
     <Wrapper>
       {parents.map((p, i) =>
-        <Parent key={i}>
-          <Link prefetch route={`/search/${p.id}`} passHref>
-            <A>{p.name}</A>
-          </Link>
+        <div style={{ display: 'flex' }} key={i}>
+          <Parent>
+            <Link prefetch route={`/find/${p.id}`} passHref>
+              <A>{p.name}</A>
+            </Link>
+          </Parent>
+          <Space>-></Space>
           {children(p)}
-        </Parent>
+        </div>
       )}
     </Wrapper>
   )
@@ -58,21 +77,24 @@ const A = styled.a`
   color: inherit;
 `
 const Space = styled.div`
-  width: 10px;
+  margin: 0 10px;
 `
 const Wrapper = styled.div`
   font-size: .8em;
   letter-spacing: -0.8px;
   padding: 10px 0;
-  display: flex;
+  @media (min-width: 500px) {
+    font-size: inherit;
+    letter-spacing: inherit;
+  }
 `
 const Name = styled.div`
 `
 const Parent = styled.div`
-  margin-right: 10px;
 `
 const InnerWrapper = styled.div`
   display: flex;
 `
 const Children = styled.div`
+  display: flex;
 `

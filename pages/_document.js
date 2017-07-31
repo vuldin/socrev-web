@@ -52,7 +52,7 @@ export default class MyDocument extends Document {
               padding: 20px 0 0 0;
               */
             }
-            h2 {
+            h2, h4 {
               margin: 50px 0 0 0;
             }
           `}</style>
