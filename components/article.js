@@ -149,3 +149,10 @@ const FixedSide = styled.div`
   left: 90px;
   top: 200px;
 `
+const ResponsivePlayer = styled(ReactPlayer)`
+  margin: 0 auto;
+  @media (min-width: 950px){
+    width: 950px !important;
+    height: 534px !important;
+  }
+`

@@ -1,11 +1,3 @@
-- COMPLETE limit categories to subcategories in excerpt/article
-- COMPLETE remove post-specific props being passed through to header
-- COMPLETE add clickable category links to article
-- COMPLETE replace creating refs with rendering in render function based on posts count
-- COMPLETE add mobx
-- COMPLETE get categories from store
-- COMPLETE add generic logo image for articles without images
-- improve style of category selection on search page
 - ? edit banner after internal article title and right before/after article image
 - modify links in API to ensure they work
 - add marxistbooks banner
@@ -13,4 +5,5 @@
 - use wp image size info for articles
 - JORDANA edit join article to not have excerpt
 - JAKE edit categories according to John's updates
-- TEST don't add figure when there isn't any media in the article
+
+- invalid json response body at https://api.socialistrevolution.org/posts/SocialistRevolutionLogoStacked.png

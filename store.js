@@ -7,7 +7,6 @@ class Store {
   constructor () {
     this.apiUrl = 'https://api.socialistrevolution.org'
     this.site = 'https://socialistrevolution.org'
-    //this.apiUrl = 'http://localhost:3002'
   }
 
   getCategories = async () => {
@@ -17,7 +16,7 @@ class Store {
   }
 
   getIndexPosts = async (isServer, page) => {
-    let url = `${this.apiUrl}/posts?page=${page}`
+    let url = `${this.apiUrl}/posts?status=publish&page=${page}`
     const [countRes, postsRes] = await Promise.all([
       fetch(`${url}&count=true`),
       fetch(url)
@@ -44,7 +43,7 @@ class Store {
       }
     }
     */
-    let url = `${this.apiUrl}/posts?page=${page}`
+    let url = `${this.apiUrl}/posts?status=publish&page=${page}`
     if (cat) url = `${url}&category=${cat}`
     //console.log(`url ${url}`)
     const [countRes, postsRes] = await Promise.all([
