@@ -3,11 +3,12 @@ import FontAwesome from 'react-fontawesome'
 
 const twitterHandle = 'usimt'
 const site = 'https://socialistrevolution.org'
+
 const tShareLink = `https://twitter.com/intent/tweet`
 const fShareLink = `https://www.facebook.com/sharer/sharer.php?u=`
 const gShareLink = 'https://plus.google.com/share?url='
 
-export default article =>
+export default ({ article }) =>
   <FixedFooter className='article-fixed-footer'>
     <a
       target='_blank'
