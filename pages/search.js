@@ -20,10 +20,10 @@ export default class extends React.Component {
     let parentCatId = query.parent
     let childCatId = query.child
     if (parentCatId !== undefined) {
-      parentCatId = parseInt(parentCatId)
+      parentCatId = parentCatId
     }
     if (childCatId !== undefined) {
-      childCatId = parseInt(childCatId)
+      childCatId = childCatId
     }
 
     const [postsRes, cats] = await Promise.all([
@@ -44,7 +44,6 @@ export default class extends React.Component {
       isServer,
       parentCatId: parentCatId,
       childCatId: childCatId,
-      //categoryId: query.id,
       posts: posts,
       pagesLeft: pagesLeft,
       page: page,
@@ -55,7 +54,6 @@ export default class extends React.Component {
     super(props)
     this.page = props.page
     this.pagesLeft = props.pagesLeft
-    //this.categoryId = props.categoryId
     this.parentCatId = props.parentCatId
     this.childCatId = props.childCatId
     this.state = {
@@ -81,12 +79,10 @@ export default class extends React.Component {
 
   render () {
     const { cats } = this.props
-    //if (this.categoryId !== this.props.categoryId) {
     if (
       this.childCatId !== this.props.childCatId ||
       this.parentCatId !== this.props.parentCatId
     ) {
-      //this.categoryId = this.props.categoryId
       this.childCatId = this.props.childCatId
       this.parentCatId = this.props.parentCatId
       this.state.posts = this.props.posts

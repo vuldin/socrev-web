@@ -132,7 +132,7 @@ export default class extends React.Component {
               {cats.map((c, i) => {
                 let result = (
                   <div key={i}>
-                    <Link prefetch route={`/find/${c.id}`} passHref key={i}>
+                    <Link prefetch route={`/find/${c.slug}`} passHref key={i}>
                       <A style={{ marginTop: '10px' }}>{c.name}</A>
                     </Link>
                   </div>

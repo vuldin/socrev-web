@@ -6,12 +6,12 @@ export default ({ cats, parentId, childId }) => {
   const ps = cats.filter(c => c.parent === 0)
   let cs, parentCat, childCat
   if (parentId !== undefined) {
-    parentId = parseInt(parentId)
-    parentCat = ps.find(p => p.id === parentId)
+    parentId = parentId
+    parentCat = ps.find(p => p.slug === parentId)
     if (parentCat !== undefined) cs = parentCat.children
     if (cs !== undefined && childId !== undefined) {
-      childId = parseInt(childId)
-      childCat = cs.find(c => c.id === childId)
+      childId = childId
+      childCat = cs.find(c => c.slug === childId)
     }
   }
 
@@ -26,8 +26,8 @@ export default ({ cats, parentId, childId }) => {
       return (
         <Child key={i}>
           {/*spacer(i)*/}
-          <Link prefetch route={`/find/${parentCat.id}/${c.id}`} passHref>
-            <A selected={c.id === childId ? true : false}>
+          <Link prefetch route={`/find/${parentCat.slug}/${c.slug}`} passHref>
+            <A selected={c.slug === childId ? true : false}>
               {c.name}
             </A>
           </Link>
@@ -41,8 +41,8 @@ export default ({ cats, parentId, childId }) => {
         result.push(
           <Parent key={i}>
             {/*spacer(i)*/}
-            <Link prefetch route={`/find/${p.id}`} passHref>
-              <A selected={p.id === parentId ? true : false}>{p.name}</A>
+            <Link prefetch route={`/find/${p.slug}`} passHref>
+              <A selected={p.slug === parentId ? true : false}>{p.name}</A>
             </Link>
           </Parent>
         )
