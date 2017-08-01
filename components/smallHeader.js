@@ -11,7 +11,7 @@ const smallContentPaddingX = 20
 const twitterHandle = 'usimt'
 const site = 'https://socialistrevolution.org'
 const tFollowLink = `https://twitter.com/intent/follow`
-const fshare = `https://www.facebook.com/imtusa`
+const fshare = `https://www.facebook.com/socialistrevolutionusa`
 const tshare = `${tFollowLink}?original_referer=${encodeURI(
   site
 )}&region=follow_link&screen_name=${twitterHandle}&tw_p=followbutton`

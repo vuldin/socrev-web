@@ -17,7 +17,8 @@ const redirects = require('./redirects')
 const rootStaticFiles = [
   '/favicon.ico',
   '/apple-touch-icon.png',
-  '/apple-touch-icon-composed.png'
+  '/apple-touch-icon-composed.png',
+  '/robots.txt'
 ]
 
 app.prepare().then(() => {
