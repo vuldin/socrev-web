@@ -109,6 +109,7 @@ export default class extends React.Component {
             let meta = React.createElement('meta', m, null)
             return meta
           })}
+          <link rel='alternate' href={site} hreflang='en-us' />
         </Head>
         <SmallHeader cats={cats} />
         <div className='fixedHeaderWrapper' ref='fixedHeaderWrapper'>
