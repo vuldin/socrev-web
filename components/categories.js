@@ -35,7 +35,12 @@ export default ({ cats }) => {
             let result = (
               <div key={i}>
                 {spacer}
-                <Link key={i} prefetch route={`/find/${p.id}/${c.id}`} passHref>
+                <Link
+                  key={i}
+                  prefetch
+                  route={`/find/${p.slug}/${c.slug}`}
+                  passHref
+                >
                   <A>{c.name}</A>
                 </Link>
               </div>
@@ -51,7 +56,7 @@ export default ({ cats }) => {
       {parents.map((p, i) =>
         <div style={{ display: 'flex' }} key={i}>
           <Parent>
-            <Link prefetch route={`/find/${p.id}`} passHref>
+            <Link prefetch route={`/find/${p.slug}`} passHref>
               <A>{p.name}</A>
             </Link>
           </Parent>
