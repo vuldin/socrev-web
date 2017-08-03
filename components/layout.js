@@ -86,6 +86,10 @@ export default class extends React.Component {
           content: `${site}/`
         },
         {
+          property: 'og:image',
+          content: `${site}/srlogo.png`
+        },
+        {
           property: 'twitter:title',
           content: 'Socialist Revolution'
         },
