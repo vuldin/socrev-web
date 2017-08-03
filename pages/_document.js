@@ -70,7 +70,7 @@ export default class MyDocument extends Document {
                 appId            : '1049510628513543',
                 autoLogAppEvents : true,
                 xfbml            : true,
-                version          : 'v2.9'
+                version          : 'v2.10'
               });
               FB.AppEvents.logPageView();
             };

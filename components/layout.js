@@ -90,6 +90,10 @@ export default class extends React.Component {
           content: `${site}/srlogo.png`
         },
         {
+          property: 'og:image',
+          content: `${site}/socrev-logo-stacked.png`
+        },
+        {
           property: 'twitter:title',
           content: 'Socialist Revolution'
         },
@@ -103,16 +107,16 @@ export default class extends React.Component {
       cats,
       children
     } = this.props
+    const metas = meta.map((m, i) => {
+      m.key = i
+      return React.createElement('meta', m, null)
+    })
     return (
       <div>
         <Head>
           <title>{title}</title>
           <link rel='canonical' href={canonical} />
-          {meta.map((m, i) => {
-            m.key = i
-            let meta = React.createElement('meta', m, null)
-            return meta
-          })}
+          {metas}
           <link rel='alternate' href={site} hreflang='en-us' />
         </Head>
         <SmallHeader cats={cats} />
