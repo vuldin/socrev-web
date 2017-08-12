@@ -117,7 +117,7 @@ export default class extends React.Component {
           <title>{title}</title>
           <link rel='canonical' href={canonical} />
           {metas}
-          <link rel='alternate' href={site} hreflang='en-us' />
+          <link rel='alternate' href={site} hrefLang='en-us' />
         </Head>
         <SmallHeader cats={cats} />
         <div className='fixedHeaderWrapper' ref='fixedHeaderWrapper'>

@@ -20,6 +20,7 @@ export default class MyDocument extends Document {
             name='google-site-verification'
             content='b4sESEo127Wta0iikjktF3RXc6ATnFqUhs-7lj4OfNI'
           />
+          <meta property='fb:app_id' content='1049510628513543' />
           <script src='https://use.fontawesome.com/62d036d8b5.js' />
           <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
           <style>{`

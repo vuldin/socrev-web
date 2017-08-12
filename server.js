@@ -18,7 +18,9 @@ const rootStaticFiles = [
   '/favicon.ico',
   '/apple-touch-icon.png',
   '/apple-touch-icon-composed.png',
-  '/robots.txt'
+  '/robots.txt',
+  '/socrev-logo-stacked.png',
+  '/srlogo.png'
 ]
 
 app.prepare().then(() => {

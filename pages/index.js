@@ -21,11 +21,14 @@ export default class extends React.Component {
       store.getIndexPosts(isServer, 1),
       store.getCategories()
     ])
-    const posts = postsRes.posts
+    let posts = postsRes.posts
     const pagesLeft = postsRes.count.pagesLeft
     const page = postsRes.count.page
 
-    const feature = posts.shift()
+    let feature
+    for (let i = 0; i < posts.length && feature === undefined; i++) {
+      if (posts[i].sticky) feature = posts.splice(i, 1)[0]
+    }
 
     return {
       lastUpdate: store.lastUpdate,
