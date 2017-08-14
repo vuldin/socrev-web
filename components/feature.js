@@ -87,10 +87,10 @@ const Words = styled.div`
 `
 const Title = styled.div`
   font-weight: bold;
-  font-family: font74157;
-  letter-spacing: -2.8px;
+  font-family: Mada, sans-serif;
+  letter-spacing: -1.7px;
   margin-bottom: 20px;
-  font-size: 2.3em;
+  font-size: 2.4em;
 `
 const A = styled.a`
   text-decoration: none;

@@ -100,10 +100,9 @@ export default () =>
 const Banner = styled.div`
   margin-top: 20px;
   background-color: #f0f0f0;
-  font-size: 1.4em;
-  font-weight: bold;
-  font-family: font74157;
-  letter-spacing: -1.2px;
+  font-size: 1.5em;
+  font-family: Mada, sans-serif;
+  letter-spacing: -1.5px;
   padding: 0 20px;
   color: #BB0A0A;
   @media (min-width: 720px) {

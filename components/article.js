@@ -127,11 +127,11 @@ const Content = styled.div`
   }
 `
 const TitleArticle = styled.div`
-  font-family: font74157;
-  letter-spacing: -0.8px;
-  font-size: 1.6em;
+  font-family: Mada, sans-serif;
+  letter-spacing: -1.5px;
+  font-size: 1.55em;
   @media (min-width: 720px) {
-    font-size: 2em;
+    font-size: 2.1em;
   }
 `
 const Author = styled.div`
