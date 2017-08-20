@@ -167,10 +167,10 @@ const Title = styled.h2`
   min-height: ${props => props.minHeight};
   margin: 0;
   font-family: Mada, sans-serif;
-  letter-spacing: -1.4px;
-  font-size: 1.45em;
-  line-height: 1.15;
+  letter-spacing: -1.2px;
+  font-size: 1.5em;
+  line-height: 1.2;
   @media (min-width: 480px){
-    font-size: 1.55em;
+    font-size: 1.6em;
   }
 `

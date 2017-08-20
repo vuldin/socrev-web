@@ -25,7 +25,6 @@ export default class MyDocument extends Document {
           <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
           <style>{`
             /*@import url(https://fonts.googleapis.com/css?family=Lora:400);
-            @import url(https://fonts.googleapis.com/css?family=PT+Sans);
             @import url(https://fonts.googleapis.com/css?family=Oswald:600);
             @import url(https://fonts.googleapis.com/css?family=Lato:700);
             @import url(https://fonts.googleapis.com/css?family=Biryani:700);
@@ -36,6 +35,7 @@ export default class MyDocument extends Document {
             @import url(https://www.fontify.me/wf/f48a579528427d3e4fa5aff81b09f0dd);*/
 
             @import url(https://fonts.googleapis.com/css?family=Mada:700);
+            @import url(https://fonts.googleapis.com/css?family=PT+Sans);
 
             body {
               margin: 0;
