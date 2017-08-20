@@ -65,7 +65,7 @@ const Feature = styled.div`
   height: 75vh;
   */
   width: 100vw;
-  height: 50vw;
+  height: 47vw;
   margin-bottom: ${contentMargin}px;
   background: ${props => {
     return `url(${props.image})`
@@ -82,15 +82,16 @@ const Feature = styled.div`
     0px 0px 10px black;
 `
 const Words = styled.div`
-  padding: 50px;
+  padding: 4vw;
   font-size: 1.1em;
 `
 const Title = styled.div`
   font-weight: bold;
   font-family: Mada, sans-serif;
-  letter-spacing: -1.7px;
+  letter-spacing: -1.5px;
   margin-bottom: 20px;
   font-size: 2.4em;
+  line-height: 1.2;
 `
 const A = styled.a`
   text-decoration: none;

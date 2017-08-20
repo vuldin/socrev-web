@@ -131,8 +131,9 @@ const TitleArticle = styled.div`
   letter-spacing: -1.5px;
   font-size: 1.55em;
   @media (min-width: 720px) {
-    font-size: 2.1em;
+    font-size: 2.2em;
   }
+  line-height: 1.2;
 `
 const Author = styled.div`
   padding-top: 10px;

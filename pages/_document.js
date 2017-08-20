@@ -39,7 +39,7 @@ export default class MyDocument extends Document {
 
             body {
               margin: 0;
-              font-size: 21px;
+              font-size: 20px;
               font-family: PT Sans, sans-serif;
               letter-spacing: -0.3px;
               background: #fafafa;
