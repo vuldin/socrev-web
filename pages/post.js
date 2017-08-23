@@ -93,7 +93,7 @@ export default class extends React.Component {
             },
             {
               property: 'article:author',
-              content: 'https://www.facebook.com/socialistrevolutionusa/'
+              content: 'https://www.facebook.com/socialistrevolutionimt/'
             },
             {
               property: 'twitter:card',
