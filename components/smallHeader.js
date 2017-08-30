@@ -140,19 +140,17 @@ export default class extends React.Component {
                 if (c.name === 'Uncategorized') result = <span key={i} />
                 return result
               })}
-            </Categories>
-            <OtherLinks>
-              <div>
-                <Link prefetch route='/join-the-imt' passHref>
-                  <A style={{ marginTop: '10px' }}>Join</A>
-                </Link>
-              </div>
               <div>
                 <Link prefetch route='/our-program' passHref>
                   <A style={{ marginTop: '10px' }}>Our Program</A>
                 </Link>
               </div>
-            </OtherLinks>
+              <div>
+                <Link prefetch route='/join-the-imt' passHref>
+                  <A style={{ marginTop: '10px' }}>Join Us</A>
+                </Link>
+              </div>
+            </Categories>
           </MenuWrapper>
         </Menu>
       </Header>
@@ -166,6 +164,7 @@ const Categories = styled.div`
   display: flex;
   flex-flow: column;
   flex: 1 0 auto;
+  margin-top: 10px;
 `
 const OtherLinks = styled.div`
   flex: 1 0 auto;
@@ -178,8 +177,9 @@ const MenuWrapper = styled.div`
   flex-flow: row wrap;
   margin-bottom: 10px;
   @media (min-width: 600px) {
-    font-size: 1.5em;
+    font-size: 1.3em;
   }
+  line-height: 1.3;
 `
 const Menu = styled.div`
   ${props => {
