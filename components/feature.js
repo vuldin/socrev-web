@@ -23,7 +23,7 @@ export default class extends React.Component {
       if (acf.imt_excerpt !== undefined) excerpt = acf.imt_excerpt
     }
     return (
-      <MediaQuery query='(min-width: 700px)'>
+        <MediaQuery query='(min-width: 700px)'>
         {matches => {
           let result = <Excerpt post={this.props.post} />
           if (matches)

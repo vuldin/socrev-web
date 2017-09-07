@@ -58,6 +58,8 @@ export default class MyDocument extends Document {
               height: auto;
               max-width: 100vw;
               vertical-align: middle;
+              /* margin: 0 auto;
+              display: block;*/
               width: 100%;
               padding-bottom: 30px;
             }
@@ -70,6 +72,14 @@ export default class MyDocument extends Document {
             h2, h4 {
               margin: 50px 0 0 0;
             }
+            /* a {
+              color: #b00000;
+              text-decoration: none;
+            }
+
+            a:hover {
+              color: #4c2c2c;
+            } */
           `}</style>
           {styleTags}
         </Head>

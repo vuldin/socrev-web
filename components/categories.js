@@ -80,6 +80,9 @@ const A = styled.a`
   text-decoration: none;
   cursor: pointer;
   color: inherit;
+  /*&:hover {
+    color: #a90000;
+  }*/
 `
 const Space = styled.div`
   margin: 0 10px;

@@ -15,6 +15,7 @@ const fshare = `https://www.facebook.com/socialistrevolutionimt`
 const tshare = `${tFollowLink}?original_referer=${encodeURI(
   site
 )}&region=follow_link&screen_name=${twitterHandle}&tw_p=followbutton`
+const instaFollow = `https://www.instagram.com/socialistrev/`
 
 export default class extends React.Component {
   state = {
@@ -76,11 +77,6 @@ export default class extends React.Component {
             <DisappearingA
               target='_blank'
               href='https://wellred.org/collections/donate/products/donate-1'
-              style={{
-                textDecoration: 'none',
-                cursor: 'pointer',
-                color: 'inherit'
-              }}
             >
               Donate
             </DisappearingA>
@@ -89,7 +85,7 @@ export default class extends React.Component {
               <FontAwesome
                 name='twitter'
                 size='2x'
-                style={{ paddingLeft: '10px' }}
+                style={{ paddingLeft: '0px' }}
               />
             </A>
             <A href={fshare} target='_blank'>
@@ -99,6 +95,13 @@ export default class extends React.Component {
                 style={{ paddingLeft: '5px' }}
               />
             </A>
+            <DisappearingA2 href={instaFollow} target='_blank'>
+              <FontAwesome
+                name='instagram'
+                size='2x'
+                style={{ paddingLeft: '8px' }}
+              />
+            </DisappearingA2>
           </Interactions>
         </Right>
         <Menu
@@ -129,7 +132,12 @@ export default class extends React.Component {
           </Left>
           <MenuWrapper>
             <Categories>
-              {cats.map((c, i) => {
+              <div>
+                <Link prefetch route='/'>
+                  <A style={{ marginTop: '10px'}}>Home</A>
+                </Link>
+              </div>
+                {cats.map((c, i) => {
                 let result = (
                   <div key={i}>
                     <Link prefetch route={`/find/${c.slug}`} passHref key={i}>
@@ -180,6 +188,7 @@ const MenuWrapper = styled.div`
     font-size: 1.3em;
   }
   line-height: 1.3;
+ // margin-top: 1.5vw;
 `
 const Menu = styled.div`
   ${props => {
@@ -203,6 +212,11 @@ const Menu = styled.div`
   background: rgba(255,255,255,0.97);
   box-shadow: 0 0 3rem rgba(0,0,0,0.25); left: 0;
   transition: opacity 250ms ease-in-out;
+  /*width: 260px;
+  @media (min-width: 600px) {
+    width: 330px;
+  }
+  padding-bottom: 1.5vw;*/
 `
 const Header = styled.header`
   @import url(https://fonts.googleapis.com/css?family=Titillium+Web);
@@ -240,6 +254,9 @@ const A = styled.a`
   text-decoration: none;
   cursor: pointer;
   color: inherit;
+ /* &:hover {
+    color: #600000;
+  }*/
 `
 const MenuSeparator = styled.div`
   margin-left: 10px;
@@ -267,6 +284,21 @@ const DisappearingA = styled.a`
   @media (min-width: 900px) {
     display: inherit;
   }
+  /*&:hover {
+    color: #600000;
+  }*/
+`
+const DisappearingA2 = styled.a`
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  display: none;
+  @media (min-width: 550px) {
+    display: inherit;
+  }
+  /*&:hover {
+    color: #600000;
+  }*/
 `
 const DisappearingDiv = styled.div`
   display: none;

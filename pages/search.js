@@ -199,4 +199,8 @@ const Button = styled.a`
   color: black;
   border: 2px solid #5a5a5a;
   cursor: pointer;
+  /* &:hover {
+    color: #600000;
+    border-color: #600000;
+  } */
 `

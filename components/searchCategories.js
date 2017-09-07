@@ -89,6 +89,9 @@ const A = styled.a`
   cursor: pointer;
   color: inherit;
   opacity: ${props => (props.selected ? 1 : 0.5)};
+/*  &:hover {
+    color: #600000;
+  }*/
 `
 const Space = styled.div`
   width: 20px;

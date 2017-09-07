@@ -47,53 +47,48 @@ export default () =>
       </BannerItem>
       */}
       <BannerItem>
-        <a
+        <A
           target='_blank'
           href='https://www.marxistbooks.com/products/subscription-to-socialist-revolution-magazine'
-          style={{
-            textDecoration: 'none',
-            cursor: 'pointer',
-            color: 'inherit'
-          }}
         >
           <div>Subscribe</div>
           <Icons>
             <FontAwesome name='newspaper-o' size='2x' />
           </Icons>
-        </a>
+        </A>
       </BannerItem>
       <BannerItem>
-        <a
+        <A
           target='_blank'
           href='https://wellred.org/collections/donate/products/donate-1'
-          style={{
-            textDecoration: 'none',
-            cursor: 'pointer',
-            color: 'inherit'
-          }}
         >
           <div>Donate</div>
           <Icons>
             <FontAwesome name='handshake-o' size='2x' />
           </Icons>
-        </a>
+        </A>
       </BannerItem>
       <BannerItem>
         <Link prefetch route='/join-the-imt'>
-          <a
-            style={{
-              textDecoration: 'none',
-              cursor: 'pointer',
-              color: 'inherit'
-            }}
-          >
+          <A>
             <div>Join</div>
             <Icons>
               <FontAwesome name='users' size='2x' />
             </Icons>
-          </a>
+          </A>
         </Link>
       </BannerItem>
+      <DisappearingBannerItem>
+        <A
+          target='_blank'
+          href='https://instagram.com/socialistrev'
+        >
+          <div>Follow</div>
+          <Icons>
+            <FontAwesome name='instagram' size='2x' />
+          </Icons>
+        </A>
+      </DisappearingBannerItem>
     </BannerItems>
   </Banner>
 
@@ -115,7 +110,7 @@ const BannerItems = styled.div`
   grid-template-columns: 1fr;
   justify-items: center;
   @media (min-width: 575px) {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 `
 const BannerItem = styled.div`
@@ -125,6 +120,24 @@ const BannerItem = styled.div`
   flex-flow: column;
   align-items: center;
 `
+const DisappearingBannerItem = styled.div`
+  font-size: .8em;
+  margin: 20px 0;
+  flex-flow: column;
+  align-items: center;
+  display: none;
+  @media (min-width: 575px) {
+    display: flex;
+  }
+`
 const Icons = styled.div`
   text-align: center;
+`
+const A = styled.a`
+  /*&:hover {
+    color: #600000;
+  } */
+  text-decoration: none;
+  cursor: pointer;
+  color: inherit;
 `
