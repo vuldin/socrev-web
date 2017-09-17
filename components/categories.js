@@ -33,7 +33,7 @@ export default ({ cats }) => {
             let spacer = <div />
             if (i !== 0) spacer = <Space>/</Space>
             let result = (
-              <div key={i}>
+              <div key={i} style={{ display: 'flex' }}>
                 {spacer}
                 <Link
                   key={i}
