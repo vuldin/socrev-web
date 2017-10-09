@@ -16,7 +16,7 @@ export default ({ post }) => {
   article.isSticky = post.sticky
   article.slug = post.slug
   article.categories = post.categories
-  let { title, excerpt, content, featured_media } = post
+  let { title, excerpt, content, featured_media, date } = post
   let { source_url } = featured_media
   article.title = htmlToReactParser.parse(title.rendered)
   let author = 'IMT member'
@@ -37,7 +37,9 @@ export default ({ post }) => {
       }
     }
     if (acf.imt_excerpt !== undefined) excerpt = acf.imt_excerpt
+    if (acf.imt_date !== undefined) date = acf.imt_date
   }
+  article.date = date
   article.author = author
   article.excerpt = excerpt
   content = htmlToReactParser.parse(content.rendered)
@@ -84,6 +86,7 @@ export default ({ post }) => {
           <TitleArticle>{article.title}</TitleArticle>
           <Categories cats={article.categories} />
           <Author>{article.author}</Author>
+            <Date>{formatDateString(article.date)}</Date>
           <Excerpt>
             {excerpt}
           </Excerpt>
@@ -99,6 +102,32 @@ export default ({ post }) => {
       </FixedSide>
     </div>
   )
+}
+
+function formatDateString(dateString) {
+    let pieces = new Array(3);
+    if (dateString.length < 10) {
+      pieces = [dateString.substring(0,4),dateString.substring(4,6),dateString.substring(6,8)]
+    }
+    else {
+      let date = dateString.substring(0, 10)
+      pieces = date.split('-')
+    }
+    let monthToNumber = {
+        '01': 'January',
+        '02': 'February',
+        '03': 'March',
+        '04': 'April',
+        '05': 'May',
+        '06': 'June',
+        '07': 'July',
+        '08': 'August',
+        '09': 'September',
+        '10': 'October',
+        '11': 'November',
+        '12': 'December'
+    };
+    return monthToNumber[pieces[1]] + ' ' + pieces[2] + ', ' + pieces[0];
 }
 
 const Padding = styled.div`
@@ -156,4 +185,8 @@ const ResponsivePlayer = styled(ReactPlayer)`
     width: 950px !important;
     height: 534px !important;
   }
+`
+
+const Date = styled.div`
+  line-height: 2;  
 `

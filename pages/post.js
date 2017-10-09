@@ -35,6 +35,7 @@ export default class extends React.Component {
   render () {
     const { post, cats } = this.props
     const title = htmlToReactParser.parse(post.title.rendered)
+    const date = htmlToReactParser.parse(post.date.rendered)
     let excerpt = post.excerpt.rendered
     const acf = post.acf
     if (acf !== false) {
@@ -78,6 +79,10 @@ export default class extends React.Component {
             {
               property: 'og:url',
               content: `${this.store.site}/${post.slug}`
+            },
+            {
+              property: 'og:date',
+              content: `${date}`
             },
             {
               property: 'twitter:title',

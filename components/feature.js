@@ -65,7 +65,7 @@ const Feature = styled.div`
   height: 75vh;
   */
   width: 100vw;
-  height: 47vw;
+  height: 45vw;
   margin-bottom: ${contentMargin}px;
   background: ${props => {
     return `url(${props.image})`
