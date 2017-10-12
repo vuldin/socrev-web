@@ -24,16 +24,6 @@ export default class MyDocument extends Document {
           <script src='https://use.fontawesome.com/62d036d8b5.js' />
           <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
           <style>{`
-            /*@import url(https://fonts.googleapis.com/css?family=Lora:400);
-            @import url(https://fonts.googleapis.com/css?family=Oswald:600);
-            @import url(https://fonts.googleapis.com/css?family=Lato:700);
-            @import url(https://fonts.googleapis.com/css?family=Biryani:700);
-            @import url(https://fonts.googleapis.com/css?family=Open+Sans:800);
-            @import url(https://fonts.googleapis.com/css?family=Martel+Sans:900);
-            @import url(https://fonts.googleapis.com/css?family=Nobile:700);
-            @import url(https://www.fontify.me/wf/ce600e451ccfc29f6b3b5a4d08b2f7aa);
-            @import url(https://www.fontify.me/wf/f48a579528427d3e4fa5aff81b09f0dd);*/
-
             @import url(https://fonts.googleapis.com/css?family=Mada:700);
             @import url(https://fonts.googleapis.com/css?family=PT+Sans);
 

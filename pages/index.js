@@ -9,8 +9,23 @@ import Excerpt from '../components/excerpt'
 import Banner from '../components/banner'
 import { Provider } from 'mobx-react'
 import { initStore } from '../store'
+import ReactGA from 'react-ga';
+
+export const initGA = () => {
+  //console.log('GA init')
+  ReactGA.initialize('UA-108015923-1')
+}
+export const logPageView = () => {
+  ReactGA.set({ page: window.location.pathname })
+  ReactGA.pageview(window.location.pathname)
+}
 
 export default class extends React.Component {
+  componentDidMount () {
+    initGA()
+    logPageView()
+  }
+
   static async getInitialProps ({ req }) {
     // eslint-disable-next-line no-undef
 

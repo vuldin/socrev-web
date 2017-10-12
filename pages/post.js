@@ -5,10 +5,24 @@ import Layout from '../components/layout'
 import Article from '../components/article'
 import { Provider } from 'mobx-react'
 import { initStore } from '../store'
+import ReactGA from 'react-ga';
+
+export const initGA = () => {
+  //console.log('GA init')
+  ReactGA.initialize('UA-108015923-1')
+}
+export const logPageView = () => {
+  ReactGA.set({ page: window.location.pathname })
+  ReactGA.pageview(window.location.pathname)
+}
 
 const htmlToReactParser = new Parser()
 
 export default class extends React.Component {
+    componentDidMount () {
+        initGA()
+        logPageView()
+    }
   static async getInitialProps ({ req, query }) {
     const isServer = !!req
     const store = initStore(isServer)
