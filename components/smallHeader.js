@@ -158,6 +158,15 @@ export default class extends React.Component {
                   <A style={{ marginTop: '10px' }}>Join Us</A>
                 </Link>
               </div>
+              <div>
+                <A
+                  style={{ marginTop: '10px' }}
+                  target='_blank'
+                  href='https://marxistbooks.com'
+                >
+                  MarxistBooks.com
+                </A>
+              </div>
             </Categories>
           </MenuWrapper>
         </Menu>
