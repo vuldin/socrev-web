@@ -37,7 +37,7 @@ export default ({ post }) => {
       }
     }
     if (acf.imt_excerpt !== undefined) excerpt = acf.imt_excerpt
-    if (acf.imt_date !== undefined) date = acf.imt_date
+    if (acf.imt_date !== undefined && acf.imt_date !== "") date = acf.imt_date
   }
   article.date = date
   article.author = author
@@ -126,8 +126,9 @@ function formatDateString(dateString) {
         '10': 'October',
         '11': 'November',
         '12': 'December'
-    };
-    return monthToNumber[pieces[1]] + ' ' + pieces[2] + ', ' + pieces[0];
+    }
+    if (pieces[2][0] == '0') pieces[2] = pieces[2][1]
+    return monthToNumber[pieces[1]] + ' ' + pieces[2] + ', ' + pieces[0]
 }
 
 const Padding = styled.div`
