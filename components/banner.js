@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import FontAwesome from 'react-fontawesome'
 import { Link } from '../routes'
+import ReactGA from 'react-ga'
 
 const twitterHandle = 'usimt'
 const tFollowLink = `https://twitter.com/intent/follow`
@@ -8,8 +9,16 @@ const site = 'https://socialistrevolution.org'
 const flink = `https://www.facebook.com/sharer/sharer.php?u=`
 const glink = 'https://plus.google.com/share?url='
 
+function handleClick(label) {
+    ReactGA.event({
+        category: 'Banner',
+        action: 'Clicked Link',
+        label: label
+    })
+}
+
 export default () =>
-  <Banner>
+    <Banner>
     <div style={{ paddingTop: '20px', textAlign: 'center' }}>
       {`Support the IMT today. Help build for the revolution!`}
     </div>
@@ -48,6 +57,7 @@ export default () =>
       */}
       <BannerItem>
         <A
+          onClick={()=>{handleClick('Subscribe')}}
           target='_blank'
           href='https://www.marxistbooks.com/products/subscription-to-socialist-revolution-magazine'
         >
@@ -59,6 +69,7 @@ export default () =>
       </BannerItem>
       <BannerItem>
         <A
+          onClick={()=>{handleClick('Donate')}}
           target='_blank'
           href='https://wellred.org/collections/donate/products/donate-1'
         >
@@ -68,7 +79,7 @@ export default () =>
           </Icons>
         </A>
       </BannerItem>
-      <BannerItem>
+      <BannerItem onClick={()=>{handleClick('Join')}}>
         <Link prefetch route='/join-the-imt'>
           <A>
             <div>Join</div>
@@ -80,6 +91,7 @@ export default () =>
       </BannerItem>
       <DisappearingBannerItem>
         <A
+          onClick={()=>{handleClick('Instagram')}}
           target='_blank'
           href='https://instagram.com/socialistrev'
         >

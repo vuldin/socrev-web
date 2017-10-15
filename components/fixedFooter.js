@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import FontAwesome from 'react-fontawesome'
+import ReactGA from 'react-ga'
 
 const twitterHandle = 'usimt'
 const site = 'https://socialistrevolution.org'
@@ -8,10 +9,20 @@ const tShareLink = `https://twitter.com/intent/tweet`
 const fShareLink = `https://www.facebook.com/sharer/sharer.php?u=`
 const gShareLink = 'https://plus.google.com/share?url='
 
+
+function handleClick(label) {
+    ReactGA.event({
+        category: 'Social Media Footer',
+        action: 'Clicked Link',
+        label: label
+    })
+}
+
 export default ({ article }) =>
   <FixedFooter className='article-fixed-footer'>
     <a
       target='_blank'
+      onClick={()=>{handleClick('Twitter Share')}}
       href={`${tShareLink}?original_referer=${encodeURI(
         `${site}/${article.slug}`
       )}&text=${article.excerpt}&url=${encodeURI(
@@ -27,6 +38,7 @@ export default ({ article }) =>
     </a>
     <a
       target='_blank'
+      onClick={()=>{handleClick('Google+ Share')}}
       href={`${gShareLink}${site}/${article.slug}`}
       style={{
         textDecoration: 'none',
@@ -38,6 +50,7 @@ export default ({ article }) =>
     </a>
     <a
       target='_blank'
+      onClick={()=>{handleClick('Facebook Share')}}
       href={`${fShareLink}${site}/${article.slug}`}
       style={{
         textDecoration: 'none',

@@ -1,5 +1,6 @@
 import FontAwesome from 'react-fontawesome'
 import styled from 'styled-components'
+import ReactGA from 'react-ga'
 
 const twitterHandle = 'usimt'
 const site = 'https://socialistrevolution.org'
@@ -14,6 +15,14 @@ const tShareLink = `https://twitter.com/intent/tweet`
 const fShareLink = `https://www.facebook.com/sharer/sharer.php?u=`
 const gShareLink = 'https://plus.google.com/share?url='
 
+function handleClick(label) {
+    ReactGA.event({
+        category: 'Social Media Sidetab',
+        action: 'Clicked Link',
+        label: label
+    })
+}
+
 export default ({ post }) =>
   <FixedInteractionTools>
     <div>Share</div>
@@ -26,6 +35,7 @@ export default ({ post }) =>
     >
       <a
         target='_blank'
+        onClick={()=>{handleClick('Twitter Share')}}
         href={`${tShareLink}?original_referer=${encodeURI(
           `${site}/${post.slug}`
         )}&text=${post.excerpt.rendered !== undefined
@@ -47,6 +57,7 @@ export default ({ post }) =>
       </a>
       <a
         target='_blank'
+        onClick={()=>{handleClick('Google+ Share')}}
         href={`${gShareLink}${encodeURI(`${site}/${post.slug}`)}`}
         style={{
           textDecoration: 'none',
@@ -62,6 +73,7 @@ export default ({ post }) =>
       </a>
       <a
         target='_blank'
+        onClick={()=>{handleClick('Facebook Share')}}
         href={`${fShareLink}${site}/${post.slug}`}
         style={{
           textDecoration: 'none',

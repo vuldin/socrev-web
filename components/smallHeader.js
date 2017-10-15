@@ -1,6 +1,7 @@
 import { Link } from '../routes'
 import styled from 'styled-components'
 import FontAwesome from 'react-fontawesome'
+import ReactGA from 'react-ga'
 
 const logoFile = 'newsrlogo-3.svg'
 const headerColor = 'white'
@@ -18,6 +19,13 @@ const tshare = `${tFollowLink}?original_referer=${encodeURI(
 const instaFollow = `https://www.instagram.com/socialistrev/`
 
 export default class extends React.Component {
+  handleClick(label) {
+    ReactGA.event({
+      category: 'Header',
+      action: 'Clicked Link',
+      label: label
+    })
+  }
   state = {
     displayMenu: false
   }
@@ -33,6 +41,7 @@ export default class extends React.Component {
                 let menu = this.refs.menu
                 //menu.props.display = !menu.props.display
                 this.setState({ displayMenu: !this.state.displayMenu })
+                this.handleClick('Menu Icon')
               }}
             >
               <FontAwesome
@@ -41,16 +50,20 @@ export default class extends React.Component {
                 style={{ paddingRight: '10px' }}
               />
             </A>
-            <Link prefetch route='/join-the-imt' passHref>
-              <DisappearingA>Join</DisappearingA>
-            </Link>
+            <div onClick={()=>{this.handleClick('Join')}}>
+              <Link prefetch route='/join-the-imt' passHref >
+                <DisappearingA>Join</DisappearingA>
+             </Link>
+            </div>
             <Separator />
-            <Link prefetch route='/our-program' passHref>
-              <DisappearingA>Our Program</DisappearingA>
-            </Link>
+            <div onClick={()=>{this.handleClick('Program')}}>
+              <Link prefetch route='/our-program' passHref>
+                <DisappearingA>Our Program</DisappearingA>
+              </Link>
+            </div>
           </Actions>
         </Left>
-        <LogoWrapper>
+        <LogoWrapper onClick={()=>{this.handleClick('Logo Index')}}>
           <Link prefetch route='/'>
             <a style={{ width: '100%' }}>
               <InnerLogoWrapper>
@@ -77,25 +90,26 @@ export default class extends React.Component {
             <DisappearingA
               target='_blank'
               href='https://wellred.org/collections/donate/products/donate-1'
+              onClick={()=>{this.handleClick('Donate')}}
             >
               Donate
             </DisappearingA>
             <Separator />
-            <A href={tshare} target='_blank'>
+            <A href={tshare} target='_blank' onClick={()=>{this.handleClick('Twitter')}}>
               <FontAwesome
                 name='twitter'
                 size='2x'
                 style={{ paddingLeft: '0px' }}
               />
             </A>
-            <A href={fshare} target='_blank'>
+            <A href={fshare} target='_blank' onClick={()=>{this.handleClick('Facebook')}}>
               <FontAwesome
                 name='facebook'
                 size='2x'
                 style={{ paddingLeft: '5px' }}
               />
             </A>
-            <DisappearingA2 href={instaFollow} target='_blank'>
+            <DisappearingA2 href={instaFollow} target='_blank' onClick={()=>{this.handleClick('Instagram')}}>
               <FontAwesome
                 name='instagram'
                 size='2x'
@@ -108,7 +122,6 @@ export default class extends React.Component {
           ref='menu'
           show={this.state.displayMenu}
           onClick={() => {
-            //console.log('menu click')
             this.setState({ displayMenu: !this.state.displayMenu })
           }}
         >
@@ -120,6 +133,7 @@ export default class extends React.Component {
                   let menu = this.refs.menu
                   //menu.props.display = !menu.props.display
                   this.setState({ displayMenu: !this.state.displayMenu })
+                  this.handleClick('Menu Icon')
                 }}
               >
                 <FontAwesome
@@ -132,14 +146,14 @@ export default class extends React.Component {
           </Left>
           <MenuWrapper>
             <Categories>
-              <div>
+              <div onClick={()=>{this.handleClick('Menu Index')}}>
                 <Link prefetch route='/'>
                   <A style={{ marginTop: '10px'}}>Home</A>
                 </Link>
               </div>
                 {cats.map((c, i) => {
                 let result = (
-                  <div key={i}>
+                  <div key={i} onClick={()=>{this.handleClick('Menu ' + c.name)}}>
                     <Link prefetch route={`/find/${c.slug}`} passHref key={i}>
                       <A style={{ marginTop: '10px' }}>{c.name}</A>
                     </Link>
@@ -148,17 +162,17 @@ export default class extends React.Component {
                 if (c.name === 'Uncategorized') result = <span key={i} />
                 return result
               })}
-              <div>
+              <div onClick={()=>{this.handleClick('Menu Program')}}>
                 <Link prefetch route='/our-program' passHref>
                   <A style={{ marginTop: '10px' }}>Our Program</A>
                 </Link>
               </div>
-              <div>
+              <div onClick={()=>{this.handleClick('Menu Join')}}>
                 <Link prefetch route='/join-the-imt' passHref>
                   <A style={{ marginTop: '10px' }}>Join Us</A>
                 </Link>
               </div>
-              <div>
+              <div onClick={()=>{this.handleClick('Menu Bookstore')}}>
                 <A
                   style={{ marginTop: '10px' }}
                   target='_blank'
