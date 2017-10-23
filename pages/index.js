@@ -9,7 +9,7 @@ import Excerpt from '../components/excerpt'
 import Banner from '../components/banner'
 import { Provider } from 'mobx-react'
 import { initStore } from '../store'
-import ReactGA from 'react-ga';
+import ReactGA from 'react-ga'
 
 export const initGA = () => {
   //console.log('GA init')
@@ -24,6 +24,13 @@ export default class extends React.Component {
   componentDidMount () {
     initGA()
     logPageView()
+  }
+  handleClick(label) {
+    ReactGA.event({
+      category: 'Index',
+      action: 'Clicked Link',
+      label: label
+    })
   }
 
   static async getInitialProps ({ req }) {
@@ -96,7 +103,10 @@ export default class extends React.Component {
           {this.pagesLeft > 0
             ? <Button
                 className='more-component'
-                onClick={() => this.draw()}
+                onClick={() => {
+                    this.handleClick('More Articles')
+                    this.draw()
+                }}
               >{`See more articles`}</Button>
             : <div />}
         </div>
