@@ -25,6 +25,13 @@ export default class extends React.Component {
     initGA()
     logPageView()
   }
+  handleClick(label) {
+    ReactGA.event({
+      category: 'Index',
+      action: 'Clicked Link',
+      label: label
+    })
+  }
 
   static async getInitialProps ({ req }) {
     // eslint-disable-next-line no-undef
@@ -74,25 +81,54 @@ export default class extends React.Component {
         <Banner />
         <PostWrapper>
           {posts.map((post, i) => {
-            let result = <Excerpt key={i} post={post} />
-            return result
+              if (i < 6){
+              let result = <Excerpt key={i} post={post} />
+
+            return result}
           })}
         </PostWrapper>
-        <A
-          href='https://www.bolshevik.info/the-chain-is-no-stronger-than-its-weakest-link.htm'
-          target='_blank'
-        >
-          <Quote>
-            <blockquote>
-              {`Your iron chain was poor and rusty enough as it is, and now it has several links made not even of wood, but of clay and paper.`}
-            </blockquote>
-            <em
-              style={{ fontSize: '.8em' }}
-            >{`Published in Pravda No. 67, June 9 (May 27), 1917`}</em>
-          </Quote>
-        </A>
+          <object
+          type='image/png'
+          data={`/static/banner3.png`}
+          style={{
+              pointerEvents: 'none',
+              display: 'block',
+              textAlign: 'center',
+              margin: 'auto',
+              width: '100%',
+              height: 'auto',
+              marginTop: '30px',
+              marginBottom: '20px'}}
+      />
+          <PostWrapper>
+              {posts.map((post, i) => {
+                  if (i >= 6){
+                      let result = <Excerpt key={i} post={post} />
+
+                      return result}
+              })}
+          </PostWrapper>
+        {/*<A*/}
+          {/*href='https://www.bolshevik.info/the-chain-is-no-stronger-than-its-weakest-link.htm'*/}
+          {/*target='_blank'*/}
+        {/*>*/}
+          {/*<object*/}
+            {/*type='image/png'*/}
+            {/*data={`/static/banner3.png`}*/}
+            {/*style={{*/}
+                {/*pointerEvents: 'none',*/}
+                {/*display: 'block',*/}
+                {/*textAlign: 'center',*/}
+                {/*margin: 'auto',*/}
+                {/*width: '100%',*/}
+                {/*height: 'auto',*/}
+                {/*marginTop: '20px',*/}
+                {/*marginBottom: '20px'*/}
+            {/*}}*/}
+        {/*/>*/}
+        {/*</A>*/}
         <div style={{ paddingTop: '20px' }} />
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <div style={{ display: 'flex', justifyContent: 'center' }} onClick={()=>{this.handleClick('More Articles')}}>
           {this.pagesLeft > 0
             ? <Button
                 className='more-component'

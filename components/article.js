@@ -60,6 +60,21 @@ export default ({ post }) => {
       content.push(<Banner key={`banner${content.length}`} />)
     } else {
       content.splice(bannerIndex, 0, <Banner key={`banner${content.length}`} />)
+        if (bannerIndex <= ps.length-3){
+        content.push(<object
+            type='image/png'
+            data={`/static/banner2.png`}
+            style={{
+                pointerEvents: 'none',
+                display: 'block',
+                textAlign: 'center',
+                margin: 'auto',
+                width: '100%',
+                height: 'auto',
+                marginTop: '40px',
+                marginBottom: '20px'
+            }}
+        />)}
     }
   }
   article.content = content
