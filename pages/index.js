@@ -87,19 +87,25 @@ export default class extends React.Component {
             return result}
           })}
         </PostWrapper>
+        <A
+          onClick={()=>{this.handleClick('Custom Banner')}}
+          href='https://www.marxistbooks.com/products/subscription-to-socialist-revolution-magazine'
+          target='_blank'
+         >
           <object
-          type='image/png'
-          data={`/static/banner3.png`}
-          style={{
-              pointerEvents: 'none',
-              display: 'block',
-              textAlign: 'center',
-              margin: 'auto',
-              width: '100%',
-              height: 'auto',
-              marginTop: '30px',
-              marginBottom: '20px'}}
-      />
+            type='image/png'
+            data={`/static/thin_banner.png`}
+            style={{
+                pointerEvents: 'none',
+                display: 'block',
+                textAlign: 'center',
+                margin: 'auto',
+                width: '100%',
+                height: 'auto',
+                marginTop: '30px',
+                marginBottom: '20px'}}
+        />
+        </A>
           <PostWrapper>
               {posts.map((post, i) => {
                   if (i >= 6){
