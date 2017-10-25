@@ -82,7 +82,6 @@ export default ({ post }) => {
                 style={{
                     pointerEvents: 'none',
                     display: 'block',
-                    textAlign: 'center',
                     margin: 'auto',
                     width: '100%',
                     height: 'auto',

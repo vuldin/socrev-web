@@ -9,7 +9,7 @@ import Excerpt from '../components/excerpt'
 import Banner from '../components/banner'
 import { Provider } from 'mobx-react'
 import { initStore } from '../store'
-import ReactGA from 'react-ga';
+import ReactGA from 'react-ga'
 
 export const initGA = () => {
   //console.log('GA init')
@@ -81,10 +81,10 @@ export default class extends React.Component {
         <Banner />
         <PostWrapper>
           {posts.map((post, i) => {
-              if (i < 6){
+            if (i < 6){
               let result = <Excerpt key={i} post={post} />
-
-            return result}
+              return result
+            }
           })}
         </PostWrapper>
         <A
@@ -98,13 +98,13 @@ export default class extends React.Component {
             style={{
                 pointerEvents: 'none',
                 display: 'block',
-                textAlign: 'center',
                 margin: 'auto',
                 width: '100%',
                 height: 'auto',
                 marginTop: '30px',
-                marginBottom: '20px'}}
-        />
+                marginBottom: '20px'
+            }}
+          />
         </A>
           <PostWrapper>
               {posts.map((post, i) => {
@@ -134,11 +134,14 @@ export default class extends React.Component {
         {/*/>*/}
         {/*</A>*/}
         <div style={{ paddingTop: '20px' }} />
-        <div style={{ display: 'flex', justifyContent: 'center' }} onClick={()=>{this.handleClick('More Articles')}}>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
           {this.pagesLeft > 0
             ? <Button
                 className='more-component'
-                onClick={() => this.draw()}
+                onClick={() => {
+                    this.handleClick('More Articles')
+                    this.draw()
+                }}
               >{`See more articles`}</Button>
             : <div />}
         </div>
