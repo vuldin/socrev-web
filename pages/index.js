@@ -114,25 +114,6 @@ export default class extends React.Component {
                       return result}
               })}
           </PostWrapper>
-        {/*<A*/}
-          {/*href='https://www.bolshevik.info/the-chain-is-no-stronger-than-its-weakest-link.htm'*/}
-          {/*target='_blank'*/}
-        {/*>*/}
-          {/*<object*/}
-            {/*type='image/png'*/}
-            {/*data={`/static/banner3.png`}*/}
-            {/*style={{*/}
-                {/*pointerEvents: 'none',*/}
-                {/*display: 'block',*/}
-                {/*textAlign: 'center',*/}
-                {/*margin: 'auto',*/}
-                {/*width: '100%',*/}
-                {/*height: 'auto',*/}
-                {/*marginTop: '20px',*/}
-                {/*marginBottom: '20px'*/}
-            {/*}}*/}
-        {/*/>*/}
-        {/*</A>*/}
         <div style={{ paddingTop: '20px' }} />
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           {this.pagesLeft > 0
