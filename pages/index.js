@@ -25,13 +25,12 @@ export default class extends React.Component {
   componentDidMount() {
     initGA()
     logPageView()
-    window.addEventListener('resize', this.getSize)
   }
   handleClick(label) {
     ReactGA.event({
       category: 'Index',
       action: 'Clicked Link',
-      label: label,
+      label: label
     })
   }
 
@@ -43,7 +42,7 @@ export default class extends React.Component {
 
     const [postsRes, cats] = await Promise.all([
       store.getIndexPosts(isServer, 1),
-      store.getCategories(),
+      store.getCategories()
     ])
     let posts = postsRes.posts
     const pagesLeft = postsRes.count.pagesLeft
@@ -61,7 +60,7 @@ export default class extends React.Component {
       pagesLeft: pagesLeft,
       page: page,
       feature: feature,
-      cats: cats,
+      cats: cats
     }
   }
   constructor(props) {
@@ -69,7 +68,6 @@ export default class extends React.Component {
     this.page = props.page
     this.pagesLeft = props.pagesLeft
     this.store = initStore(props.isServer, props.lastUpdate)
-    this.state = { size: 'small' }
   }
   createRefComponents = pagesLeft => {
     let results = []
@@ -77,14 +75,6 @@ export default class extends React.Component {
       results.push(<div key={i} ref={i} />)
     }
     return results
-  }
-  getSize = () => {
-    // 415, 720, 1150
-    let size = 'small'
-    const width = window.innerWidth
-    if (width > 415 && width <= 720) size = 'medium'
-    if (width > 720) size = 'large'
-    if (this.state.size !== size) this.setState({ size })
   }
   getNewContent = posts => {
     return (
@@ -98,7 +88,7 @@ export default class extends React.Component {
             }
           })}
         </PostWrapper>
-        <SubscriptionBanner size={this.state.size} />
+        <SubscriptionBanner location={'index'} />
         <PostWrapper>
           {posts.map((post, i) => {
             if (i >= 6) {

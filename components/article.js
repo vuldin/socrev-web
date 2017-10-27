@@ -5,20 +5,12 @@ import FixedFooter from './fixedFooter.js'
 import InteractionTool from './interactionTool'
 import styled from 'styled-components'
 import Categories from './categories'
-import ReactGA from 'react-ga'
+import SubscriptionBanner from '../components/banners/subscription'
 
 const htmlToReactParser = new Parser()
 
 const smallContentPaddingX = 20
 const noBannerArticles = ['join-the-imt'] // article slugs that don't need a banner
-
-function handleClick(label) {
-    ReactGA.event({
-        category: 'Article',
-        action: 'Clicked Link',
-        label: label
-    })
-}
 
 export default ({ post }) => {
   let article = {}
@@ -70,27 +62,8 @@ export default ({ post }) => {
     } else {
         content.splice(bannerIndex, 0, <Banner key={`banner${content.length}`} />)
         if (bannerIndex <= ps.length-3){
-        content.push(
-          <a
-            onClick={()=>{handleClick('Custom Banner')}}
-            href='https://www.marxistbooks.com/products/subscription-to-socialist-revolution-magazine'
-            target='_blank'
-          >
-            <object
-                type='image/png'
-                data={`/static/tablet_banner.png`}
-                style={{
-                    pointerEvents: 'none',
-                    display: 'block',
-                    margin: 'auto',
-                    width: '100%',
-                    height: 'auto',
-                    marginTop: '40px',
-                    marginBottom: '20px'
-                }}
-            />
-          </a>
-        )}
+          content.push(<SubscriptionBanner location={'article'} />)
+        }
     }
   }
   article.content = content
