@@ -7,6 +7,7 @@ import FontAwesome from 'react-fontawesome'
 import Feature from '../components/feature'
 import Excerpt from '../components/excerpt'
 import Banner from '../components/banner'
+import SubscriptionBanner from '../components/banners/subscription'
 import { Provider } from 'mobx-react'
 import { initStore } from '../store'
 import ReactGA from 'react-ga'
@@ -21,19 +22,20 @@ export const logPageView = () => {
 }
 
 export default class extends React.Component {
-  componentDidMount () {
+  componentDidMount() {
     initGA()
     logPageView()
+    window.addEventListener('resize', this.getSize)
   }
   handleClick(label) {
     ReactGA.event({
       category: 'Index',
       action: 'Clicked Link',
-      label: label
+      label: label,
     })
   }
 
-  static async getInitialProps ({ req }) {
+  static async getInitialProps({ req }) {
     // eslint-disable-next-line no-undef
 
     const isServer = !!req
@@ -41,7 +43,7 @@ export default class extends React.Component {
 
     const [postsRes, cats] = await Promise.all([
       store.getIndexPosts(isServer, 1),
-      store.getCategories()
+      store.getCategories(),
     ])
     let posts = postsRes.posts
     const pagesLeft = postsRes.count.pagesLeft
@@ -59,14 +61,15 @@ export default class extends React.Component {
       pagesLeft: pagesLeft,
       page: page,
       feature: feature,
-      cats: cats
+      cats: cats,
     }
   }
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.page = props.page
     this.pagesLeft = props.pagesLeft
     this.store = initStore(props.isServer, props.lastUpdate)
+    this.state = { size: 'small' }
   }
   createRefComponents = pagesLeft => {
     let results = []
@@ -75,56 +78,49 @@ export default class extends React.Component {
     }
     return results
   }
+  getSize = () => {
+    // 415, 720, 1150
+    let size = 'small'
+    const width = window.innerWidth
+    if (width > 415 && width <= 720) size = 'medium'
+    if (width > 720) size = 'large'
+    if (this.state.size !== size) this.setState({ size })
+  }
   getNewContent = posts => {
     return (
       <div>
         <Banner />
         <PostWrapper>
           {posts.map((post, i) => {
-            if (i < 6){
+            if (i < 6) {
               let result = <Excerpt key={i} post={post} />
               return result
             }
           })}
         </PostWrapper>
-        <A
-          onClick={()=>{this.handleClick('Custom Banner')}}
-          href='https://www.marxistbooks.com/products/subscription-to-socialist-revolution-magazine'
-          target='_blank'
-         >
-          <object
-            type='image/png'
-            data={`/static/thin_banner.png`}
-            style={{
-                pointerEvents: 'none',
-                display: 'block',
-                margin: 'auto',
-                width: '100%',
-                height: 'auto',
-                marginTop: '30px',
-                marginBottom: '20px'
-            }}
-          />
-        </A>
-          <PostWrapper>
-              {posts.map((post, i) => {
-                  if (i >= 6){
-                      let result = <Excerpt key={i} post={post} />
+        <SubscriptionBanner size={this.state.size} />
+        <PostWrapper>
+          {posts.map((post, i) => {
+            if (i >= 6) {
+              let result = <Excerpt key={i} post={post} />
 
-                      return result}
-              })}
-          </PostWrapper>
+              return result
+            }
+          })}
+        </PostWrapper>
         <div style={{ paddingTop: '20px' }} />
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-          {this.pagesLeft > 0
-            ? <Button
-                className='more-component'
-                onClick={() => {
-                    this.handleClick('More Articles')
-                    this.draw()
-                }}
-              >{`See more articles`}</Button>
-            : <div />}
+          {this.pagesLeft > 0 ? (
+            <Button
+              className="more-component"
+              onClick={() => {
+                this.handleClick('More Articles')
+                this.draw()
+              }}
+            >{`See more articles`}</Button>
+          ) : (
+            <div />
+          )}
         </div>
       </div>
     )
@@ -142,7 +138,7 @@ export default class extends React.Component {
     render(newJsx, this.refs[this.page])
   }
 
-  render () {
+  render() {
     const { feature, posts, cats } = this.props
     return (
       <Provider store={this.store}>
