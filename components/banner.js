@@ -59,7 +59,7 @@ export default () =>
         <A
           onClick={()=>{handleClick('Subscribe')}}
           target='_blank'
-          href='https://www.marxistbooks.com/products/subscription-to-socialist-revolution-magazine'
+          href='http://www.wellred.org/Subscribe-to-SR-Magazine'
         >
           <div>Subscribe</div>
           <Icons>
@@ -71,7 +71,7 @@ export default () =>
         <A
           onClick={()=>{handleClick('Donate')}}
           target='_blank'
-          href='https://wellred.org/collections/donate/products/donate-1'
+          href='http://www.wellred.org/donate'
         >
           <div>Donate</div>
           <Icons>

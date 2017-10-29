@@ -142,7 +142,6 @@ export default class extends React.Component {
   }
 }
 
-
 const PostWrapper = styled.div`
   /*
   margin: 20px 0 0 0;

@@ -89,7 +89,7 @@ export default class extends React.Component {
           <Interactions>
             <DisappearingA
               target='_blank'
-              href='https://wellred.org/collections/donate/products/donate-1'
+              href='http://www.wellred.org/donate'
               onClick={()=>{this.handleClick('Donate')}}
             >
               Donate

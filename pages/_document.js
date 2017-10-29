@@ -52,6 +52,7 @@ export default class MyDocument extends Document {
               display: block;*/
               width: 100%;
               padding-bottom: 30px;
+              padding-top: 10px;
             }
             p {
               margin: 20px 0 0 0;
