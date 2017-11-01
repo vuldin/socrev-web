@@ -71,7 +71,7 @@ export default ({ post }) => {
   if (source_url)
     media = (
       <figure>
-        <img src={source_url} />
+        <img src={source_url} style={{ marginTop: '-20px' }}/>
       </figure>
     )
   if (featured_media.video)

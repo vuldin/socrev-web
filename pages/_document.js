@@ -29,9 +29,10 @@ export default class MyDocument extends Document {
 
             body {
               margin: 0;
-              font-size: 20px;
+              font-size: 19.5px;
               font-family: PT Sans, sans-serif;
               letter-spacing: -0.3px;
+              line-height: 1.4;
               background: #fafafa;
             }
             * {
@@ -51,8 +52,8 @@ export default class MyDocument extends Document {
               /* margin: 0 auto;
               display: block;*/
               width: 100%;
-              padding-bottom: 30px;
-              padding-top: 10px;
+              padding-bottom: 20px;
+              padding-top: 20px;
             }
             p {
               margin: 20px 0 0 0;
@@ -62,6 +63,13 @@ export default class MyDocument extends Document {
             }
             h2, h4 {
               margin: 50px 0 0 0;
+            }
+            blockquote {
+              font-size: 18px;
+              color: #3a3a3a;
+              border-left: 5px #dddddd solid;
+              margin: 20px 0px 0px 0px;
+              padding: 0px 30px 15px 30px;
             }
             /* a {
               color: #b00000;
