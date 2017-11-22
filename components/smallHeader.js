@@ -50,11 +50,13 @@ export default class extends React.Component {
                 style={{ paddingRight: '10px' }}
               />
             </A>
-            <div onClick={()=>{this.handleClick('Join')}}>
-              <Link prefetch route='/join-the-imt' passHref >
-                <DisappearingA>Join</DisappearingA>
-             </Link>
-            </div>
+            <DisappearingA
+              onClick={()=>{this.handleClick('Join')}}
+              target='_blank'
+              href='https://wellred.org/'
+            >
+              Join
+            </DisappearingA>
             <Separator />
             <div onClick={()=>{this.handleClick('Program')}}>
               <Link prefetch route='/our-program' passHref>
@@ -89,7 +91,7 @@ export default class extends React.Component {
           <Interactions>
             <DisappearingA
               target='_blank'
-              href='http://www.wellred.org/donate'
+              href='https://wellred.org/donate'
               onClick={()=>{this.handleClick('Donate')}}
             >
               Donate
@@ -167,11 +169,15 @@ export default class extends React.Component {
                   <A style={{ marginTop: '10px' }}>Our Program</A>
                 </Link>
               </div>
-              <div onClick={()=>{this.handleClick('Menu Join')}}>
-                <Link prefetch route='/join-the-imt' passHref>
-                  <A style={{ marginTop: '10px' }}>Join Us</A>
-                </Link>
-              </div>
+              <div>
+              <A
+                onClick={()=>{this.handleClick('Menu Join')}}
+                style={{ marginTop: '10px' }}
+                target='_blank'
+                href='https://wellred.org/'
+              >
+                Join Us
+              </A></div>
               <div onClick={()=>{this.handleClick('Menu Bookstore')}}>
                 <A
                   style={{ marginTop: '10px' }}

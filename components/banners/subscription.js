@@ -26,7 +26,7 @@ export default ({ location }) => (
     onClick={() => {
       handleClick('Subscription Banner')
     }}
-    href="https://wellredimt.wildapricot.org/Subscribe-to-SR-Magazine"
+    href="https://wellred.org/Subscribe-to-SR-Magazine"
     target="_blank"
   >
     <MediaQuery query='(max-width: 500px)'>
