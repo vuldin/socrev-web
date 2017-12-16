@@ -7,6 +7,7 @@ import FontAwesome from 'react-fontawesome'
 import Feature from '../components/feature'
 import Excerpt from '../components/excerpt'
 import Banner from '../components/banner'
+import SubscriptionBanner from '../components/banners/subscription'
 import { Provider } from 'mobx-react'
 import { initStore } from '../store'
 import ReactGA from 'react-ga'
@@ -21,19 +22,27 @@ export const logPageView = () => {
 }
 
 export default class extends React.Component {
-  componentDidMount () {
+  componentDidMount() {
     initGA()
     logPageView()
+    window.addEventListener('resize', this.getSize)
   }
   handleClick(label) {
     ReactGA.event({
       category: 'Index',
       action: 'Clicked Link',
-      label: label
+      label: label,
+    })
+  }
+  handleClick(label) {
+    ReactGA.event({
+      category: 'Index',
+      action: 'Clicked Link',
+      label: label,
     })
   }
 
-  static async getInitialProps ({ req }) {
+  static async getInitialProps({ req }) {
     // eslint-disable-next-line no-undef
 
     const isServer = !!req
@@ -41,7 +50,7 @@ export default class extends React.Component {
 
     const [postsRes, cats] = await Promise.all([
       store.getIndexPosts(isServer, 1),
-      store.getCategories()
+      store.getCategories(),
     ])
     let posts = postsRes.posts
     const pagesLeft = postsRes.count.pagesLeft
@@ -59,14 +68,15 @@ export default class extends React.Component {
       pagesLeft: pagesLeft,
       page: page,
       feature: feature,
-      cats: cats
+      cats: cats,
     }
   }
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.page = props.page
     this.pagesLeft = props.pagesLeft
     this.store = initStore(props.isServer, props.lastUpdate)
+    this.state = { size: 'small' }
   }
   createRefComponents = pagesLeft => {
     let results = []
@@ -75,40 +85,49 @@ export default class extends React.Component {
     }
     return results
   }
+  getSize = () => {
+    // 415, 720, 1150
+    let size = 'small'
+    const width = window.innerWidth
+    if (width > 415 && width <= 720) size = 'medium'
+    if (width > 720) size = 'large'
+    if (this.state.size !== size) this.setState({ size })
+  }
   getNewContent = posts => {
     return (
       <div>
         <Banner />
         <PostWrapper>
           {posts.map((post, i) => {
-            let result = <Excerpt key={i} post={post} />
-            return result
+            if (i < 6) {
+              let result = <Excerpt key={i} post={post} />
+              return result
+            }
           })}
         </PostWrapper>
-        <A
-          href='https://www.bolshevik.info/the-chain-is-no-stronger-than-its-weakest-link.htm'
-          target='_blank'
-        >
-          <Quote>
-            <blockquote>
-              {`Your iron chain was poor and rusty enough as it is, and now it has several links made not even of wood, but of clay and paper.`}
-            </blockquote>
-            <em
-              style={{ fontSize: '.8em' }}
-            >{`Published in Pravda No. 67, June 9 (May 27), 1917`}</em>
-          </Quote>
-        </A>
+        <SubscriptionBanner size={this.state.size} />
+        <PostWrapper>
+          {posts.map((post, i) => {
+            if (i >= 6) {
+              let result = <Excerpt key={i} post={post} />
+
+              return result
+            }
+          })}
+        </PostWrapper>
         <div style={{ paddingTop: '20px' }} />
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-          {this.pagesLeft > 0
-            ? <Button
-                className='more-component'
-                onClick={() => {
-                    this.handleClick('More Articles')
-                    this.draw()
-                }}
-              >{`See more articles`}</Button>
-            : <div />}
+          {this.pagesLeft > 0 ? (
+            <Button
+              className="more-component"
+              onClick={() => {
+                this.handleClick('More Articles')
+                this.draw()
+              }}
+            >{`See more articles`}</Button>
+          ) : (
+            <div />
+          )}
         </div>
       </div>
     )
@@ -126,7 +145,7 @@ export default class extends React.Component {
     render(newJsx, this.refs[this.page])
   }
 
-  render () {
+  render() {
     const { feature, posts, cats } = this.props
     return (
       <Provider store={this.store}>

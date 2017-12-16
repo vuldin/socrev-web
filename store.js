@@ -4,7 +4,7 @@ import 'isomorphic-fetch'
 let store = null
 
 class Store {
-  constructor () {
+  constructor() {
     this.apiUrl = 'https://api.socialistrevolution.org'
     this.site = 'https://socialistrevolution.org'
   }
@@ -19,14 +19,14 @@ class Store {
     let url = `${this.apiUrl}/posts?status=publish&page=${page}`
     const [countRes, postsRes] = await Promise.all([
       fetch(`${url}&count=true`),
-      fetch(url)
+      fetch(url),
     ])
     const [count, posts] = await Promise.all([countRes.json(), postsRes.json()])
     count.pagesLeft = Math.ceil(count.postsLeft / 12)
     count.page = page
     let result = {
       posts: posts,
-      count: count
+      count: count,
     }
     return result
   }
@@ -48,7 +48,7 @@ class Store {
     //console.log(`url ${url}`)
     const [countRes, postsRes] = await Promise.all([
       fetch(`${url}&count=true`),
-      fetch(url)
+      fetch(url),
     ])
     const [count, posts] = await Promise.all([countRes.json(), postsRes.json()])
     count.pagesLeft = Math.ceil(count.postsLeft / 12)
@@ -56,13 +56,13 @@ class Store {
     //console.log(`getSearchPosts ${JSON.stringify(count)}`)
     let result = {
       posts: posts,
-      count: count
+      count: count,
     }
     return result
   }
 }
 
-export function initStore (isServer, lastUpdate = Date.now()) {
+export function initStore(isServer, lastUpdate = Date.now()) {
   if (isServer && typeof window === 'undefined') {
     return new Store(isServer, lastUpdate)
   } else {
