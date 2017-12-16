@@ -11,9 +11,9 @@ function handleClick(label) {
 }
 
 function getBannerName(size) {
-  let name = 'mobile_banner_xjc7ge'
-  if (size === 'medium') name = 'tablet_banner_lhkxlh'
-  if (size === 'large') name = 'thin_banner2_srbmcs'
+  let name = 'mobile_banner_ftwwvn'
+  if (size === 'medium') name = 'tablet_banner_sxvvvp'
+  if (size === 'large') name = 'thin_banner2_bxwg4b'
   return name
 }
 
