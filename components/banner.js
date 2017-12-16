@@ -59,7 +59,7 @@ export default () =>
         <A
           onClick={()=>{handleClick('Subscribe')}}
           target='_blank'
-          href='https://www.marxistbooks.com/products/subscription-to-socialist-revolution-magazine'
+          href='https://wellred.org/Subscribe-to-SR-Magazine'
         >
           <div>Subscribe</div>
           <Icons>
@@ -71,7 +71,7 @@ export default () =>
         <A
           onClick={()=>{handleClick('Donate')}}
           target='_blank'
-          href='https://wellred.org/collections/donate/products/donate-1'
+          href='https://wellred.org/donate'
         >
           <div>Donate</div>
           <Icons>
@@ -79,15 +79,17 @@ export default () =>
           </Icons>
         </A>
       </BannerItem>
-      <BannerItem onClick={()=>{handleClick('Join')}}>
-        <Link prefetch route='/join-the-imt'>
-          <A>
-            <div>Join</div>
-            <Icons>
-              <FontAwesome name='users' size='2x' />
-            </Icons>
-          </A>
-        </Link>
+      <BannerItem>
+        <A
+          onClick={()=>{handleClick('Join')}}
+          target='_blank'
+          href='https://wellred.org/'
+        >
+          <div>Join</div>
+          <Icons>
+            <FontAwesome name='users' size='2x' />
+          </Icons>
+        </A>
       </BannerItem>
       <DisappearingBannerItem>
         <A

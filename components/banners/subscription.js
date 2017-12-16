@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import ReactGA from 'react-ga'
 import { Image, Transformation } from 'cloudinary-react'
+import MediaQuery from 'react-responsive'
 
 function handleClick(label) {
   ReactGA.event({
@@ -17,23 +18,64 @@ function getBannerName(size) {
   return name
 }
 
-export default ({ size }) => (
+export default ({ location }) => (
   <A
     onClick={() => {
       handleClick('Subscription Banner')
     }}
-    href="https://www.marxistbooks.com/products/subscription-to-socialist-revolution-magazine"
+    href="https://wellred.org/Subscribe-to-SR-Magazine"
     target="_blank"
   >
-    <Image
-      cloudName="dj3o4xzd5"
-      publicId={getBannerName(size)}
-      className="cld-responsive"
-      responsive
-      secure
-    >
-      <Transformation crop="scale" dpr="auto" responsive_placeholder="blank" />
-    </Image>
+    <MediaQuery query="(max-width: 500px)">
+      <Image
+        style={{ marginTop: '40px', marginBottom: '-10px' }}
+        cloudName="dj3o4xzd5"
+        publicId={getBannerName(location)[0]}
+        className="cld-responsive"
+        responsive
+        secure
+      >
+        <Transformation
+          crop="scale"
+          dpr="auto"
+          responsive_placeholder="blank"
+        />
+      </Image>
+    </MediaQuery>
+    <MediaQuery query="(min-width: 500.01px)">
+      <MediaQuery query="(max-width: 719.99px)">
+        <Image
+          style={{ marginTop: '40px', marginBottom: '-10px' }}
+          cloudName="dj3o4xzd5"
+          publicId={getBannerName(location)[1]}
+          className="cld-responsive"
+          responsive
+          secure
+        >
+          <Transformation
+            crop="scale"
+            dpr="auto"
+            responsive_placeholder="blank"
+          />
+        </Image>
+      </MediaQuery>
+    </MediaQuery>
+    <MediaQuery query="(min-width: 720px)">
+      <Image
+        style={{ marginTop: '40px', marginBottom: '-10px' }}
+        cloudName="dj3o4xzd5"
+        publicId={getBannerName(location)[2]}
+        className="cld-responsive"
+        responsive
+        secure
+      >
+        <Transformation
+          crop="scale"
+          dpr="auto"
+          responsive_placeholder="blank"
+        />
+      </Image>
+    </MediaQuery>
   </A>
 )
 

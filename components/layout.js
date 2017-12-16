@@ -49,7 +49,7 @@ export default class extends React.Component {
   }
   render () {
     const {
-      title = 'IMT | US',
+      title = 'Socialist Revolution | IMT',
       meta = [
         {
           name: 'description',
@@ -75,7 +75,7 @@ export default class extends React.Component {
         },
         {
           property: 'og:title',
-          content: 'IMT | US'
+          content: 'Socialist Revolution | IMT'
         },
         {
           property: 'og:type',

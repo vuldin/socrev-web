@@ -58,7 +58,7 @@ export default class extends React.Component {
     return (
       <Provider store={this.store}>
         <Layout
-          title={`IMT | ${title}`}
+          title={`${title} | Socialist Revolution`}
           canonical={`${this.store.site}/${post.slug}`}
           cats={cats}
           meta={[
