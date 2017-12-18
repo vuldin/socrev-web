@@ -9,11 +9,21 @@ import Banner from '../components/banner'
 import SearchCategories from '../components/searchCategories'
 import { Provider } from 'mobx-react'
 import { initStore } from '../store'
-import ReactGA from 'react-ga';
+import ReactGA from 'react-ga'
+import {
+  InstantSearch,
+  SearchBox,
+  Hits,
+  Highlight,
+  Stats,
+  SortBy,
+  Pagination,
+} from 'react-instantsearch/dom'
+import Link from 'next/link'
 
 export const initGA = () => {
-    //console.log('GA init')
-    ReactGA.initialize('UA-108015923-1')
+  //console.log('GA init')
+  ReactGA.initialize('UA-108015923-1')
 }
 export const logPageView = () => {
   ReactGA.set({ page: window.location.pathname })
@@ -21,11 +31,11 @@ export const logPageView = () => {
 }
 
 export default class extends React.Component {
-    componentDidMount () {
-        initGA()
-        logPageView()
-    }
-  static async getInitialProps ({ query, req }) {
+  componentDidMount() {
+    initGA()
+    logPageView()
+  }
+  static async getInitialProps({ query, req }) {
     // eslint-disable-next-line no-undef
 
     const isServer = !!req
@@ -41,17 +51,13 @@ export default class extends React.Component {
     }
 
     const [postsRes, cats] = await Promise.all([
-      store.getSearchPosts(
-        isServer,
-        1,
-        childCatId !== undefined ? childCatId : parentCatId
-      ),
-      store.getCategories()
+      store.getPostsByPage(1),
+      store.getCategories(),
     ])
+    //const postsRes = await store.getPostsByPage(1)
     const posts = postsRes.posts
     const pagesLeft = postsRes.count.pagesLeft
     const page = postsRes.count.page
-    //console.log(`getInitialProps pagesLeft ${pagesLeft}`)
 
     return {
       lastUpdate: store.lastUpdate,
@@ -61,17 +67,17 @@ export default class extends React.Component {
       posts: posts,
       pagesLeft: pagesLeft,
       page: page,
-      cats: cats
+      cats: cats,
     }
   }
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.page = props.page
     this.pagesLeft = props.pagesLeft
     this.parentCatId = props.parentCatId
     this.childCatId = props.childCatId
     this.state = {
-      posts: props.posts
+      posts: props.posts,
     }
     this.store = initStore(props.isServer, props.lastUpdate)
   }
@@ -91,7 +97,7 @@ export default class extends React.Component {
     this.setState({ posts: posts })
   }
 
-  render () {
+  render() {
     const { cats } = this.props
     if (
       this.childCatId !== this.props.childCatId ||
@@ -113,8 +119,8 @@ export default class extends React.Component {
     const fillers = [
       <Banner />,
       <A
-        href='https://www.bolshevik.info/the-chain-is-no-stronger-than-its-weakest-link.htm'
-        target='_blank'
+        href="https://www.bolshevik.info/the-chain-is-no-stronger-than-its-weakest-link.htm"
+        target="_blank"
       >
         <Quote>
           <blockquote>
@@ -124,7 +130,7 @@ export default class extends React.Component {
             style={{ fontSize: '.8em' }}
           >{`Published in Pravda No. 67, June 9 (May 27), 1917`}</em>
         </Quote>
-      </A>
+      </A>,
     ]
     let children = postArrays.map((pa, i) => {
       const fillerIndex = i % fillers.length
@@ -140,31 +146,71 @@ export default class extends React.Component {
         </div>
       )
     })
+    const HitExcerpt = ({ hit }) => {
+      return (
+        <div
+          style={{ marginBottom: '10px', display: 'flex', flexFlow: 'column' }}
+        >
+          <Link href={`/${hit.slug}`}>
+            <a>
+              <Highlight attributeName="title" hit={hit} />
+            </a>
+          </Link>
+          <div style={{ color: 'grey' }}>
+            <Highlight attributeName="excerpt" hit={hit} />
+          </div>
+        </div>
+      )
+    }
     return (
       <Provider store={this.store}>
         <Layout cats={cats}>
-          <SearchCategories
-            cats={cats}
-            parentId={this.parentCatId}
-            childId={this.childCatId}
-          />
-          {children}
-          {this.pagesLeft
-            ? <div
-                key={`button${children.length + 1}`}
-                style={{ display: 'flex', justifyContent: 'center' }}
-              >
-                <Button
-                  className='more-component'
-                  onClick={() => this.draw()}
-                >{`See more articles`}</Button>
-              </div>
-            : <div key={`button${children.length + 1}`} />}
+          <InstantSearch
+            apiKey="93a6d17fa8b5146a0a816101d4e97f14"
+            appId="JXJDRPF1XP"
+            indexName="posts"
+          >
+            <SearchBox translations={{ placeholder: 'Search' }} />
+            <SearchCategories
+              cats={cats}
+              parentId={this.parentCatId}
+              childId={this.childCatId}
+            />
+            <Stats />
+            {/*
+            <SortBy
+              defaultRefinement="instant_search"
+              items={[
+                { value: 'instant_search', label: 'Most relevant' },
+                { value: 'instant_search_date_asc', label: 'Oldest' },
+                { value: 'instant_search_date_desc', label: 'Newest' },
+              ]}
+            />
+            */}
+            <Hits hitComponent={HitExcerpt} />
+            <Pagination showLast />
+          </InstantSearch>
         </Layout>
       </Provider>
     )
   }
 }
+/*
+            {children}
+            {this.pagesLeft ? (
+              <div
+                key={`button${children.length + 1}`}
+                style={{ display: 'flex', justifyContent: 'center' }}
+              >
+                <Button
+                  className="more-component"
+                  onClick={() => this.draw()}
+                >{`See more articles`}</Button>
+              </div>
+            ) : (
+              <div key={`button${children.length + 1}`} />
+            )}
+*/
 
 const PostWrapper = styled.div`
   /*

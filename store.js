@@ -5,7 +5,7 @@ let store = null
 
 class Store {
   constructor() {
-    this.apiUrl = 'https://api.socialistrevolution.org'
+    this.apiUrl = 'https://socrev-api-cmodjtynev.now.sh'
     this.site = 'https://socialistrevolution.org'
   }
 
@@ -31,21 +31,8 @@ class Store {
     return result
   }
 
-  getSearchPosts = async (isServer, page, cat) => {
-    //console.log(`getSearchPosts category: ${cat}`)
-    /*
-    if (!isServer && cat === undefined) {
-      let path = window.location.pathname
-      if (path.includes('/search/')) {
-        console.log(`client, grabbing cat from url ${path}`)
-        const segments = path.split('/')
-        cat = segments[segments.length - 1]
-      }
-    }
-    */
+  getPostsByPage = async page => {
     let url = `${this.apiUrl}/posts?status=publish&page=${page}`
-    if (cat) url = `${url}&category=${cat}`
-    //console.log(`url ${url}`)
     const [countRes, postsRes] = await Promise.all([
       fetch(`${url}&count=true`),
       fetch(url),
@@ -53,7 +40,6 @@ class Store {
     const [count, posts] = await Promise.all([countRes.json(), postsRes.json()])
     count.pagesLeft = Math.ceil(count.postsLeft / 12)
     count.page = page
-    //console.log(`getSearchPosts ${JSON.stringify(count)}`)
     let result = {
       posts: posts,
       count: count,
@@ -62,12 +48,12 @@ class Store {
   }
 }
 
-export function initStore(isServer, lastUpdate = Date.now()) {
+export function initStore(isServer) {
   if (isServer && typeof window === 'undefined') {
-    return new Store(isServer, lastUpdate)
+    return new Store()
   } else {
     if (store === null) {
-      store = new Store(isServer, lastUpdate)
+      store = new Store()
     }
     return store
   }

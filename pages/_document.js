@@ -4,25 +4,25 @@ import { ServerStyleSheet } from 'styled-components'
 const contentMargin = 20
 
 export default class MyDocument extends Document {
-  render () {
+  render() {
     const sheet = new ServerStyleSheet()
     const main = sheet.collectStyles(<Main />)
     const styleTags = sheet.getStyleElement()
     return (
       <html>
         <Head>
-          <meta charSet='utf-8' />
+          <meta charSet="utf-8" />
           <meta
-            name='viewport'
-            content='initial-scale=1.0, width=device-width height=device-height'
+            name="viewport"
+            content="initial-scale=1.0, width=device-width height=device-height"
           />
           <meta
-            name='google-site-verification'
-            content='b4sESEo127Wta0iikjktF3RXc6ATnFqUhs-7lj4OfNI'
+            name="google-site-verification"
+            content="b4sESEo127Wta0iikjktF3RXc6ATnFqUhs-7lj4OfNI"
           />
-          <meta property='fb:app_id' content='1049510628513543' />
-          <script src='https://use.fontawesome.com/62d036d8b5.js' />
-          <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+          <meta property="fb:app_id" content="1049510628513543" />
+          <script src="https://use.fontawesome.com/62d036d8b5.js" />
+          <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
           <style>{`
             @import url(https://fonts.googleapis.com/css?family=Mada:700);
             @import url(https://fonts.googleapis.com/css?family=PT+Sans);
@@ -71,6 +71,17 @@ export default class MyDocument extends Document {
               margin: 20px 0px 0px 0px;
               padding: 0px 30px 15px 30px;
             }
+            /* start instant search styles */
+            .ais-Highlight__highlighted {
+              font-weight: bold;
+              color: #ed1f24;
+            }
+            /*
+            .ais-Highlight__nonHighlighted {
+              color: grey;
+            }
+            /* end instant search styles */
+            */
             /* a {
               color: #b00000;
               text-decoration: none;
