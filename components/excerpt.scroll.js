@@ -10,21 +10,20 @@ const contentPaddingX = 20
 export default class extends React.Component {
   render() {
     let { title, excerpt, featured_media, slug } = this.props.post
-    let srcUrl = featured_media.source_url
-    if (!srcUrl) {
-      srcUrl = '/static/imt-wil-logo.jpg'
-    }
+
+    // TODO move to cms so post version in mongo includes these updates
+    // TODO similar mods are performed in article component
+    // start moveToCms
+    let srcUrl = '/static/imt-wil-logo.jpg'
+    if (!featured_media.source_url) srcUrl = featured_media.source_url
     title = htmlToReactParser.parse(title.rendered)
-    //console.log(excerpt.rendered)
     let author = 'IMT member'
     excerpt = htmlToReactParser.parse(excerpt.rendered)
+    // handle custom wordpress properties
     const acf = this.props.post.acf
     if (acf !== false) {
       if (acf.imt_author !== undefined) {
-        if (
-          Object.prototype.toString.call(acf.imt_author) === '[object Array]'
-        ) {
-          // https://stackoverflow.com/questions/4775722/check-if-object-is-array#4775737
+        if (Array.isArray(acf.imt_author)) {
           author = ''
           acf.imt_author.forEach((a, i) => {
             if (i === 0) author = a
@@ -37,12 +36,12 @@ export default class extends React.Component {
       }
       if (acf.imt_excerpt !== undefined) excerpt = acf.imt_excerpt
     }
+    // handle media
     let media = (
       <BackColor>
         <Picture id={srcUrl} />
       </BackColor>
     )
-
     if (featured_media.video) {
       // https://img.youtube.com/vi/r2pJcLWsnOQ/0.jpg
       let playUrl = '/static/newplay.png'
@@ -73,6 +72,8 @@ export default class extends React.Component {
         </BackColor>
       )
     }
+    // end moveToCms
+
     return (
       <Excerpt>
         <Link prefetch route={`/scroll/${slug}`} passHref>

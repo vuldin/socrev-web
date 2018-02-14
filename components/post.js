@@ -5,56 +5,22 @@ import InteractionTool from './interactionTool'
 import styled from 'styled-components'
 import Categories from './categories'
 import SubscriptionBanner from '../components/banners/subscription'
+import Markdown from 'react-markdown'
 
 const smallContentPaddingX = 20
 const noBannerArticles = ['join-the-imt'] // article slugs that don't need a banner
 
-export default class Article extends React.Component {
+export default class Post extends React.Component {
   componentDidMount() {
     // disable scrolling on html element while article is shown
     // this was set back to auto in scroll:componentWillUpdate
-    document.scrollingElement.style.overflow = 'hidden'
+    //document.scrollingElement.style.overflow = 'hidden'
   }
   render() {
     let { post } = this.props
-    let article = {}
-    article.isSticky = post.sticky
-    article.slug = post.slug
-    article.categories = post.categories
-    let { title, excerpt, content, featured_media, date } = post
-    let { source_url } = featured_media
-    article.title = htmlToReactParser.parse(title.rendered)
-    let author = 'IMT member'
-    excerpt = htmlToReactParser.parse(excerpt.rendered)
-    const acf = post.acf
-    if (acf !== false) {
-      if (acf.imt_author !== undefined) {
-        if (
-          Object.prototype.toString.call(acf.imt_author) === '[object Array]'
-        ) {
-          // https://stackoverflow.com/questions/4775722/check-if-object-is-array#4775737
-          author = ''
-          acf.imt_author.forEach((a, i) => {
-            if (i === 0) author = a
-            else author += ` and ${a}`
-          })
-        } else {
-          // imt_author was originally just a string, so this is for handling some older articles
-          author = acf.imt_author
-        }
-      }
-      if (acf.imt_excerpt !== undefined) excerpt = acf.imt_excerpt
-      if (acf.imt_date !== undefined && acf.imt_date !== '') date = acf.imt_date
-    }
-    article.date = date
-    article.author = author
-    article.excerpt = excerpt
 
-    let print = JSON.parse(JSON.stringify(article))
-    print.content = content.rendered
-
-    content = htmlToReactParser.parse(content.rendered)
-    content = content.filter(d => d !== '\n')
+    /*
+    // banner
     if (noBannerArticles.find(d => d === article.slug) === undefined) {
       const ps = content.filter(c => c.type === 'p')
       let bannerIndex = 0
@@ -81,9 +47,15 @@ export default class Article extends React.Component {
       }
     }
     article.content = content
+    */
 
-    print.media = source_url
-
+    // media
+    const media = (
+      <figure>
+        <img src={post.media} style={{ marginTop: '-20px' }} />
+      </figure>
+    )
+    /*
     let media = <div />
     if (source_url)
       media = (
@@ -95,66 +67,43 @@ export default class Article extends React.Component {
       media = (
         <ResponsivePlayer url={source_url} width={'100vw'} height={'56vw'} />
       )
-    article.media = media
-    console.log(print)
+    */
     return (
       <div>
-        {article.isSticky || featured_media.video ? article.media : <span />}
+        {post.isSticky ? media : <span />}
         <Padding contentPaddingX={smallContentPaddingX}>
           <Side>
-            <InteractionTool post={article} />
+            <InteractionTool post={post} />
           </Side>
           <Content>
-            <TitleArticle>{article.title}</TitleArticle>
-            <Categories cats={article.categories} />
-            <Author>{article.author}</Author>
-            <Date>{formatDateString(article.date)}</Date>
-            <Excerpt>{excerpt}</Excerpt>
-            {!article.isSticky && !featured_media.video ? (
-              article.media
-            ) : (
-              <span />
-            )}
-            {article.content}
+            <TitleArticle>{post.title}</TitleArticle>
+            <Categories cats={post.categories} />
+            <Author>
+              {post.authors.map((d, i) => <span key={i}>{d}</span>)}
+            </Author>
+            <Date>{post.date}</Date>
+            <Excerpt>{post.excerpt}</Excerpt>
+            {!post.isSticky ? media : <span />}
+            {post.content.map((d, i) => {
+              let result = <Markdown key={i} source={d.val} />
+              if (d.key === 'img') {
+                result = (
+                  <figure key={i}>
+                    <img src={d.val} />
+                  </figure>
+                )
+              }
+              return result
+            })}
           </Content>
         </Padding>
-        <FixedFooter article={article} />
+        <FixedFooter article={post} />
         <FixedSide className="article-fixed-side">
-          <InteractionTool post={article} />
+          <InteractionTool post={post} />
         </FixedSide>
       </div>
     )
   }
-}
-
-function formatDateString(dateString) {
-  let pieces = new Array(3)
-  if (dateString.length < 10) {
-    pieces = [
-      dateString.substring(0, 4),
-      dateString.substring(4, 6),
-      dateString.substring(6, 8),
-    ]
-  } else {
-    let date = dateString.substring(0, 10)
-    pieces = date.split('-')
-  }
-  let monthToNumber = {
-    '01': 'January',
-    '02': 'February',
-    '03': 'March',
-    '04': 'April',
-    '05': 'May',
-    '06': 'June',
-    '07': 'July',
-    '08': 'August',
-    '09': 'September',
-    '10': 'October',
-    '11': 'November',
-    '12': 'December',
-  }
-  if (pieces[2][0] == '0') pieces[2] = pieces[2][1]
-  return monthToNumber[pieces[1]] + ' ' + pieces[2] + ', ' + pieces[0]
 }
 
 const Padding = styled.div`
